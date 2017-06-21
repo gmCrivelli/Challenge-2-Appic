@@ -1,0 +1,19 @@
+workspace 'Test-VGC'
+xcodeproj 'vgc/vgc.xcodeproj'
+xcodeproj 'vgc-remote/vgc-remote.xcodeproj'
+
+use_frameworks!
+
+
+target :'vgc' do
+	platform :tvos, '9.0'
+	xcodeproj './vgc/vgc.xcodeproj'
+	pod 'VirtualGameController', '~> 0.0'
+end
+
+
+target :'vgc-remote' do
+	platform :ios, '9.0'
+	xcodeproj './vgc-remote/vgc-remote.xcodeproj'
+	pod 'VirtualGameController', '~> 0.0'
+end	

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-vgc-remote.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-vgc.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VirtualGameController-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VirtualGameController-tvOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>3E895AC05EC675572CE6E35F7727D147</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>891A9B72CDA14B9655DB673E13628DD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9568DCFF508BA3A361E5F8A632918CEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4498104AE11971FB4162A01DAF4D830</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

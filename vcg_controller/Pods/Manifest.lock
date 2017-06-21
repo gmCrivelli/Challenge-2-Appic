@@ -1,0 +1,12 @@
+PODS:
+  - VirtualGameController (0.0.7)
+
+DEPENDENCIES:
+  - VirtualGameController (~> 0.0)
+
+SPEC CHECKSUMS:
+  VirtualGameController: 894cdaced0574e2c9c2afcf74490e9d4e207b8ff
+
+PODFILE CHECKSUM: e96e2c63056a50cc95b9a37008fd4a330fc294de
+
+COCOAPODS: 1.0.1

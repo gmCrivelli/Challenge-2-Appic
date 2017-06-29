@@ -76,9 +76,9 @@ class TargetController: NSObject {
         let waitAction = SKAction.wait(forDuration: 2)
         
         if (foundedTarget.initialPosition == "left") {
-            node.run(SKAction.repeatForever(SKAction.sequence([waitAction, moveToRight, moveToLeft])))
+            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToRight, moveToLeft]))]))
         } else {
-            node.run(SKAction.repeatForever(SKAction.sequence([waitAction, moveToLeft, moveToRight])))
+            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToLeft, moveToRight]))]))
         }
     }
     

@@ -20,10 +20,10 @@ class GameScene: SKScene {
         
         // 
         let targetNode1 = targetController.addTarget(typeOfNode: "shape")
-        targetController.moveTarget(targetNode: targetNode1)
+        targetController.moveBetweenSides(node: targetNode1)
         
         let targetNode2 = targetController.addTarget(typeOfNode: "sprite")
-        targetController.moveTarget(targetNode: targetNode2)
+        targetController.moveBetweenSides(node: targetNode2)
     }
     
     override func update(_ currentTime: TimeInterval) {

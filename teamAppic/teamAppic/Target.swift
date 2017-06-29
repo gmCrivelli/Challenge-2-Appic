@@ -10,9 +10,11 @@ import SpriteKit
 
 class Target {
     
-    var targetNode: SKSpriteNode
+    var targetNode: SKNode
+    var initialPosition : String
     
-    init (node: SKSpriteNode) {
+    init (node: SKNode, initialPosition : String) {
         self.targetNode = node
+        self.initialPosition = initialPosition
     }
 }

@@ -13,19 +13,29 @@ class TargetController: NSObject {
     var screenSize : CGSize
     let radius : CGFloat = 30
     var gameNode : SKNode
+    var left : CGFloat!
+    var right : CGFloat!
+    var top : CGFloat!
+    var bottom : CGFloat!
+    var targetArray = [Target]()
     
     init (screenSize : CGSize, gameNode: SKNode) {
         self.screenSize = screenSize
         self.gameNode = gameNode
+        self.left = self.radius - self.screenSize.width/2
+        self.right = self.screenSize.width/2 - radius
+        self.top = self.screenSize.height/2 - radius
+        self.bottom = radius - self.screenSize.height/2
     }
     
     func addTarget (typeOfNode : String) -> SKNode {
         var targetNode : SKNode
-        if (typeOfNode == "shape") {
+        
+        switch typeOfNode {
+        case "shape":
             targetNode = SKShapeNode(circleOfRadius: radius)
             self.gameNode.addChild(targetNode)
-        }
-        else {
+        default:
             targetNode = SKSpriteNode(texture: SKTexture(imageNamed: "target"))
             let targetNodeSprite = targetNode as! SKSpriteNode
             targetNodeSprite.size.height = self.radius*2
@@ -33,36 +43,63 @@ class TargetController: NSObject {
             self.gameNode.addChild(targetNodeSprite)
         }
         
-        chooseTargetPosition(targetNode: targetNode)
-        setTargetTexture(node: targetNode, color: .blue)
+        let initialSide = chooseTargetPosition(targetNode: targetNode)
+        let target = Target(node: targetNode, initialPosition: initialSide)
+        targetArray.append(target)
+        setTargetColor(node: targetNode, color: .blue)
         
         return targetNode
     }
     
-    func setTargetTexture (node : SKNode, color : UIColor) {
+    
+    /// sets the color of a target if it is a SKShapeNode
+    ///
+    /// - Parameters:
+    ///   - node: node that will be colorized
+    ///   - color: color in which node will be colorized
+    func setTargetColor (node : SKNode, color : UIColor) {
         if (node is SKShapeNode) {
             let nodeShape = node as! SKShapeNode
             nodeShape.fillColor = color
         }
     }
     
-    func moveTarget (targetNode : SKNode) {
-        let left = self.radius - self.screenSize.width/2
-        let right = self.screenSize.width/2 - radius
-        let moveLeft = SKAction.moveTo(x: left, duration: 5)
-        let moveRight = SKAction.moveTo(x: right, duration: 5)
+    /// moves node from onde side to another
+    ///
+    /// - Parameter node: node which will be moved
+    func moveBetweenSides (node : SKNode) {
         
-        targetNode.run(SKAction.repeatForever(SKAction.sequence([moveLeft, moveRight])))
+        let foundedTarget = findTargetInArray(node: node)
+        
+        let moveToLeft = SKAction.moveTo(x: left, duration: 5)
+        let moveToRight = SKAction.moveTo(x: right, duration: 5)
+        let waitAction = SKAction.wait(forDuration: 2)
+        
+        if (foundedTarget.initialPosition == "left") {
+            node.run(SKAction.repeatForever(SKAction.sequence([waitAction, moveToRight, moveToLeft])))
+        } else {
+            node.run(SKAction.repeatForever(SKAction.sequence([waitAction, moveToLeft, moveToRight])))
+        }
     }
     
-    private func chooseTargetPosition (targetNode: SKNode){
+    func findTargetInArray (node : SKNode) -> Target {
+        var foundedTarget : Target?
+        for target in targetArray {
+            if (target.targetNode == node) {
+                foundedTarget = target
+            }
+        }
+        return foundedTarget!
+    }
+    
+    /// determines the initial position of target
+    ///
+    /// - Parameter targetNode: target node that will have its initial position setted
+    /// - Returns: returns the initial side
+    private func chooseTargetPosition (targetNode: SKNode) -> String {
         // Determine where to spawn the ball along the Y axis
         let edge = arc4random_uniform(2)
-        
-        let left = self.radius - self.screenSize.width/2
-        let right = self.screenSize.width/2 - radius
-        let top = self.screenSize.height/2 - radius
-        let bottom = radius - self.screenSize.height/2
+        var initialSide : String = ""
         
         var actualX:CGFloat = 0
         var actualY:CGFloat = 0
@@ -70,27 +107,29 @@ class TargetController: NSObject {
         switch edge {
         // left
         case 0:
+            initialSide = "left"
             actualX = left
             actualY = random(min: bottom, max: top)
         // right
         case 1:
+            initialSide = "right"
             actualX = right
             actualY = random(min: bottom, max: top)
             
 //        case 2:
-//            actualX = random(min: radius - self.screenSize.width/2, max: self.screenSize.width/2 - self.radius)
-//            actualY = self.screenSize.height/2
+//            actualX = random(min: left, max: right)
+//            actualY = top
 //            
 //        case 3:
-//            actualX = random(min: self.radius - self.screenSize.width/2, max: self.screenSize.width/2 - self.radius)
-//            actualY = -self.screenSize.height/2
+//            actualX = random(min: left, max: right)
+//            actualY = bottom
 //            
         default:
             break
         }
         
         targetNode.position = CGPoint(x: actualX, y: actualY)
-        
+        return initialSide
     }
     
     

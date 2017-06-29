@@ -19,6 +19,8 @@ class TargetController: NSObject {
     var bottom : CGFloat!
     var targetArray = [Target]()
     
+    let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
+    
     init (screenSize : CGSize, gameNode: SKNode) {
         self.screenSize = screenSize
         self.gameNode = gameNode
@@ -49,6 +51,14 @@ class TargetController: NSObject {
         setTargetColor(node: targetNode, color: .blue)
         
         return targetNode
+    }
+    
+    func detectHit(_ location: CGPoint ){
+        for t in self.targetArray {
+            if t.targetNode.contains(location) {
+                t.targetNode.run(SKAction.sequence([hitAction, hitAction.reversed()]))
+            }
+        }
     }
     
     

@@ -93,14 +93,23 @@ class GameScene: SKScene, ReactToMotionEvents {
 			
 		} else {
 			
-			let currToPosX = self.currentTouchPosition.x * CGFloat(Double.pi/180.0)
-			let currToPosY = self.currentTouchPosition.y * CGFloat(Double.pi/180.0)
+			let currToPosX = self.currentTouchPosition.x
+			let currToPosY = self.currentTouchPosition.y
 			
-			let movementPerSec:CGFloat = 100
-			let timeInterval: CGFloat! = 0.016666
+			let movementPerSec:CGFloat = 750.0
+			let timeInterval: CGFloat = 1.0/60.0
 			
-			aimNode.position.x += currToPosX * movementPerSec * CGFloat(timeInterval)
-			aimNode.position.y -= currToPosY * movementPerSec * CGFloat(timeInterval)
+			let p_x:CGFloat = 450
+			let p_y:CGFloat = 300
+			
+			var posX = aimNode.position.x + currToPosX * movementPerSec * timeInterval
+			var posY = aimNode.position.y + currToPosY * movementPerSec * timeInterval
+			
+			posX = (posX.magnitude > p_x.magnitude) ? aimNode.position.x : posX
+			posY = (posY.magnitude > p_y.magnitude) ? aimNode.position.y : posY
+
+			aimNode.position.x = posX
+			aimNode.position.y = posY
 			
 		}
 
@@ -115,8 +124,6 @@ class GameScene: SKScene, ReactToMotionEvents {
     func motionUpdate(motion: GCMotion) {
 		
 		if !controllerSwipeMode {
-			
-			///
 			let x = motion.gravity.x
 			let y = -motion.gravity.y
 			let p_x:Double = 0.7

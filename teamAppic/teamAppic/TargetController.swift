@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+let timeToDisappear : TimeInterval = 3.0
+let numberOfSplashs = 4
+
 class TargetController: NSObject {
    
     var screenSize : CGSize
@@ -18,6 +21,7 @@ class TargetController: NSObject {
     var top : CGFloat!
     var bottom : CGFloat!
     var targetArray = [Target]()
+    var splashImagesArray = [String]()
     
     let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
     
@@ -28,6 +32,9 @@ class TargetController: NSObject {
         self.right = self.screenSize.width/2 - radius
         self.top = self.screenSize.height/2 - radius
         self.bottom = radius - self.screenSize.height/2
+        for i in 1...numberOfSplashs {
+            splashImagesArray.append("splash\(i).png")
+        }
     }
     
     func addTarget (typeOfNode : String) -> SKNode {
@@ -56,7 +63,22 @@ class TargetController: NSObject {
     func detectHit(_ location: CGPoint ){
         for t in self.targetArray {
             if t.targetNode.contains(location) {
-                t.targetNode.run(SKAction.sequence([hitAction, hitAction.reversed()]))
+                
+                let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
+                
+                let splashNode = SKSpriteNode(texture: SKTexture(imageNamed: splashImagesArray[randomSplash
+                    ]))
+                splashNode.size.height = self.radius*0.75
+                splashNode.size.width = self.radius*0.75
+                splashNode.colorBlendFactor = 1
+                splashNode.color = .green
+                
+                t.targetNode.addChild(splashNode)
+                let splashPosition = gameNode.convert(location, to: splashNode)
+                splashNode.position = splashPosition
+                
+                splashNode.zPosition = 1
+//                t.targetNode.run(SKAction.sequence([hitAction, hitAction.reversed()]))
             }
         }
     }
@@ -80,16 +102,26 @@ class TargetController: NSObject {
     func moveBetweenSides (node : SKNode) {
         
         let foundedTarget = findTargetInArray(node: node)
+        let waitAction = SKAction.wait(forDuration: timeToDisappear)
+
+//        let moveToLeft = SKAction.moveTo(x: left, duration: 5)
+//        let moveToRight = SKAction.moveTo(x: right, duration: 5)
         
-        let moveToLeft = SKAction.moveTo(x: left, duration: 5)
-        let moveToRight = SKAction.moveTo(x: right, duration: 5)
-        let waitAction = SKAction.wait(forDuration: 2)
+//        if (foundedTarget.initialPosition == "left") {
+//            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToRight, moveToLeft]))]))
+//        } else {
+//            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToLeft, moveToRight]))]))
+//        }
         
-        if (foundedTarget.initialPosition == "left") {
-            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToRight, moveToLeft]))]))
-        } else {
-            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([moveToLeft, moveToRight]))]))
+        let timeFade = 0.5
+        let disappearAction = SKAction.fadeOut(withDuration: timeFade)
+        let moveToPosition = SKAction.run {
+            let newX = self.random(min: self.left, max: self.right)
+            let newY = self.random(min: self.bottom, max: self.top)
+            foundedTarget.targetNode.position = CGPoint(x: newX, y: newY)
         }
+        let appearAction = SKAction.fadeIn(withDuration: timeFade)
+        node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([disappearAction, moveToPosition, appearAction, waitAction]))]))
     }
     
     func findTargetInArray (node : SKNode) -> Target {

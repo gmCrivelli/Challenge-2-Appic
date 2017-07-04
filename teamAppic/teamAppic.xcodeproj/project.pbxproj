@@ -14,9 +14,10 @@
 		1F1E0F5E1F03C996007B5825 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F5D1F03C996007B5825 /* GameScene.swift */; };
 		1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F5F1F03C996007B5825 /* GameViewController.swift */; };
 		1F1E0F631F03C996007B5825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0F611F03C996007B5825 /* Main.storyboard */; };
-		1F1E0F651F03C996007B5825 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0F641F03C996007B5825 /* Assets.xcassets */; };
 		1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6C1F03CB15007B5825 /* TargetController.swift */; };
 		1F1E0F6F1F03CBE9007B5825 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6E1F03CBE9007B5825 /* Target.swift */; };
+		1F2D5E881F0BB337004ED7CB /* Plok.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D5E861F0BB337004ED7CB /* Plok.sks */; };
+		1F2D5E891F0BB337004ED7CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D5E871F0BB337004ED7CB /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +29,11 @@
 		1F1E0F5D1F03C996007B5825 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		1F1E0F5F1F03C996007B5825 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1F1E0F621F03C996007B5825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1F1E0F641F03C996007B5825 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F1E0F661F03C996007B5825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1E0F6C1F03CB15007B5825 /* TargetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetController.swift; sourceTree = "<group>"; };
 		1F1E0F6E1F03CBE9007B5825 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		1F2D5E861F0BB337004ED7CB /* Plok.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Plok.sks; sourceTree = "<group>"; };
+		1F2D5E871F0BB337004ED7CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +74,9 @@
 				1F1E0F5F1F03C996007B5825 /* GameViewController.swift */,
 				1F1E0F611F03C996007B5825 /* Main.storyboard */,
 				1F1E0F6C1F03CB15007B5825 /* TargetController.swift */,
+				1F2D5E861F0BB337004ED7CB /* Plok.sks */,
+				1F2D5E871F0BB337004ED7CB /* Assets.xcassets */,
 				1F1E0F6E1F03CBE9007B5825 /* Target.swift */,
-				1F1E0F641F03C996007B5825 /* Assets.xcassets */,
 				1F1E0F661F03C996007B5825 /* Info.plist */,
 			);
 			path = teamAppic;
@@ -111,7 +114,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = D6FBY3CTDY;
+						DevelopmentTeam = K3MJ38Y24S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -142,8 +145,9 @@
 				1F1E0F581F03C996007B5825 /* GameScene.sks in Resources */,
 				1F1E0F5A1F03C996007B5825 /* Actions.sks in Resources */,
 				1F1E0F5C1F03C996007B5825 /* Game.xcassets in Resources */,
+				1F2D5E881F0BB337004ED7CB /* Plok.sks in Resources */,
+				1F2D5E891F0BB337004ED7CB /* Assets.xcassets in Resources */,
 				1F1E0F631F03C996007B5825 /* Main.storyboard in Resources */,
-				1F1E0F651F03C996007B5825 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +278,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = D6FBY3CTDY;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
@@ -288,7 +292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = D6FBY3CTDY;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";

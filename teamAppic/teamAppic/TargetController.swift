@@ -60,7 +60,7 @@ class TargetController: NSObject {
         return targetNode
     }
     
-    func detectHit(_ location: CGPoint ){
+    func detectHit (_ location: CGPoint) {
         for t in self.targetArray {
             if t.targetNode.contains(location) {
                 
@@ -72,17 +72,42 @@ class TargetController: NSObject {
                 splashNode.size.width = self.radius*0.75
                 splashNode.colorBlendFactor = 1
                 splashNode.color = .green
-                
                 t.targetNode.addChild(splashNode)
                 let splashPosition = gameNode.convert(location, to: splashNode)
                 splashNode.position = splashPosition
-                
                 splashNode.zPosition = 1
-                //                t.targetNode.run(SKAction.sequence([hitAction, hitAction.reversed()]))
+                
+                let plokNode : SKEmitterNode! = SKEmitterNode(fileNamed: "Plok.sks")
+                splashNode.addChild(plokNode)
+                setupPlokNode(plokNode)
             }
         }
     }
     
+    func setupPlokNode (_ plokNode : SKEmitterNode) {
+        
+        // center of splash
+        plokNode.position = CGPoint(x: 0, y: 0)
+        plokNode.particleColorSequence = nil
+        plokNode.particleColor = .green
+        plokNode.alpha = 0
+        let sizePlok = self.radius
+        plokNode.particleSize = CGSize(width: sizePlok, height: sizePlok)
+    
+        let waitAction = SKAction.wait(forDuration: 1)
+        let appearAction = SKAction.run {
+            plokNode.alpha = 1
+        }
+        let removePlokAction = SKAction.run {
+            plokNode.removeFromParent()
+        }
+        
+        plokNode.isUserInteractionEnabled = false
+        
+        // it makes the plok effect appear in the screen and after that it is removed
+        plokNode.run(SKAction.sequence([appearAction, waitAction, appearAction.reversed(), removePlokAction]))
+        
+    }
     
     /// sets the color of a target if it is a SKShapeNode
     ///

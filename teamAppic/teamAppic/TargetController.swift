@@ -65,18 +65,24 @@ class TargetController: NSObject {
             if t.targetNode.contains(location) {
                 
                 let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
-                
-                let splashNode = SKSpriteNode(texture: SKTexture(imageNamed: splashImagesArray[randomSplash
-                    ]))
-                splashNode.size.height = self.radius*0.75
-                splashNode.size.width = self.radius*0.75
+				let convert = gameNode.convert(location, to: t.targetNode)
+				let x = convert.x
+				let y = -convert.y
+				
+				print("location: \(location)        convert: \(convert)")
+				
+				let convertedLocation = CGPoint(x: x, y: y)
+				let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: t.targetNode.frame, splashPosition: convertedLocation)
+				let splashNode = SKSpriteNode(texture: splash.splashTexture)
+
+                splashNode.size.height = self.radius*2
+                splashNode.size.width = self.radius*2
                 splashNode.colorBlendFactor = 1
                 splashNode.color = .green
-                
                 t.targetNode.addChild(splashNode)
-                let splashPosition = gameNode.convert(location, to: splashNode)
-                splashNode.position = splashPosition
-                
+//                let splashPosition = gameNode.convert(location, to: splashNode)
+//                splashNode.position = splashPosition
+				
                 splashNode.zPosition = 1
                 //                t.targetNode.run(SKAction.sequence([hitAction, hitAction.reversed()]))
             }

@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		187A3F771F0BE0CD00AE46CC /* splashSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187A3F751F0BE0CD00AE46CC /* splashSound.mp3 */; };
-		187A3F781F0BE0CD00AE46CC /* splashSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187A3F761F0BE0CD00AE46CC /* splashSound2.mp3 */; };
+		184F1CA01F0C01E100F3B684 /* shoot1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9D1F0C01E100F3B684 /* shoot1.mp3 */; };
+		184F1CA11F0C01E100F3B684 /* shoot2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9E1F0C01E100F3B684 /* shoot2.mp3 */; };
+		184F1CA21F0C01E100F3B684 /* shoot3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9F1F0C01E100F3B684 /* shoot3.mp3 */; };
+		184F1CA51F0C026400F3B684 /* splashSound1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1CA31F0C026400F3B684 /* splashSound1.mp3 */; };
+		184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1CA41F0C026400F3B684 /* splashSound2.mp3 */; };
 		187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */; };
 		187A3F7D1F0BE14100AE46CC /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 187A3F7B1F0BE14100AE46CC /* MenuScene.sks */; };
 		187A3F7F1F0BE2BE00AE46CC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3F7E1F0BE2BE00AE46CC /* MenuViewController.swift */; };
@@ -27,8 +30,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		187A3F751F0BE0CD00AE46CC /* splashSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound.mp3; sourceTree = "<group>"; };
-		187A3F761F0BE0CD00AE46CC /* splashSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound2.mp3; sourceTree = "<group>"; };
+		184F1C9D1F0C01E100F3B684 /* shoot1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot1.mp3; sourceTree = "<group>"; };
+		184F1C9E1F0C01E100F3B684 /* shoot2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot2.mp3; sourceTree = "<group>"; };
+		184F1C9F1F0C01E100F3B684 /* shoot3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot3.mp3; sourceTree = "<group>"; };
+		184F1CA31F0C026400F3B684 /* splashSound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound1.mp3; sourceTree = "<group>"; };
+		184F1CA41F0C026400F3B684 /* splashSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound2.mp3; sourceTree = "<group>"; };
 		187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature21.ttf; sourceTree = "<group>"; };
 		187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		187A3F7B1F0BE14100AE46CC /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
@@ -63,8 +69,11 @@
 			isa = PBXGroup;
 			children = (
 				187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */,
-				187A3F751F0BE0CD00AE46CC /* splashSound.mp3 */,
-				187A3F761F0BE0CD00AE46CC /* splashSound2.mp3 */,
+				184F1CA31F0C026400F3B684 /* splashSound1.mp3 */,
+				184F1CA41F0C026400F3B684 /* splashSound2.mp3 */,
+				184F1C9D1F0C01E100F3B684 /* shoot1.mp3 */,
+				184F1C9E1F0C01E100F3B684 /* shoot2.mp3 */,
+				184F1C9F1F0C01E100F3B684 /* shoot3.mp3 */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -171,10 +180,13 @@
 				1F1E0F581F03C996007B5825 /* GameScene.sks in Resources */,
 				1F1E0F5A1F03C996007B5825 /* Actions.sks in Resources */,
 				1F1E0F5C1F03C996007B5825 /* Game.xcassets in Resources */,
+				184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */,
+				184F1CA51F0C026400F3B684 /* splashSound1.mp3 in Resources */,
 				1F2D5E881F0BB337004ED7CB /* Plok.sks in Resources */,
-				187A3F781F0BE0CD00AE46CC /* splashSound2.mp3 in Resources */,
+				184F1CA01F0C01E100F3B684 /* shoot1.mp3 in Resources */,
 				187A3F801F0BE5BA00AE46CC /* DoubleFeature21.ttf in Resources */,
-				187A3F771F0BE0CD00AE46CC /* splashSound.mp3 in Resources */,
+				184F1CA11F0C01E100F3B684 /* shoot2.mp3 in Resources */,
+				184F1CA21F0C01E100F3B684 /* shoot3.mp3 in Resources */,
 				1F2D5E891F0BB337004ED7CB /* Assets.xcassets in Resources */,
 				187A3F7D1F0BE14100AE46CC /* MenuScene.sks in Resources */,
 				1F1E0F631F03C996007B5825 /* Main.storyboard in Resources */,

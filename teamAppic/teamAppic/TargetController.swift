@@ -10,6 +10,7 @@ import SpriteKit
 
 let timeToDisappear : TimeInterval = 3.0
 let numberOfSplashs = 4
+let numberOfShootSounds = 3
 
 class TargetController: NSObject {
     
@@ -22,10 +23,13 @@ class TargetController: NSObject {
     var bottom : CGFloat!
     var targetArray = [Target]()
     var splashImagesArray = [String]()
+
+    var soundActions = [SKAction]()
     
     let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
     
     init (screenSize : CGSize, gameNode: SKNode) {
+        
         self.screenSize = screenSize
         self.gameNode = gameNode
         self.left = self.radius - self.screenSize.width/2
@@ -34,6 +38,10 @@ class TargetController: NSObject {
         self.bottom = radius - self.screenSize.height/2
         for i in 1...numberOfSplashs {
             splashImagesArray.append("splash\(i).png")
+        }
+        
+        for i in 1...numberOfShootSounds {
+            soundActions.append(SKAction.playSoundFileNamed("shoot\(i).mp3", waitForCompletion: false))
         }
     }
     
@@ -66,8 +74,12 @@ class TargetController: NSObject {
                 
                 let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
                 
-                let splashNode = SKSpriteNode(texture: SKTexture(imageNamed: splashImagesArray[randomSplash
-                    ]))
+                let randomSound: Int = Int(arc4random_uniform(UInt32(numberOfShootSounds)))
+                
+                let splashNode = SKSpriteNode(texture: SKTexture(imageNamed: splashImagesArray[randomSplash]))
+                
+                splashNode.run(soundActions[randomSound])
+                
                 splashNode.size.height = self.radius*0.75
                 splashNode.size.width = self.radius*0.75
                 splashNode.colorBlendFactor = 1

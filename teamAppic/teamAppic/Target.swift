@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Target {
+class Target{
     
     var targetNode: SKNode
     var initialPosition : String

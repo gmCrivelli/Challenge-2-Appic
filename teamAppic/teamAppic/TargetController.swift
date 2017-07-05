@@ -52,8 +52,7 @@ class TargetController: NSObject {
             self.gameNode.addChild(targetNodeSprite)
         }
         
-        let initialSide = chooseTargetPosition(targetNode: targetNode)
-        let target = Target(node: targetNode, initialPosition: initialSide)
+        let target = Target(node: targetNode, initialPosition: CGPoint.zero)
         targetArray.append(target)
         setTargetColor(node: targetNode, color: .blue)
         
@@ -62,7 +61,7 @@ class TargetController: NSObject {
     
     func detectHit(_ location: CGPoint ){
         for t in self.targetArray {
-            if t.targetNode.contains(location) {
+            if t.node.contains(location) {
                 
                 let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
                 
@@ -73,7 +72,7 @@ class TargetController: NSObject {
                 splashNode.colorBlendFactor = 1
                 splashNode.color = .green
                 
-                t.targetNode.addChild(splashNode)
+                t.node.addChild(splashNode)
                 let splashPosition = gameNode.convert(location, to: splashNode)
                 splashNode.position = splashPosition
                 
@@ -118,7 +117,7 @@ class TargetController: NSObject {
         let moveToPosition = SKAction.run {
             let newX = self.random(min: self.left, max: self.right)
             let newY = self.random(min: self.bottom, max: self.top)
-            foundedTarget.targetNode.position = CGPoint(x: newX, y: newY)
+            foundedTarget.node.position = CGPoint(x: newX, y: newY)
         }
         let appearAction = SKAction.fadeIn(withDuration: timeFade)
         node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([disappearAction, moveToPosition, appearAction, waitAction]))]))
@@ -127,53 +126,12 @@ class TargetController: NSObject {
     func findTargetInArray (node : SKNode) -> Target {
         var foundedTarget : Target?
         for target in targetArray {
-            if (target.targetNode == node) {
+            if (target.node == node) {
                 foundedTarget = target
             }
         }
         return foundedTarget!
     }
-    
-    /// determines the initial position of target
-    ///
-    /// - Parameter targetNode: target node that will have its initial position setted
-    /// - Returns: returns the initial side
-    private func chooseTargetPosition (targetNode: SKNode) -> String {
-        // Determine where to spawn the ball along the Y axis
-        let edge = arc4random_uniform(2)
-        var initialSide : String = ""
-        
-        var actualX:CGFloat = 0
-        var actualY:CGFloat = 0
-        
-        switch edge {
-        // left
-        case 0:
-            initialSide = "left"
-            actualX = left
-            actualY = random(min: bottom, max: top)
-        // right
-        case 1:
-            initialSide = "right"
-            actualX = right
-            actualY = random(min: bottom, max: top)
-            
-            //        case 2:
-            //            actualX = random(min: left, max: right)
-            //            actualY = top
-            //
-            //        case 3:
-            //            actualX = random(min: left, max: right)
-            //            actualY = bottom
-        //
-        default:
-            break
-        }
-        
-        targetNode.position = CGPoint(x: actualX, y: actualY)
-        return initialSide
-    }
-    
     
     /// returns a random float value from 0 to 1
     ///
@@ -181,7 +139,6 @@ class TargetController: NSObject {
     private func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
-    
     
     /// returns a random value float from min to max
     ///

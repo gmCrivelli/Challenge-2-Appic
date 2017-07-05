@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+// essa classe gerenciar 4 cenas: GameScene, PauseScene, GameOverScene, SelectionControlScene
+
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {

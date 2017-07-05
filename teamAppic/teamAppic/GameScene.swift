@@ -51,10 +51,10 @@ class GameScene: SKScene, ReactToMotionEvents {
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
 		
-		let targetNode1 = targetController.addTarget(typeOfNode: "shape")
+        let targetNode1 = targetController.addTarget(debugging: true, typeOfNode: "shape")
 		targetController.moveBetweenSides(node: targetNode1)
 		
-		let targetNode2 = targetController.addTarget(typeOfNode: "sprite")
+        let targetNode2 = targetController.addTarget(debugging: false, typeOfNode: "sprite")
 		targetController.moveBetweenSides(node: targetNode2)
 	}
 	

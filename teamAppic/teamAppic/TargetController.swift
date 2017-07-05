@@ -75,7 +75,7 @@ class TargetController: NSObject {
                 let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
 				let convert = gameNode.convert(location, to: t.targetNode)
 				
-				var convertedLocation = CGPoint(x: convert.x, y: -convert.y)
+				var convertedLocation = CGPoint(x: convert.x, y: convert.y)
 				let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: t.targetNode.frame, splashPosition: convertedLocation)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 

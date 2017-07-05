@@ -39,15 +39,16 @@ class Splash{
 		let clipPath = UIBezierPath()
 		clipPath.addArc(withCenter: CGPoint(x: x, y: y), radius: r, startAngle: 0, endAngle: 360, clockwise: true)
 		clipPath.addClip()
+        
 		
 		// adds image to the desired position
 		ctx.saveGState()
 		let splashImage: UIImage! = UIImage(named: imageName)
-		x = splashPosition.x + 8
-		y = splashPosition.y + 8
-		let scale: CGFloat = 0.7
-		let w:CGFloat = targetRect.size.width * scale
-		let h:CGFloat = targetRect.size.width * scale
+        let sizeDiff:CGFloat = r*0.5
+		x = splashPosition.x + sizeDiff/2
+		y = -splashPosition.y + sizeDiff/2
+		let w:CGFloat = targetRect.size.width - sizeDiff
+		let h:CGFloat = targetRect.size.width - sizeDiff
 		splashImage.draw(in: CGRect(x: x, y: y, width: w, height: h))
 		
 		// Saves the Context to an Image

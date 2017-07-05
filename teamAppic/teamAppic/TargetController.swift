@@ -74,17 +74,17 @@ class TargetController: NSObject {
 				
                 let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
 				let convert = gameNode.convert(location, to: t.targetNode)
-				let x = convert.x
-				let y = -convert.y
 				
-				var convertedLocation = CGPoint(x: x, y: y)
+				var convertedLocation = CGPoint(x: convert.x, y: -convert.y)
 				let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: t.targetNode.frame, splashPosition: convertedLocation)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
                 splashNode.size.height = self.radius*2
                 splashNode.size.width = self.radius*2
+                
                 splashNode.colorBlendFactor = 1
-                splashNode.color = .green
+                // player 1 color
+                splashNode.color = Players.playerColor(player: 1)
 				splashNode.zPosition = 1
                 t.targetNode.addChild(splashNode)
 	
@@ -92,23 +92,24 @@ class TargetController: NSObject {
                 splashNode.run(soundActions[randomSound])
                 let plokNode : SKEmitterNode! = SKEmitterNode(fileNamed: "Plok.sks")
 				convertedLocation.y = -convertedLocation.y
-				plokNode.position = convertedLocation
-                splashNode.addChild(plokNode)
+				plokNode.position = location
+                gameNode.addChild(plokNode)
                 setupPlokNode(plokNode)
             }
         }
     }
     
     func setupPlokNode (_ plokNode : SKEmitterNode) {
-        
+        let timePlok : TimeInterval = 0.3
         // center of splash
         plokNode.particleColorSequence = nil
-        plokNode.particleColor = .green
+        // player 1 color
+        plokNode.particleColor = Players.playerColor(player: 1)
         plokNode.alpha = 0
         let sizePlok = self.radius
         plokNode.particleSize = CGSize(width: sizePlok, height: sizePlok)
     
-        let waitAction = SKAction.wait(forDuration: 1)
+        let waitAction = SKAction.wait(forDuration: timePlok)
         let appearAction = SKAction.run {
             plokNode.alpha = 1
         }

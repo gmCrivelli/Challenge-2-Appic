@@ -29,10 +29,10 @@ class Splash{
 	func cropImage(imageName: String, targetRect: CGRect, splashPosition: CGPoint) -> UIImage{
 		UIGraphicsBeginImageContext(targetRect.size)
 
-		// contexto gráfico
+		// graphic context
 		let ctx:CGContext! = UIGraphicsGetCurrentContext()
 		
-//		add path clip to ensure the image only stays in the target
+        // adds path clip to ensure the image only stays in the target
 		let r:CGFloat = targetRect.size.width/2
 		var x:CGFloat = targetRect.size.width/2
 		var y:CGFloat = targetRect.size.width/2
@@ -40,7 +40,7 @@ class Splash{
 		clipPath.addArc(withCenter: CGPoint(x: x, y: y), radius: r, startAngle: 0, endAngle: 360, clockwise: true)
 		clipPath.addClip()
 		
-		//add image to the desired position
+		// adds image to the desired position
 		ctx.saveGState()
 		let splashImage: UIImage! = UIImage(named: imageName)
 		x = splashPosition.x + 8
@@ -50,7 +50,7 @@ class Splash{
 		let h:CGFloat = targetRect.size.width * scale
 		splashImage.draw(in: CGRect(x: x, y: y, width: w, height: h))
 		
-		//Save the Context to an Image
+		// Saves the Context to an Image
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		return image!
 	}

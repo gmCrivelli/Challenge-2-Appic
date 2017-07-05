@@ -11,7 +11,7 @@ import SpriteKit
 import UIKit
 
 class Splash{
-	
+    let SPLASHSIZE : CGFloat = 15
 	var splashTexture: SKTexture!
 	
 	init(imageNamed: String, targetRect: CGRect, splashPosition: CGPoint) {
@@ -44,7 +44,7 @@ class Splash{
 		// adds image to the desired position
 		ctx.saveGState()
 		let splashImage: UIImage! = UIImage(named: imageName)
-        let sizeDiff:CGFloat = r*0.5
+        let sizeDiff:CGFloat = SPLASHSIZE
 		x = splashPosition.x + sizeDiff/2
 		y = -splashPosition.y + sizeDiff/2
 		let w:CGFloat = targetRect.size.width - sizeDiff

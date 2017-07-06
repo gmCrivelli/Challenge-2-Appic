@@ -28,6 +28,8 @@ class TargetController: NSObject {
     
     let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
     
+    var debugging : Bool = false
+    
     init (screenSize : CGSize, gameNode: SKNode) {
         
         self.screenSize = screenSize
@@ -45,7 +47,7 @@ class TargetController: NSObject {
         }
     }
     
-    func addTarget (typeOfNode : String) -> SKNode {
+    func addTarget (debugging : Bool, typeOfNode : String) -> SKNode {
         var targetNode : SKNode
         
         switch typeOfNode {
@@ -65,6 +67,8 @@ class TargetController: NSObject {
         targetArray.append(target)
         setTargetColor(node: targetNode, color: .blue)
         
+        self.debugging = debugging
+        
         return targetNode
     }
     
@@ -79,12 +83,13 @@ class TargetController: NSObject {
 				let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: t.targetNode.frame, splashPosition: convertedLocation)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
+                // these values must be the same of t.targetNode 
                 splashNode.size.height = self.radius*2
                 splashNode.size.width = self.radius*2
                 
                 splashNode.colorBlendFactor = 1
                 // player 1 color
-                splashNode.color = Players.playerColor(player: 1)
+                splashNode.color = PlayersColors.playerColor(player: 1)
 				splashNode.zPosition = 1
                 t.targetNode.addChild(splashNode)
 	
@@ -104,7 +109,7 @@ class TargetController: NSObject {
         // center of splash
         plokNode.particleColorSequence = nil
         // player 1 color
-        plokNode.particleColor = Players.playerColor(player: 1)
+        plokNode.particleColor = PlayersColors.playerColor(player: 1)
         plokNode.alpha = 0
         let sizePlok = self.radius
         plokNode.particleSize = CGSize(width: sizePlok, height: sizePlok)
@@ -161,7 +166,9 @@ class TargetController: NSObject {
             foundedTarget.targetNode.position = CGPoint(x: newX, y: newY)
         }
         let appearAction = SKAction.fadeIn(withDuration: timeFade)
-        node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([disappearAction, moveToPosition, appearAction, waitAction]))]))
+        if (!self.debugging) {
+            node.run(SKAction.sequence([waitAction, SKAction.repeatForever(SKAction.sequence([disappearAction, moveToPosition, appearAction, waitAction]))]))
+        }
     }
     
     func findTargetInArray (node : SKNode) -> Target {
@@ -179,8 +186,13 @@ class TargetController: NSObject {
     /// - Parameter targetNode: target node that will have its initial position setted
     /// - Returns: returns the initial side
     private func chooseTargetPosition (targetNode: SKNode) -> String {
-        // Determine where to spawn the ball along the Y axis
-        let edge = arc4random_uniform(2)
+        var edge : Int
+        if (self.debugging) {
+            // Determine where to spawn the ball along the Y axis
+            edge = Int(arc4random_uniform(2))
+        } else {
+            edge = -1
+        }
         var initialSide : String = ""
         
         var actualX:CGFloat = 0
@@ -205,9 +217,12 @@ class TargetController: NSObject {
             //        case 3:
             //            actualX = random(min: left, max: right)
             //            actualY = bottom
-        //
+    
+        // mid center
         default:
-            break
+            initialSide = "mid"
+            actualX = 0
+            actualY = 0
         }
         
         targetNode.position = CGPoint(x: actualX, y: actualY)

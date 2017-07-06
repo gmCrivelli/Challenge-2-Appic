@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Players {
+class PlayersColors {
     private static let colorPlayer : [UIColor] = [.green, .yellow, .red, .purple]
     private static let numberOfPlayers = 4
     

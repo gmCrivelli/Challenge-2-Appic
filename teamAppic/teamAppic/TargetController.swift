@@ -83,6 +83,7 @@ class TargetController: NSObject {
 				let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: t.targetNode.frame, splashPosition: convertedLocation)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
+                // these values must be the same of t.targetNode 
                 splashNode.size.height = self.radius*2
                 splashNode.size.width = self.radius*2
                 

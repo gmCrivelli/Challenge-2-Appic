@@ -11,11 +11,15 @@ import GameplayKit
 import GameController
 import QuartzCore
 
+var teste = 0
+
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()
     var aimNode:SKSpriteNode!
 	var targetController : TargetController!
+    // Hud
+    let hud = Hud.hudInstance
 	//Controller mode
 	var controllerSwipeMode: Bool = false
 	//Positions
@@ -56,6 +60,10 @@ class GameScene: SKScene, ReactToMotionEvents {
 		
         let targetNode2 = targetController.addTarget(debugging: false, typeOfNode: "sprite")
 		targetController.moveBetweenSides(node: targetNode2)
+        
+        // insert players (single player)
+        hud.insertPlayers(playerNameArray: ["Player 1"])
+        hud.timer.startTimer()
 	}
 	
 	///		Setup the gestures.
@@ -75,6 +83,9 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
         targetController.detectHit(aimNode.position)
+        hud.playerArray[0].score.updatesScore()
+//        print("Player 1 name: \(hud.playerArray[0].playerName)")
+//        print("Current score Player 1: \(hud.playerArray[0].score.currentScore)")
     }
 	
 	///		Override of the function Update, called 
@@ -84,6 +95,7 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - currentTime: TimeInterval
     override func update(_ currentTime: TimeInterval) {
+        
         // Called before each frame is rendered
         aimNode.removeAllActions()
 

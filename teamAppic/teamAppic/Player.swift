@@ -11,8 +11,10 @@ import SpriteKit
 
 class Player {
     
-    private let score = Score()
+    /// each player has their score (one object of class score)
+    public let score = Score()
     
+    /// name of this player
     public private (set) var playerName : String
     
     public init (playerName : String) {

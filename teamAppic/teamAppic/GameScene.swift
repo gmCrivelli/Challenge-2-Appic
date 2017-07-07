@@ -84,8 +84,8 @@ class GameScene: SKScene, ReactToMotionEvents {
     func selectTapped(_ sender: UITapGestureRecognizer) {
         targetController.detectHit(aimNode.position)
         hud.playerArray[0].score.updatesScore()
-//        print("Player 1 name: \(hud.playerArray[0].playerName)")
-//        print("Current score Player 1: \(hud.playerArray[0].score.currentScore)")
+        print("Player 1 name: \(hud.playerArray[0].playerName)")
+        print("Current score Player 1: \(hud.playerArray[0].score.currentScore)")
     }
 	
 	///		Override of the function Update, called 

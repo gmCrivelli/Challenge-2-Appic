@@ -12,6 +12,13 @@ let timeToDisappear : TimeInterval = 3.0
 let numberOfSplashs = 4
 let numberOfShootSounds = 3
 
+public protocol HudProtocol : NSObjectProtocol {
+    /// function to updates the player score
+    ///
+    /// - Parameter player: player which score will be increased
+    func updateScore(player : Int)
+}
+
 class TargetController: NSObject {
     
     var screenSize : CGSize
@@ -29,6 +36,9 @@ class TargetController: NSObject {
     let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
     
     var debugging : Bool = false
+
+    /// delegate to HUD
+    public weak var delegateHud : HudProtocol?
     
     init (screenSize : CGSize, gameNode: SKNode) {
         
@@ -72,7 +82,7 @@ class TargetController: NSObject {
         return targetNode
     }
     
-    func detectHit (_ location: CGPoint) {
+    func detectHit (_ location: CGPoint, player : Int) {
         for t in self.targetArray {
             if t.targetNode.contains(location) {
 				
@@ -100,6 +110,9 @@ class TargetController: NSObject {
 				plokNode.position = location
                 gameNode.addChild(plokNode)
                 setupPlokNode(plokNode)
+                
+                // updating score of the player
+                delegateHud?.updateScore(player: player)
             }
         }
     }

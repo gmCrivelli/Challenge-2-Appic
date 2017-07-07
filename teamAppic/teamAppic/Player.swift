@@ -17,7 +17,10 @@ class Player {
     /// name of this player
     public private (set) var playerName : String
     
-    public init (playerName : String) {
+    public private (set) var aimNode : SKSpriteNode!
+    
+    public init (playerName : String, aimNode : SKSpriteNode) {
         self.playerName = playerName
+        self.aimNode = aimNode
     }
 }

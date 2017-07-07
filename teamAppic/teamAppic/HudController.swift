@@ -19,10 +19,21 @@ class HudController : NSObject, HudProtocol {
     public private (set) var playerArray : [Player]
     
     /// timer
-    public private (set) var timer = GameTimer()
-    
+	public private (set) var timer = GameTimer()
+	
+	/// all score labels Nodes
+	private var scoreLabelNodeArray : [SKLabelNode]
+
+	/// all player names labels  Node
+	private var nameLabelNodeArray : [SKLabelNode]
+
+	/// timer label Node
+	private var timerLabelNode: SKLabelNode!
+	
     private override init() {
         self.playerArray = []
+		self.scoreLabelNodeArray = []
+		self.nameLabelNodeArray = []
     }
     
     /// inserts players in hud (each one will have their score object)
@@ -41,8 +52,35 @@ class HudController : NSObject, HudProtocol {
     public func updateScore(player: Int) {
         if (player+1 <= playerArray.count) {
             playerArray[player].score.updatesScore()
+			scoreLabelNodeArray[player].text = "\(playerArray[player].score.currentScore)"
         } else {
             print ("This player not exists")
         }
     }
+	
+	/// Sets the Hud Scores, Player Names and timer, suports 4 players
+	///
+	/// - Parameter gameScene: scene that contains the Score, combo, Names labels
+	public func setHUD(gameNode: SKNode){
+
+		//Get the Node of the timer
+		self.timerLabelNode = gameNode.childNode(withName: "timer_test") as! SKLabelNode
+		self.timer.setLabel(timerLabelNode: self.timerLabelNode)
+		self.timer.startTimer()
+		// Get the Nodes for each Player
+		var i = 1
+		for player in playerArray {
+
+			let playerNameNode = gameNode.childNode(withName: "nameLabel\(i)") as! SKLabelNode
+			playerNameNode.isHidden = false
+			playerNameNode.text = player.playerName + ":"
+			self.nameLabelNodeArray.append(playerNameNode)
+
+			let playerScoreNode = gameNode.childNode(withName: "scoreLabel\(i)") as! SKLabelNode
+			playerScoreNode.isHidden = false
+			self.scoreLabelNodeArray.append(playerScoreNode)
+
+			i+=1
+		}
+	}
 }

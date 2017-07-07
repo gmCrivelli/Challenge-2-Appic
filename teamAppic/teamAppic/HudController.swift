@@ -64,7 +64,7 @@ class HudController : NSObject, HudProtocol {
 	public func setHUD(gameNode: SKNode){
 
 		//Get the Node of the timer
-		self.timerLabelNode = gameNode.childNode(withName: "timer_test") as! SKLabelNode
+		self.timerLabelNode = gameNode.childNode(withName: "timerLabel") as! SKLabelNode
 		self.timer.setLabel(timerLabelNode: self.timerLabelNode)
 		self.timer.startTimer()
 		// Get the Nodes for each Player

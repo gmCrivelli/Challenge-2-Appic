@@ -12,13 +12,16 @@ import SpriteKit
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 60
+    private let GAMEPLAYTIME : Int = 61
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
     
     /// gameplay timer
     private var timer : Int
+	
+	/// Timer Label
+	private var timerLabelNode : SKLabelNode?
     
     public init () {
         self.timer = GAMEPLAYTIME
@@ -26,13 +29,16 @@ class GameTimer {
     
     /// starts the timer counter
     @objc public func startTimer() {
-        print(self.timer)
         if (self.timer > 0) {
             self.timer -= 1
             _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.startTimer), userInfo: nil, repeats: false)
         } else {
             print("Game Over")
         }
+		//Case there is a label to assign the value
+		if (timerLabelNode != nil) {
+			self.timerLabelNode?.text = "Time: \(getTimer())"
+		}
     }
     
     
@@ -42,4 +48,11 @@ class GameTimer {
     public func getTimer() -> Int {
         return self.timer
     }
+	
+	/// set the Timer Label
+	///
+	/// - Parameter: timerLabel - label for the update
+	public func setLabel(timerLabelNode : SKLabelNode){
+		self.timerLabelNode = timerLabelNode
+	}
 }

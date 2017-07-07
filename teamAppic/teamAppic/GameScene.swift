@@ -61,7 +61,6 @@ class GameScene: SKScene, ReactToMotionEvents {
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
         
-        //
         self.targetController.delegateHud = self.hudController
 		
         let targetNode1 = targetController.addTarget(debugging: true, typeOfNode: "shape")
@@ -72,7 +71,7 @@ class GameScene: SKScene, ReactToMotionEvents {
         
         // insert players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
-        hudController.timer.startTimer()
+		hudController.setHUD(gameNode: gameNode)
 	}
 	
 	///		Setup the gestures.
@@ -96,10 +95,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
+		
         targetController.detectHit(playerAimArray[0].position, player: 0)
-
-//        targetController.detectHit(aimNode.position)
-        hudController.playerArray[0].score.updatesScore()
         print("Player 1 name: \(hudController.playerArray[0].playerName)")
         print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
     }

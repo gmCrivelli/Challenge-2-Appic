@@ -16,10 +16,9 @@ var teste = 0
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()
-    var aimNode:SKSpriteNode!
 	var targetController : TargetController!
     // Hud
-    let hud = Hud.hudInstance
+    let hudController = HudController.hudInstance
 	//Controller mode
 	var controllerSwipeMode: Bool = false
 	//Positions
@@ -28,6 +27,10 @@ class GameScene: SKScene, ReactToMotionEvents {
 	//Motion update
 	var lastX: Double! = 0
 	var lastY : Double! = 0
+    
+    // this two array must have the same length
+    var playerNameArray : [String] = []
+    var playerAimArray : [SKSpriteNode] = []
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -51,9 +54,15 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///
 	func setupNodes(){
 		gameNode = self.childNode(withName: "gameNode")!
-		aimNode = gameNode.childNode(withName: "aim") as! SKSpriteNode
+        
+        // initializing player array and aim array (single player for now)
+        playerNameArray.append("Player 1")
+        playerAimArray.append(gameNode.childNode(withName: "aim1") as! SKSpriteNode)
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
+        
+        //
+        self.targetController.delegateHud = self.hudController
 		
         let targetNode1 = targetController.addTarget(debugging: true, typeOfNode: "shape")
 		targetController.moveBetweenSides(node: targetNode1)
@@ -62,17 +71,22 @@ class GameScene: SKScene, ReactToMotionEvents {
 		targetController.moveBetweenSides(node: targetNode2)
         
         // insert players (single player)
-        hud.insertPlayers(playerNameArray: ["Player 1"])
-        hud.timer.startTimer()
+        hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
+        hudController.timer.startTimer()
 	}
 	
 	///		Setup the gestures.
 	///
 	func setupGestures(){
-		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
+		let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
 		let pressType = UIPressType.select
-		tapGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
-		self.view?.addGestureRecognizer(tapGestureRecognizer)
+        selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
+		self.view?.addGestureRecognizer(selectGestureRecognizer)
+        
+        let pauseGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.pauseTapped(_:)))
+        let pauseType = UIPressType.playPause
+        pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
+        self.view?.addGestureRecognizer(pauseGestureRecognizer)
 	}
 	
 	///		Function that catches the Gesture for tap in
@@ -82,10 +96,18 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
-        targetController.detectHit(aimNode.position)
-        hud.playerArray[0].score.updatesScore()
+        // VERIFICAR COMO IREMOS IMPLEMENTAR O GESTURE PARA CADA JOGADOR
+        targetController.detectHit(playerAimArray[0].position, player: 0)
+
 //        print("Player 1 name: \(hud.playerArray[0].playerName)")
 //        print("Current score Player 1: \(hud.playerArray[0].score.currentScore)")
+    }
+    
+    /// catches the gesture for pause in the tv control
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
+    func pauseTapped(_ sender : UITapGestureRecognizer) {
+        print("The game will be paused")
     }
 	
 	///		Override of the function Update, called 
@@ -97,11 +119,11 @@ class GameScene: SKScene, ReactToMotionEvents {
     override func update(_ currentTime: TimeInterval) {
         
         // Called before each frame is rendered
-        aimNode.removeAllActions()
+        playerAimArray[0].removeAllActions()
 
 		if !controllerSwipeMode {
 			
-			aimNode.position = currentAimPosition
+			playerAimArray[0].position = currentAimPosition
 			
 		} else {
 			
@@ -114,14 +136,14 @@ class GameScene: SKScene, ReactToMotionEvents {
 			let p_x:CGFloat = 450
 			let p_y:CGFloat = 300
 			
-			var posX = aimNode.position.x + currToPosX * movementPerSec * timeInterval
-			var posY = aimNode.position.y + currToPosY * movementPerSec * timeInterval
+			var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
+			var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval
 			
-			posX = (posX.magnitude > p_x.magnitude) ? aimNode.position.x : posX
-			posY = (posY.magnitude > p_y.magnitude) ? aimNode.position.y : posY
+			posX = (posX.magnitude > p_x.magnitude) ? playerAimArray[0].position.x : posX
+			posY = (posY.magnitude > p_y.magnitude) ? playerAimArray[0].position.y : posY
 
-			aimNode.position.x = posX
-			aimNode.position.y = posY
+			playerAimArray[0].position.x = posX
+			playerAimArray[0].position.y = posY
 			
 		}
 

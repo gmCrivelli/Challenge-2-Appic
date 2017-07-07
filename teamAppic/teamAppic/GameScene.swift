@@ -96,11 +96,12 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
-        // VERIFICAR COMO IREMOS IMPLEMENTAR O GESTURE PARA CADA JOGADOR
         targetController.detectHit(playerAimArray[0].position, player: 0)
 
-//        print("Player 1 name: \(hud.playerArray[0].playerName)")
-//        print("Current score Player 1: \(hud.playerArray[0].score.currentScore)")
+//        targetController.detectHit(aimNode.position)
+        hudController.playerArray[0].score.updatesScore()
+        print("Player 1 name: \(hudController.playerArray[0].playerName)")
+        print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
     }
     
     /// catches the gesture for pause in the tv control

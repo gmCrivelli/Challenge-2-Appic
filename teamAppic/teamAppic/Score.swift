@@ -42,9 +42,8 @@ class Score {
     ///
     /// - Returns: high score
     public func getHighScore() -> Int {
-        let highScore : Int? = UserDefaults.standard.integer(forKey: "HighScore")
-        if (highScore != nil) {
-            return highScore!
+        if let highScore = UserDefaults.standard.integer(forKey: "HighScore") as Int? {
+            return highScore
         } else {
             return 0
         }
@@ -53,6 +52,7 @@ class Score {
     /// function that increase the current score of a player
     public func updatesScore() {
         self.currentScore += (NORMALSCORE + self.bonusScore)
+        print (self.currentScore)
     }
     
     

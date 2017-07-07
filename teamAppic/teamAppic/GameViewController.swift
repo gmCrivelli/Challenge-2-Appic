@@ -32,6 +32,9 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            
+            // observer to know when pause is selected
+            
         }
     }
 

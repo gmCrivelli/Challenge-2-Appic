@@ -16,6 +16,7 @@ var teste = 0
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()
+    var pauseNode = SKSpriteNode()
 	var targetController : TargetController!
     // Hud
     let hudController = HudController.hudInstance
@@ -53,7 +54,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
-		gameNode = self.childNode(withName: "gameNode")!
+		self.gameNode = self.childNode(withName: "gameNode")!
+        self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
         // initializing player array and aim array (single player for now)
         playerNameArray.append("Player 1")
@@ -95,16 +97,27 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
-		
-        targetController.detectHit(playerAimArray[0].position, player: 0)
-        print("Player 1 name: \(hudController.playerArray[0].playerName)")
-        print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
+        if (!self.gameNode.isPaused) {
+            targetController.detectHit(playerAimArray[0].position, player: 0)
+            print("Player 1 name: \(hudController.playerArray[0].playerName)")
+            print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
+        }
     }
     
-    /// catches the gesture for pause in the tv control
+    /// catches the gesture for pause in the tv control and pauses the game
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func pauseTapped(_ sender : UITapGestureRecognizer) {
+        self.gameNode.isPaused = !(self.gameNode.isPaused)
+        if (self.gameNode.isPaused) {
+            self.hudController.timer.pauseTimer()
+            self.pauseNode.alpha = 1
+            self.gameNode.alpha = 0.3
+        } else {
+            self.hudController.timer.resumeTimer()
+            self.pauseNode.alpha = 0
+            self.gameNode.alpha = 1
+        }
         print("The game will be paused")
     }
 	

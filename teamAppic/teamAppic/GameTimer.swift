@@ -18,35 +18,48 @@ class GameTimer {
     static let gameTimerInstance = GameTimer()
     
     /// gameplay timer
-    private var timer : Int
+    private var timerCount : Int
 	
 	/// Timer Label
 	private var timerLabelNode : SKLabelNode?
     
+    private var timer : Timer?
+    
     public init () {
-        self.timer = GAMEPLAYTIME
+        self.timerCount = GAMEPLAYTIME
+        self.timer = Timer()
     }
     
     /// starts the timer counter
-    @objc public func startTimer() {
-        if (self.timer > 0) {
-            self.timer -= 1
-            _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.startTimer), userInfo: nil, repeats: false)
+    public func startTimer() {
+        self.timerCount = GAMEPLAYTIME
+        self.setupTimer()
+    }
+    
+    /// counts the timer
+    @objc private func countsTimer() {
+        if (self.timerCount > 0) {
+            self.timerCount -= 1
+            self.setupTimer()
         } else {
             print("Game Over")
         }
-		//Case there is a label to assign the value
-		if (timerLabelNode != nil) {
-			self.timerLabelNode?.text = "Time: \(getTimer())"
-		}
+        //Case there is a label to assign the value
+        if (timerLabelNode != nil) {
+            self.timerLabelNode?.text = "Time: \(getTimer())"
+        }
     }
     
+    /// setups the scheduled timer
+    private func setupTimer() {
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countsTimer), userInfo: nil, repeats: false)
+    }
     
     /// returns the remaining time of timer
     ///
     /// - Returns: remaining time
     public func getTimer() -> Int {
-        return self.timer
+        return self.timerCount
     }
 	
 	/// set the Timer Label
@@ -55,4 +68,15 @@ class GameTimer {
 	public func setLabel(timerLabelNode : SKLabelNode){
 		self.timerLabelNode = timerLabelNode
 	}
+    
+    /// pauses the timer
+    public func pauseTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
+    /// resumes the timer
+    public func resumeTimer() {
+        self.setupTimer()
+    }
 }

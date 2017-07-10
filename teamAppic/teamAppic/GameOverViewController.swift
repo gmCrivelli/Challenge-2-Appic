@@ -1,8 +1,8 @@
 //
-//  GameViewController.swift
+//  GameOverController.swift
 //  teamAppic
 //
-//  Created by Rodrigo Maximo on 28/06/17.
+//  Created by Rodrigo Maximo on 09/07/17.
 //  Copyright © 2017 Rodrigo Maximo. All rights reserved.
 //
 
@@ -10,39 +10,30 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-
-class GameViewController: UIViewController, GameOVerProtocol{
-    static let instance = GameViewController()
+class GameOverViewController: UIViewController {
+    
+    @IBOutlet weak var gameOverLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        gameOverLabel.textColor = .blue
+        
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "MenuScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
                 view.presentScene(scene)
-                scene.zPosition = 10
-				
-                let gameScene = scene as! GameScene
                 
-                gameScene.gameDelegate = self
             }
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
-    }
-
-    public func gameOver() {
-        
-        
-        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {

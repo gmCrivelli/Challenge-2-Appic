@@ -13,6 +13,10 @@ import QuartzCore
 
 var teste = 0
 
+protocol GameOVerProtocol: NSObjectProtocol {
+    func gameOver()
+}
+
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()
@@ -21,7 +25,7 @@ class GameScene: SKScene, ReactToMotionEvents {
     // Hud
     let hudController = HudController.hudInstance
 	//Controller mode
-	var controllerSwipeMode: Bool = false
+	var controllerSwipeMode: Bool = true
 	//Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
@@ -32,6 +36,8 @@ class GameScene: SKScene, ReactToMotionEvents {
     // this two array must have the same length
     var playerNameArray : [String] = []
     var playerAimArray : [SKSpriteNode] = []
+    
+    public weak var gameDelegate: GameOVerProtocol?
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -54,6 +60,7 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
+        
 		self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
@@ -118,6 +125,11 @@ class GameScene: SKScene, ReactToMotionEvents {
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
         }
+        
+//        if let gameDelegate = self.gameDelegate {
+//            gameDelegate.gameOver()
+//        }
+
         print("The game will be paused")
     }
 	

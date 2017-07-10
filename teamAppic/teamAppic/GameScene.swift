@@ -28,8 +28,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 	var lastY : Double! = 0
     
     // this two array must have the same length
-    var playerNameArray : [String] = []
-    var playerAimArray : [SKSpriteNode] = []
+    var playerNameArray = [String]()
+    var playerAimArray = [SKSpriteNode]()
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -57,8 +57,8 @@ class GameScene: SKScene, ReactToMotionEvents {
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
         // initializing player array and aim array (single player for now)
-        playerNameArray.append("Player 1")
-        playerAimArray.append(gameNode.childNode(withName: "aim1") as! SKSpriteNode)
+        playerNameArray = ["Player 1"]
+        playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
         

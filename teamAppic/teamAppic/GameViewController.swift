@@ -39,8 +39,6 @@ class GameViewController: UIViewController, GameOVerProtocol{
     }
 
     public func gameOver() {
-        
-        
         self.performSegue(withIdentifier: "gameOverSegue", sender: self)
     }
     

@@ -36,6 +36,10 @@ class GameOverViewController: UIViewController {
         }
     }
     
+    @IBAction func restartGame(_ sender: UIButton) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

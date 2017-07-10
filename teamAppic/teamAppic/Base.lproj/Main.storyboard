@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16B2657" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xYS-ru-j4r">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xYS-ru-j4r">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -151,105 +149,14 @@
                         <viewControllerLayoutGuide type="top" id="IjP-e1-nco"/>
                         <viewControllerLayoutGuide type="bottom" id="t6P-By-9Eu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mWB-js-eXg">
+                    <view key="view" contentMode="scaleToFill" id="mWB-js-eXg" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="7MI-vI-vao">
-                                <rect key="frame" x="33" y="265" width="1854" height="550"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="A4S-gb-Tir">
-                                        <rect key="frame" x="0.0" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scarpz" translatesAutoresizingMaskIntoConstraints="NO" id="YOc-Rf-1Wf">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="YOc-Rf-1Wf" secondAttribute="height" multiplier="1:1" id="bSQ-fZ-yo7"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Felipe Scarpitta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZV-Ue-Qxd">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GVd-tn-3cV">
-                                        <rect key="frame" x="471" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gustavo" translatesAutoresizingMaskIntoConstraints="NO" id="UjI-pF-aNt">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gustavo Crivelli" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYV-6K-QPv">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="lVZ-A8-Zje">
-                                        <rect key="frame" x="942" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Richard" translatesAutoresizingMaskIntoConstraints="NO" id="PFo-XV-rpK">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Richard Netto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjl-sf-i96">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="yia-Sr-c79">
-                                        <rect key="frame" x="1413" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rodrigo" translatesAutoresizingMaskIntoConstraints="NO" id="Qfd-ql-0iu">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rodrigo Máximo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVA-Dp-gzR">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="PFo-XV-rpK" firstAttribute="width" secondItem="UjI-pF-aNt" secondAttribute="width" id="7Vf-XJ-X5W"/>
-                                    <constraint firstItem="UjI-pF-aNt" firstAttribute="height" secondItem="YOc-Rf-1Wf" secondAttribute="height" id="KeW-Tg-vD6"/>
-                                    <constraint firstItem="Qfd-ql-0iu" firstAttribute="width" secondItem="PFo-XV-rpK" secondAttribute="width" id="Vw2-ay-IYU"/>
-                                    <constraint firstItem="UjI-pF-aNt" firstAttribute="width" secondItem="YOc-Rf-1Wf" secondAttribute="width" id="b7C-EW-WgJ"/>
-                                    <constraint firstItem="Qfd-ql-0iu" firstAttribute="height" secondItem="PFo-XV-rpK" secondAttribute="height" id="gp8-T3-au4"/>
-                                    <constraint firstItem="PFo-XV-rpK" firstAttribute="height" secondItem="UjI-pF-aNt" secondAttribute="height" id="hYj-S3-fxd"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="7MI-vI-vao" firstAttribute="centerY" secondItem="mWB-js-eXg" secondAttribute="centerY" id="6Wi-tb-bSV"/>
-                            <constraint firstItem="YOc-Rf-1Wf" firstAttribute="width" secondItem="mWB-js-eXg" secondAttribute="width" multiplier="0.23" id="KFX-2b-HLO"/>
-                            <constraint firstItem="7MI-vI-vao" firstAttribute="centerX" secondItem="mWB-js-eXg" secondAttribute="centerX" id="aS5-iM-bEn"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="crivelli" destination="UjI-pF-aNt" id="mIg-iK-z9R"/>
-                        <outlet property="richard" destination="PFo-XV-rpK" id="T70-sd-dcZ"/>
-                        <outlet property="rodrigo" destination="Qfd-ql-0iu" id="tUC-XI-IjA"/>
-                        <outlet property="scarpz" destination="YOc-Rf-1Wf" id="Oed-uD-jn4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnm-Ny-fDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1342" y="-476"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Gustavo" width="511" height="511"/>
-        <image name="Richard" width="599" height="600"/>
-        <image name="Rodrigo" width="238" height="282"/>
-        <image name="Scarpz" width="244" height="316"/>
-    </resources>
 </document>

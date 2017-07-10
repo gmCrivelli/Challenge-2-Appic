@@ -11,8 +11,6 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-var teste = 0
-
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()

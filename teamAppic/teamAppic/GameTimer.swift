@@ -38,6 +38,7 @@ class GameTimer {
     
     /// counts the timer
     @objc private func countsTimer() {
+		print("Timer")
         if (self.timerCount > 0) {
             self.timerCount -= 1
             self.setupTimer()

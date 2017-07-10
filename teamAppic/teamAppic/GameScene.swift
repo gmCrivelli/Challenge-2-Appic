@@ -12,6 +12,9 @@ import GameController
 import QuartzCore
 
 class GameScene: SKScene, ReactToMotionEvents {
+    
+    let music = SKAudioNode(fileNamed: "sound.mp3")
+    
 	//Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
@@ -40,11 +43,23 @@ class GameScene: SKScene, ReactToMotionEvents {
 		setupScenes()
 		setupNodes()
 		setupGestures()
+        setupMusics()
     }
 	
+    /// setups the circus music when the game is being played
+    func setupMusics() {
+        MusicManager.instance.setup()
+        MusicManager.instance.play()
+    }
+    
+    /// setups the game over configurations
+    func gameOverSetups() {
+        MusicManager.instance.stop()
+    }
+    
 	///		Setup the Scenes.
 	///
-	func setupScenes(){
+	func setupScenes() {
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		appDelegate.motionDelegate = self
 	}
@@ -117,10 +132,6 @@ class GameScene: SKScene, ReactToMotionEvents {
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
         }
-        
-//        if let gameDelegate = self.gameDelegate {
-//            gameDelegate.gameOver()
-//        }
 
         print("The game will be paused")
     }

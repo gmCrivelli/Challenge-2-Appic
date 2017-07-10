@@ -12,7 +12,9 @@ import GameplayKit
 
 
 class GameViewController: UIViewController, GameOVerProtocol{
-    static let instance = GameViewController()
+    
+    /// scene where the game actions are implemented
+    var gameScene : GameScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,9 @@ class GameViewController: UIViewController, GameOVerProtocol{
                 // Present the scene
                 view.presentScene(scene)
 				
-                let gameScene = scene as! GameScene
+                self.gameScene = scene as! GameScene
                 
-                gameScene.hudController.timer.gameDelegate = self
+                self.gameScene.hudController.timer.gameDelegate = self
             }
             
             view.ignoresSiblingOrder = true
@@ -38,6 +40,11 @@ class GameViewController: UIViewController, GameOVerProtocol{
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        // when the scene will disappear, setups the game over configuration
+        self.gameScene.gameOverSetups()
+    }
+    
     public func gameOver() {
         self.performSegue(withIdentifier: "gameOverSegue", sender: self)
     }

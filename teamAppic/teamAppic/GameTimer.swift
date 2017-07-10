@@ -41,16 +41,19 @@ class GameTimer {
     /// starts the timer counter
     public func startTimer() {
         self.timerCount = GAMEPLAYTIME
+        // before setup timer, the timer is invalidated to sure that there is not another scheduled timer
+        self.pauseTimer()
+        
         self.setupTimer()
     }
     
     /// counts the timer
     @objc private func countsTimer() {
-		print("Timer")
         if (self.timerCount > 0) {
             self.timerCount -= 1
             self.setupTimer()
         } else {
+            // game over
             if let gameOverDelegate = gameDelegate {
                 gameOverDelegate.gameOver()
             }

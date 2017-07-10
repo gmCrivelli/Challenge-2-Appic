@@ -19,7 +19,7 @@ class GameScene: SKScene, ReactToMotionEvents {
     // Hud
     let hudController = HudController.hudInstance
 	//Controller mode
-	var controllerSwipeMode: Bool = false
+	var controllerSwipeMode: Bool = true
 	//Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
@@ -28,8 +28,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 	var lastY : Double! = 0
     
     // this two array must have the same length
-    var playerNameArray : [String] = []
-    var playerAimArray : [SKSpriteNode] = []
+    var playerNameArray = [String]()
+    var playerAimArray = [SKSpriteNode]()
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -52,12 +52,13 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
+        
 		self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
         // initializing player array and aim array (single player for now)
-        playerNameArray.append("Player 1")
-        playerAimArray.append(gameNode.childNode(withName: "aim1") as! SKSpriteNode)
+        playerNameArray = ["Player 1"]
+        playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
         
@@ -116,6 +117,11 @@ class GameScene: SKScene, ReactToMotionEvents {
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
         }
+        
+//        if let gameDelegate = self.gameDelegate {
+//            gameDelegate.gameOver()
+//        }
+
         print("The game will be paused")
     }
 	

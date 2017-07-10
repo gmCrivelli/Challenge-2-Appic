@@ -27,6 +27,7 @@
 		1F1E0F631F03C996007B5825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0F611F03C996007B5825 /* Main.storyboard */; };
 		1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6C1F03CB15007B5825 /* TargetController.swift */; };
 		1F1E0F6F1F03CBE9007B5825 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6E1F03CBE9007B5825 /* Target.swift */; };
+		1F2989441F128BF200FAC619 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2989431F128BF200FAC619 /* GameOverViewController.swift */; };
 		1F2D5E881F0BB337004ED7CB /* Plok.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D5E861F0BB337004ED7CB /* Plok.sks */; };
 		1F7885511F0D13A100F57921 /* PlayersColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885501F0D13A100F57921 /* PlayersColors.swift */; };
 		1F7885531F0D769900F57921 /* HudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885521F0D769900F57921 /* HudController.swift */; };
@@ -61,6 +62,7 @@
 		1F1E0F661F03C996007B5825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1E0F6C1F03CB15007B5825 /* TargetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetController.swift; sourceTree = "<group>"; };
 		1F1E0F6E1F03CBE9007B5825 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		1F2989431F128BF200FAC619 /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		1F2D5E861F0BB337004ED7CB /* Plok.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Plok.sks; sourceTree = "<group>"; };
 		1F7885501F0D13A100F57921 /* PlayersColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersColors.swift; sourceTree = "<group>"; };
 		1F7885521F0D769900F57921 /* HudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				1F1E0F5F1F03C996007B5825 /* GameViewController.swift */,
 				1F1E0F6C1F03CB15007B5825 /* TargetController.swift */,
 				187A3F7E1F0BE2BE00AE46CC /* MenuViewController.swift */,
+				1F2989431F128BF200FAC619 /* GameOverViewController.swift */,
 				187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */,
 			);
 			name = Controllers;
@@ -264,6 +267,7 @@
 				187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */,
 				1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */,
 				B03601781F0C22940000673A /* Splash.swift in Sources */,
+				1F2989441F128BF200FAC619 /* GameOverViewController.swift in Sources */,
 				1F1E0F5E1F03C996007B5825 /* GameScene.swift in Sources */,
 				1F7885571F0D7BB600F57921 /* Player.swift in Sources */,
 				1F1D9A521F0E821300C202B5 /* GameTimer.swift in Sources */,

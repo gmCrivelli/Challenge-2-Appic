@@ -11,12 +11,6 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-var teste = 0
-
-protocol GameOVerProtocol: NSObjectProtocol {
-    func gameOver()
-}
-
 class GameScene: SKScene, ReactToMotionEvents {
 	//Nodes and TargetController
     var gameNode = SKNode()
@@ -36,8 +30,6 @@ class GameScene: SKScene, ReactToMotionEvents {
     // this two array must have the same length
     var playerNameArray : [String] = []
     var playerAimArray : [SKSpriteNode] = []
-    
-    public weak var gameDelegate: GameOVerProtocol?
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.

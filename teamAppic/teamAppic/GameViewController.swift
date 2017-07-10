@@ -25,11 +25,10 @@ class GameViewController: UIViewController, GameOVerProtocol{
                 
                 // Present the scene
                 view.presentScene(scene)
-                scene.zPosition = 10
 				
                 let gameScene = scene as! GameScene
                 
-                gameScene.gameDelegate = self
+                gameScene.hudController.timer.gameDelegate = self
             }
             
             view.ignoresSiblingOrder = true

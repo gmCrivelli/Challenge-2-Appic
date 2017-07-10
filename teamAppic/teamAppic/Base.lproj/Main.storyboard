@@ -22,19 +22,6 @@
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="weF-Pa-zaM" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scarpz" translatesAutoresizingMaskIntoConstraints="NO" id="dBY-wK-T0Y">
-                                <rect key="frame" x="802" y="382" width="316" height="316"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="dBY-wK-T0Y" secondAttribute="height" multiplier="1:1" id="oH0-OR-yvg"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="dBY-wK-T0Y" firstAttribute="width" secondItem="dBY-wK-T0Y" secondAttribute="height" multiplier="1:1" id="45g-qC-N1l"/>
-                            <constraint firstItem="dBY-wK-T0Y" firstAttribute="centerX" secondItem="weF-Pa-zaM" secondAttribute="centerX" id="6gh-Ls-mil"/>
-                            <constraint firstItem="dBY-wK-T0Y" firstAttribute="centerY" secondItem="weF-Pa-zaM" secondAttribute="centerY" id="CuB-Vc-OwM"/>
-                        </constraints>
                     </view>
                     <connections>
                         <segue destination="fUC-ZE-pv4" kind="show" identifier="gameOverSegue" id="DNZ-wN-dBi"/>
@@ -210,7 +197,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-Vh-cXB">
-                                <rect key="frame" x="632" y="175" width="657" height="270"/>
+                                <rect key="frame" x="612" y="175" width="697" height="270"/>
                                 <color key="tintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="270" id="esd-yO-7Os"/>

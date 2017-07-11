@@ -10,15 +10,17 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-
-class GameViewController: UIViewController, GameOVerProtocol{
+class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
     
     /// scene where the game actions are implemented
     var gameScene : GameScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadScene()
+    }
+    
+    public func loadScene() {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -27,7 +29,7 @@ class GameViewController: UIViewController, GameOVerProtocol{
                 
                 // Present the scene
                 view.presentScene(scene)
-				
+                
                 self.gameScene = scene as! GameScene
                 
                 self.gameScene.hudController.timer.gameDelegate = self
@@ -47,6 +49,12 @@ class GameViewController: UIViewController, GameOVerProtocol{
     
     public func gameOver() {
         self.performSegue(withIdentifier: "gameOverSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? GameOverViewController {
+            destVC.delegateGameVC = self
+        }
     }
     
     override func didReceiveMemoryWarning() {

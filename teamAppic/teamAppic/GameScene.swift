@@ -55,6 +55,9 @@ class GameScene: SKScene, ReactToMotionEvents {
     /// setups the game over configurations
     func gameOverSetups() {
         MusicManager.instance.stop()
+        // sures that every node will be removed when the game overs or menu is selected
+        self.gameNode.removeAllChildren()
+        self.gameNode.removeFromParent()
     }
     
 	///		Setup the Scenes.
@@ -122,8 +125,8 @@ class GameScene: SKScene, ReactToMotionEvents {
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func pauseTapped(_ sender : UITapGestureRecognizer) {
-        self.gameNode.isPaused = !(self.gameNode.isPaused)
-        if (self.gameNode.isPaused) {
+        self.isPaused = !(self.isPaused)
+        if (self.isPaused) {
             self.hudController.timer.pauseTimer()
             self.pauseNode.alpha = 1
             self.gameNode.alpha = 0.3

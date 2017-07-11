@@ -55,6 +55,9 @@ class GameScene: SKScene, ReactToMotionEvents {
     /// setups the game over configurations
     func gameOverSetups() {
         MusicManager.instance.stop()
+        // sures that every node will be removed when the game overs or menu is selected
+        self.gameNode.removeAllChildren()
+        self.gameNode.removeFromParent()
     }
     
 	///		Setup the Scenes.

@@ -29,14 +29,11 @@ class HudController : NSObject, HudProtocol {
 
 	/// timer label Node
 	private var timerLabelNode: SKLabelNode!
-    
-    private var gameInitialized : Bool
 	
     private override init() {
         self.playerArray = []
 		self.scoreLabelNodeArray = []
 		self.nameLabelNodeArray = []
-        self.gameInitialized = true
     }
     
     /// inserts players in hud (each one will have their score object)

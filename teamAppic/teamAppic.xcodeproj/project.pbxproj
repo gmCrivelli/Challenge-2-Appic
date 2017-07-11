@@ -29,6 +29,7 @@
 		1F1E0F6F1F03CBE9007B5825 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6E1F03CBE9007B5825 /* Target.swift */; };
 		1F2989441F128BF200FAC619 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2989431F128BF200FAC619 /* GameOverViewController.swift */; };
 		1F2D5E881F0BB337004ED7CB /* Plok.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D5E861F0BB337004ED7CB /* Plok.sks */; };
+		1F5267A31F155B5A0091519C /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5267A21F155B5A0091519C /* MenuScene.swift */; };
 		1F7885511F0D13A100F57921 /* PlayersColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885501F0D13A100F57921 /* PlayersColors.swift */; };
 		1F7885531F0D769900F57921 /* HudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885521F0D769900F57921 /* HudController.swift */; };
 		1F7885551F0D7BAC00F57921 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885541F0D7BAC00F57921 /* Score.swift */; };
@@ -65,6 +66,7 @@
 		1F1E0F6E1F03CBE9007B5825 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		1F2989431F128BF200FAC619 /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		1F2D5E861F0BB337004ED7CB /* Plok.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Plok.sks; sourceTree = "<group>"; };
+		1F5267A21F155B5A0091519C /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		1F7885501F0D13A100F57921 /* PlayersColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersColors.swift; sourceTree = "<group>"; };
 		1F7885521F0D769900F57921 /* HudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudController.swift; sourceTree = "<group>"; };
 		1F7885541F0D7BAC00F57921 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				1F1E0F5D1F03C996007B5825 /* GameScene.swift */,
 				B0E729F21F13C67B0089DF9F /* AboutScene.swift */,
+				1F5267A21F155B5A0091519C /* MenuScene.swift */,
 				1F78854F1F0D0C3800F57921 /* Sks */,
 			);
 			name = Scenes;
@@ -214,7 +217,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = D6FBY3CTDY;
+						DevelopmentTeam = K3MJ38Y24S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5267A31F155B5A0091519C /* MenuScene.swift in Sources */,
 				187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */,
 				1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */,
 				B03601781F0C22940000673A /* Splash.swift in Sources */,
@@ -398,7 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = D6FBY3CTDY;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
@@ -412,7 +416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = D6FBY3CTDY;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";

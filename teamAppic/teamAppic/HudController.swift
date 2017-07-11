@@ -92,4 +92,11 @@ class HudController : NSObject, HudProtocol {
 			i+=1
 		}
 	}
+    
+    /// sets the high score for all players after the game ends
+    public func gameOverHighScore() {
+        for player in self.playerArray {
+            player.score.reInitScore()
+        }
+    }
 }

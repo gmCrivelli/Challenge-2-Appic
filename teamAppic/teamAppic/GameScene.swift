@@ -22,7 +22,7 @@ class GameScene: SKScene, ReactToMotionEvents {
     // Hud
     let hudController = HudController.hudInstance
 	//Controller mode
-	var controllerSwipeMode: Bool = true
+	var controllerSwipeMode: Bool = false
 	//Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)

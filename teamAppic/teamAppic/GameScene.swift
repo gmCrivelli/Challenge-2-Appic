@@ -11,9 +11,10 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-var teste = 0
-
 class GameScene: SKScene, ReactToMotionEvents {
+    
+    let music = SKAudioNode(fileNamed: "sound.mp3")
+    
 	//Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
@@ -21,7 +22,7 @@ class GameScene: SKScene, ReactToMotionEvents {
     // Hud
     let hudController = HudController.hudInstance
 	//Controller mode
-	var controllerSwipeMode: Bool = false
+	var controllerSwipeMode: Bool = true
 	//Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
@@ -30,8 +31,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 	var lastY : Double! = 0
     
     // this two array must have the same length
-    var playerNameArray : [String] = []
-    var playerAimArray : [SKSpriteNode] = []
+    var playerNameArray = [String]()
+    var playerAimArray = [SKSpriteNode]()
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -42,11 +43,23 @@ class GameScene: SKScene, ReactToMotionEvents {
 		setupScenes()
 		setupNodes()
 		setupGestures()
+        setupMusics()
     }
 	
+    /// setups the circus music when the game is being played
+    func setupMusics() {
+        MusicManager.instance.setup()
+        MusicManager.instance.play()
+    }
+    
+    /// setups the game over configurations
+    func gameOverSetups() {
+        MusicManager.instance.stop()
+    }
+    
 	///		Setup the Scenes.
 	///
-	func setupScenes(){
+	func setupScenes() {
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		appDelegate.motionDelegate = self
 	}
@@ -54,12 +67,13 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
+        
 		self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
         // initializing player array and aim array (single player for now)
-        playerNameArray.append("Player 1")
-        playerAimArray.append(gameNode.childNode(withName: "aim1") as! SKSpriteNode)
+        playerNameArray = ["Player 1"]
+        playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
         
@@ -118,6 +132,7 @@ class GameScene: SKScene, ReactToMotionEvents {
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
         }
+
         print("The game will be paused")
     }
 	

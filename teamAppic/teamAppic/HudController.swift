@@ -29,17 +29,24 @@ class HudController : NSObject, HudProtocol {
 
 	/// timer label Node
 	private var timerLabelNode: SKLabelNode!
+    
+    private var gameInitialized : Bool
 	
     private override init() {
         self.playerArray = []
 		self.scoreLabelNodeArray = []
 		self.nameLabelNodeArray = []
+        self.gameInitialized = true
     }
     
     /// inserts players in hud (each one will have their score object)
     ///
-    /// - Parameter playerNameAndAimArray: array of tuples that contains the name of each player and their aim node in format (name, aimNode)
+    /// - Parameters:
+    ///   - playerNameArray: array of players name
+    ///   - playerAimArray: array of players aim nodes
     public func insertPlayers(playerNameArray : [String], playerAimArray : [SKSpriteNode]) {
+        // this array must be reinitialized to avoid that, everytime menu is selected, more players be added
+        self.playerArray = []
         for (playerName,aimNode) in zip(playerNameArray,playerAimArray) {
             let player = Player(playerName: playerName, aimNode : aimNode)
             self.playerArray.append(player)
@@ -69,8 +76,13 @@ class HudController : NSObject, HudProtocol {
 		self.timer.startTimer()
 		// Get the Nodes for each Player
 		var i = 1
-		for player in playerArray {
-
+        
+        // these arrays must be reinitialized to avoid that, everytime menu is selected, more labels be added
+		self.nameLabelNodeArray = []
+        self.scoreLabelNodeArray = []
+        
+        for player in playerArray {
+            
 			let playerNameNode = gameNode.childNode(withName: "nameLabel\(i)") as! SKLabelNode
 			playerNameNode.isHidden = false
 			playerNameNode.text = player.playerName + ":"

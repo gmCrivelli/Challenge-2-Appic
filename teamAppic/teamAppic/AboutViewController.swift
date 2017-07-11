@@ -7,40 +7,37 @@
 //
 
 import UIKit
+import SpriteKit
+import GameplayKit
 
 class AboutViewController: UIViewController {
-    
-    @IBOutlet weak var scarpz: UIImageView!
-    @IBOutlet weak var crivelli: UIImageView!
-    @IBOutlet weak var richard: UIImageView!
-    @IBOutlet weak var rodrigo: UIImageView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        scarpz.layer.cornerRadius = 20.0
-        crivelli.layer.cornerRadius = 4.0
-        richard.layer.cornerRadius = 4.0
-        rodrigo.layer.cornerRadius = 4.0
-
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		if let view = self.view as! SKView? {
+			// Load the SKScene from 'GameScene.sks'
+			if let scene = SKScene(fileNamed: "AboutScene") {
+				// Set the scale mode to scale to fit the window
+				scene.scaleMode = .aspectFill
+				
+				// Present the scene
+				view.presentScene(scene)
+				
+			}
+			
+			view.ignoresSiblingOrder = true
+			
+			view.showsFPS = true
+			view.showsNodeCount = true
+			
+			// observer to know when pause is selected
+			
+		}
+	}
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Release any cached data, images, etc that aren't in use.
+	}
 }

@@ -23,10 +23,97 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
+                    <connections>
+                        <segue destination="fUC-ZE-pv4" kind="show" identifier="gameOverSegue" id="DNZ-wN-dBi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Nd-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-3039"/>
+            <point key="canvasLocation" x="1271" y="-3376"/>
+        </scene>
+        <!--Game Over View Controller-->
+        <scene sceneID="N5R-JD-8OW">
+            <objects>
+                <viewController id="fUC-ZE-pv4" customClass="GameOverViewController" customModule="teamAppic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dbf-L7-2XU"/>
+                        <viewControllerLayoutGuide type="bottom" id="MV5-mK-8fk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QdU-h7-PJc" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="mgr-Td-RNW">
+                                <rect key="frame" x="480" y="538" width="960" height="216"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BmN-pW-8TQ" userLabel="Menu">
+                                        <rect key="frame" x="0.0" y="0.0" width="465" height="216"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="MENU">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="60" name="ComicSansMS"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <segue destination="xYS-ru-j4r" kind="show" id="Cow-xQ-opd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SFZ-id-9jl" userLabel="Restart">
+                                        <rect key="frame" x="495" y="0.0" width="465" height="216"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="RESTART">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="60" name="ComicSansMS"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="restartGame:" destination="fUC-ZE-pv4" eventType="primaryActionTriggered" id="OGw-e2-kYF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-PQ-9rj" userLabel="Game Over">
+                                <rect key="frame" x="395" y="238" width="1130" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1130" id="pdO-Bv-mgs"/>
+                                    <constraint firstAttribute="height" constant="200" id="xDq-Kp-W9p"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="GAME OVER">
+                                        <attributes>
+                                            <font key="NSFont" size="200" name="DoubleFeature"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="MV5-mK-8fk" firstAttribute="top" secondItem="mgr-Td-RNW" secondAttribute="bottom" constant="326" id="8If-ev-XrC" userLabel="Stack bottom"/>
+                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="top" secondItem="Dbf-L7-2XU" secondAttribute="bottom" constant="238" id="9Nu-SD-wre" userLabel="GameOver Top"/>
+                            <constraint firstItem="mgr-Td-RNW" firstAttribute="width" secondItem="QdU-h7-PJc" secondAttribute="width" multiplier="0.5" id="Exk-mb-iqS" userLabel="Stack width"/>
+                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Gie-XV-OJf" userLabel="GameOver horizontal"/>
+                            <constraint firstItem="mgr-Td-RNW" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Vun-jc-l0w" userLabel="Stack horizontal"/>
+                            <constraint firstItem="mgr-Td-RNW" firstAttribute="height" secondItem="QdU-h7-PJc" secondAttribute="height" multiplier="0.2" id="rJb-7D-9uZ" userLabel="Stack height "/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gameOverLabel" destination="A2i-PQ-9rj" id="T2S-fu-n2t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SyB-j2-yDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1828" y="-3322"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="dKr-12-tCh">
@@ -141,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3k-wX-oFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1625" y="-1501"/>
+            <point key="canvasLocation" x="-1828" y="-1423"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="zN9-DL-VpC">
@@ -151,105 +238,14 @@
                         <viewControllerLayoutGuide type="top" id="IjP-e1-nco"/>
                         <viewControllerLayoutGuide type="bottom" id="t6P-By-9Eu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mWB-js-eXg">
+                    <view key="view" contentMode="scaleToFill" id="mWB-js-eXg" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="7MI-vI-vao">
-                                <rect key="frame" x="33" y="265" width="1854" height="550"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="A4S-gb-Tir">
-                                        <rect key="frame" x="0.0" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scarpz" translatesAutoresizingMaskIntoConstraints="NO" id="YOc-Rf-1Wf">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="YOc-Rf-1Wf" secondAttribute="height" multiplier="1:1" id="bSQ-fZ-yo7"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Felipe Scarpitta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZV-Ue-Qxd">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GVd-tn-3cV">
-                                        <rect key="frame" x="471" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gustavo" translatesAutoresizingMaskIntoConstraints="NO" id="UjI-pF-aNt">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gustavo Crivelli" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYV-6K-QPv">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="lVZ-A8-Zje">
-                                        <rect key="frame" x="942" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Richard" translatesAutoresizingMaskIntoConstraints="NO" id="PFo-XV-rpK">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Richard Netto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjl-sf-i96">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="yia-Sr-c79">
-                                        <rect key="frame" x="1413" y="0.0" width="441" height="550"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rodrigo" translatesAutoresizingMaskIntoConstraints="NO" id="Qfd-ql-0iu">
-                                                <rect key="frame" x="0.0" y="0.0" width="441" height="441"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rodrigo Máximo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVA-Dp-gzR">
-                                                <rect key="frame" x="0.0" y="491" width="441" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="PFo-XV-rpK" firstAttribute="width" secondItem="UjI-pF-aNt" secondAttribute="width" id="7Vf-XJ-X5W"/>
-                                    <constraint firstItem="UjI-pF-aNt" firstAttribute="height" secondItem="YOc-Rf-1Wf" secondAttribute="height" id="KeW-Tg-vD6"/>
-                                    <constraint firstItem="Qfd-ql-0iu" firstAttribute="width" secondItem="PFo-XV-rpK" secondAttribute="width" id="Vw2-ay-IYU"/>
-                                    <constraint firstItem="UjI-pF-aNt" firstAttribute="width" secondItem="YOc-Rf-1Wf" secondAttribute="width" id="b7C-EW-WgJ"/>
-                                    <constraint firstItem="Qfd-ql-0iu" firstAttribute="height" secondItem="PFo-XV-rpK" secondAttribute="height" id="gp8-T3-au4"/>
-                                    <constraint firstItem="PFo-XV-rpK" firstAttribute="height" secondItem="UjI-pF-aNt" secondAttribute="height" id="hYj-S3-fxd"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="7MI-vI-vao" firstAttribute="centerY" secondItem="mWB-js-eXg" secondAttribute="centerY" id="6Wi-tb-bSV"/>
-                            <constraint firstItem="YOc-Rf-1Wf" firstAttribute="width" secondItem="mWB-js-eXg" secondAttribute="width" multiplier="0.23" id="KFX-2b-HLO"/>
-                            <constraint firstItem="7MI-vI-vao" firstAttribute="centerX" secondItem="mWB-js-eXg" secondAttribute="centerX" id="aS5-iM-bEn"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="crivelli" destination="UjI-pF-aNt" id="mIg-iK-z9R"/>
-                        <outlet property="richard" destination="PFo-XV-rpK" id="T70-sd-dcZ"/>
-                        <outlet property="rodrigo" destination="Qfd-ql-0iu" id="tUC-XI-IjA"/>
-                        <outlet property="scarpz" destination="YOc-Rf-1Wf" id="Oed-uD-jn4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnm-Ny-fDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-476"/>
+            <point key="canvasLocation" x="1342" y="-1423"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Gustavo" width="511" height="511"/>
-        <image name="Richard" width="599" height="600"/>
-        <image name="Rodrigo" width="238" height="282"/>
-        <image name="Scarpz" width="244" height="316"/>
-    </resources>
 </document>

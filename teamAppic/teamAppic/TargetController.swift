@@ -34,7 +34,9 @@ class TargetController: NSObject {
     var soundActions = [SKAction]()
     
     let hitAction:SKAction = SKAction.scale(by: 1.5, duration: 0.3)
-    
+	
+	var backGroundAbout : Bool = false
+	
     var debugging : Bool = false
 
     /// delegate to HUD
@@ -72,7 +74,7 @@ class TargetController: NSObject {
             self.gameNode.addChild(targetNodeSprite)
         }
         
-        let initialSide = chooseTargetPosition(targetNode: targetNode)
+		let initialSide = chooseTargetPosition(backGround : false, targetNode: targetNode)
         let target = Target(node: targetNode, initialPosition: initialSide)
         targetArray.append(target)
         setTargetColor(node: targetNode, color: .blue)
@@ -81,7 +83,13 @@ class TargetController: NSObject {
         
         return targetNode
     }
-    
+	
+	func addCustomTarget(node : SKSpriteNode) {
+		let initialSide = chooseTargetPosition(backGround : true, targetNode: node)
+		let target = Target(node: node, initialPosition: initialSide)
+		targetArray.append(target)
+	}
+	
     func detectHit (_ location: CGPoint, player : Int) {
         for t in self.targetArray {
             if t.targetNode.contains(location) {
@@ -109,20 +117,62 @@ class TargetController: NSObject {
 				convertedLocation.y = -convertedLocation.y
 				plokNode.position = location
                 gameNode.addChild(plokNode)
-                setupPlokNode(plokNode)
-                
+				setupPlokNode(plokNode,color: PlayersColors.playerColor(player: 1))
                 // updating score of the player
                 delegateHud?.updateScore(player: player)
             }
         }
     }
-    
-    func setupPlokNode (_ plokNode : SKEmitterNode) {
+	
+	func addSplashToTarget(node: SKSpriteNode, position: CGPoint) {
+		
+		let randomSplash : Int = Int(arc4random_uniform(UInt32(numberOfSplashs)))
+		let convert = gameNode.convert(position, to: node)
+		var convertedLocation = CGPoint(x: convert.x, y: convert.y)
+		let texture = SKTexture(imageNamed: splashImagesArray[randomSplash])
+		let splashNode = SKSpriteNode(texture: texture)
+		
+		splashNode.position = convertedLocation
+		splashNode.size.height = self.radius*2
+		splashNode.size.width = self.radius*2
+		splashNode.colorBlendFactor = 1
+		let color = randomColor()
+		splashNode.color = color
+		splashNode.zPosition = 1
+		node.addChild(splashNode)
+		
+		let desapearAction = SKAction.fadeAlpha(to: 0, duration: 3)
+		let removeAction = SKAction.run {
+			splashNode.removeAllActions()
+			splashNode.removeFromParent()
+		}
+		let randomSound: Int = Int(arc4random_uniform(UInt32(numberOfShootSounds)))
+		let randomSoundAction = soundActions[randomSound]
+		let sequenceAction = SKAction.sequence([randomSoundAction, desapearAction, removeAction])
+		splashNode.run(sequenceAction)
+		
+		let plokNode : SKEmitterNode! = SKEmitterNode(fileNamed: "Plok.sks")
+		convertedLocation.y = -convertedLocation.y
+		plokNode.position = position
+		
+		gameNode.addChild(plokNode)
+		setupPlokNode(plokNode, color: color)
+	}
+	
+	func randomColor() -> UIColor {
+		let randRed:CGFloat = CGFloat(Float(arc4random_uniform(100))/100.0)
+		let randGreen:CGFloat = CGFloat(Float(arc4random_uniform(100))/100.0)
+		let randBlue:CGFloat = CGFloat(Float(arc4random_uniform(100))/100.0)
+		let color = UIColor(red: randRed, green: randGreen, blue: randBlue, alpha: 1)
+		return color
+	}
+	
+	func setupPlokNode (_ plokNode : SKEmitterNode, color: UIColor) {
         let timePlok : TimeInterval = 0.3
         // center of splash
         plokNode.particleColorSequence = nil
         // player 1 color
-        plokNode.particleColor = PlayersColors.playerColor(player: 1)
+		plokNode.particleColor = color
         plokNode.alpha = 0
         let sizePlok = self.radius
         plokNode.particleSize = CGSize(width: sizePlok, height: sizePlok)
@@ -198,7 +248,7 @@ class TargetController: NSObject {
     ///
     /// - Parameter targetNode: target node that will have its initial position setted
     /// - Returns: returns the initial side
-    private func chooseTargetPosition (targetNode: SKNode) -> String {
+	private func chooseTargetPosition (backGround : Bool, targetNode: SKNode) -> String {
         var edge : Int
         if (self.debugging) {
             // Determine where to spawn the ball along the Y axis
@@ -206,6 +256,11 @@ class TargetController: NSObject {
         } else {
             edge = -1
         }
+		
+		if (backGround) {
+			edge = -1
+		}
+		
         var initialSide : String = ""
         
         var actualX:CGFloat = 0

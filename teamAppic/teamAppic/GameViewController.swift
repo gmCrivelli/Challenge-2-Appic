@@ -10,10 +10,12 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-// essa classe gerenciar 4 cenas: GameScene, PauseScene, GameOverScene, SelectionControlScene
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, GameOVerProtocol{
+    
+    /// scene where the game actions are implemented
+    var gameScene : GameScene!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,18 +28,27 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
 				
+                self.gameScene = scene as! GameScene
+                
+                self.gameScene.hudController.timer.gameDelegate = self
             }
             
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
             view.showsNodeCount = true
-            
-            // observer to know when pause is selected
-            
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        // when the scene will disappear, setups the game over configuration
+        self.gameScene.gameOverSetups()
+    }
+    
+    public func gameOver() {
+        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

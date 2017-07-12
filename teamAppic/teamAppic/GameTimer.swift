@@ -12,7 +12,7 @@ import SpriteKit
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 60
+    private let GAMEPLAYTIME : Int = 5
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()

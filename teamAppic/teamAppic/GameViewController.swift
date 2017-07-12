@@ -10,11 +10,17 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
+    
+    /// scene where the game actions are implemented
+    var gameScene : GameScene!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadScene()
+    }
+    
+    public func loadScene() {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -23,6 +29,10 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 view.presentScene(scene)
+                
+                self.gameScene = scene as! GameScene
+                
+                self.gameScene.hudController.timer.gameDelegate = self
             }
             
             view.ignoresSiblingOrder = true
@@ -32,6 +42,21 @@ class GameViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        // when the scene will disappear, setups the game over configuration
+        self.gameScene.gameOverSetups()
+    }
+    
+    public func gameOver() {
+        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? GameOverViewController {
+            destVC.delegateGameVC = self
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

@@ -13,13 +13,23 @@ import QuartzCore
 
 class GameScene: SKScene, ReactToMotionEvents, UIGestureRecognizerDelegate {
     
-    var targetController : TargetController!
-    var gameNode = SKNode()
-    var aimNode:SKSpriteNode!
+    let music = SKAudioNode(fileNamed: "sound.mp3")
     
-    var maxX:CGFloat!
-    var maxY:CGFloat!
-    var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
+	//Nodes and TargetController
+    var gameNode = SKNode()
+    var aimNode = SKSpriteNode()
+    var pauseNode = SKSpriteNode()
+	var targetController : TargetController!
+    // Hud
+    let hudController = HudController.hudInstance
+	//Controller mode
+	var controllerSwipeMode: Bool = false
+	//Positions
+	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
+	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
+	//Motion update
+	var lastX: Double! = 0
+	var lastY : Double! = 0
     
     private var prevTilt : CGPoint = CGPoint.zero
     private var currentTilt : CGPoint = CGPoint.zero
@@ -31,111 +41,261 @@ class GameScene: SKScene, ReactToMotionEvents, UIGestureRecognizerDelegate {
     
     private let motionMovement:CGFloat = 100
     
+    var lastUpdateTimeInterval : TimeInterval = 0
+    var entityManager: EntityManager!
+
+    // this two array must have the same length
+    var playerNameArray = [String]()
+    var playerAimArray = [SKSpriteNode]()
+	
+	///		Called after moving to the View,
+	///	call all setup Functions.
+	///
+	/// - Parameters:
+	///   - view: SKView
+
     override func didMove(to view: SKView) {
+		setupScenes()
+        setupEntities()
+		setupNodes()
+		setupGestures()
+        setupMusics()
+    }
+	
+    func setupEntities() {
+        
+        entityManager = EntityManager(scene: self)
+        
+        targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
+        
+        let cannon1 = PatternCannon(baseLocation: CGPoint(x: 50, y: -100),
+                                    cannonStep: CGPoint(x: 100, y: 0),
+                                    numberOfTargets: 5,
+                                    targetScale: 0.3,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: 0, y: 500),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.0],
+                                    entityManager: entityManager)
+        
+        let cannon2 = PatternCannon(baseLocation: CGPoint(x: -50, y: 50),
+                                    cannonStep: CGPoint(x: 0, y: 150),
+                                    numberOfTargets: 8,
+                                    targetScale: 0.25,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: 500, y: 200),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.0],
+                                    entityManager: entityManager)
+        
+        let cannon3 = PatternCannon(baseLocation: CGPoint(x: self.size.width + 50, y: 50),
+                                    cannonStep: CGPoint(x: 0, y: 150),
+                                    numberOfTargets: 8,
+                                    targetScale: 0.25,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: -500, y: 200),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.0],
+                                    entityManager: entityManager)
+    }
+    
+    /// setups the circus music when the game is being played
+    func setupMusics() {
+        MusicManager.instance.setup()
+        MusicManager.instance.play()
+    }
+    
+    /// setups the game over configurations
+    func gameOverSetups() {
+        MusicManager.instance.stop()
+        // sures that every node will be removed when the game overs or menu is selected
+        self.gameNode.removeAllChildren()
+        self.gameNode.removeFromParent()
+    }
+    
+	///		Setup the Scenes.
+	///
+	func setupScenes() {
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		appDelegate.motionDelegate = self
+	}
+	
+	///		Setup the Nodes.
+	///
+	func setupNodes(){
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.motionDelegate = self
         
-        gameNode = self.childNode(withName: "gameNode")!
-        aimNode = gameNode.childNode(withName: "aim") as! SKSpriteNode
-        targetController = TargetController(screenSize: self.size, gameNode: gameNode)
+		self.gameNode = self.childNode(withName: "gameNode")!
+        self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
+        
+        // initializing player array and aim array (single player for now)
+        playerNameArray = ["Player 1"]
+        playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
+        
+        self.targetController.delegateHud = self.hudController
 
-        let targetNode1 = targetController.addTarget(typeOfNode: "shape")
-        targetController.moveBetweenSides(node: targetNode1)
+        // insert players (single player)
+        hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
+		hudController.setHUD(gameNode: gameNode)
+	}
+
+	func setupGestures(){
+		let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
+		let pressType = UIPressType.select
+        selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
+		self.view?.addGestureRecognizer(selectGestureRecognizer)
         
-        let targetNode2 = targetController.addTarget(typeOfNode: "sprite")
-        targetController.moveBetweenSides(node: targetNode2)
-        
-        maxX = self.size.width/2
-        maxY = self.size.height/2
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
-        tapGestureRecognizer.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue),NSNumber(value: UIPressType.select.rawValue)];
-        tapGestureRecognizer.delegate = self
-        self.view?.addGestureRecognizer(tapGestureRecognizer)
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panAim(_:)))
-        panGestureRecognizer.delegate = self
-        self.view?.addGestureRecognizer(panGestureRecognizer)
-    }
-    
+        let pauseGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.pauseTapped(_:)))
+        let pauseType = UIPressType.playPause
+        pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
+        self.view?.addGestureRecognizer(pauseGestureRecognizer)
+	}
+	
+	///		Function that catches the Gesture for tap in
+	///	in the controller, executes the target controller 
+	///	detectHit function.
+	///
+	/// - Parameters:
+	///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
-        targetController.detectHit(aimNode.position)
-    }
-    
-    func panAim(_ sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            prevTilt = currentTilt
-            needsUpdatePan = false
-        case .ended:
-            needsUpdatePan = true
-        default:
-            break
+        if (!self.gameNode.isPaused) {
+            targetController.detectHit(playerAimArray[0].position, player: 0)
+            print("Player 1 name: \(hudController.playerArray[0].playerName)")
+            print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
+            targetController.detectHit(playerAimArray[0].position, player: 0)
         }
-        
-        print(sender.velocity(in: self.view))
-        panVel = sender.velocity(in: self.view)
-        
-        panVel.x = panVel.x * (1 + abs(panVel.x * 0.0003)) * 0.001
-        panVel.y = panVel.y * (1 + abs(panVel.y * 0.0003)) * 0.003
     }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if (gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UITapGestureRecognizer) {
-            return true
+
+    /// catches the gesture for pause in the tv control and pauses the game
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
+    func pauseTapped(_ sender : UITapGestureRecognizer) {
+        self.isPaused = !(self.isPaused)
+        if (self.isPaused) {
+            self.hudController.timer.pauseTimer()
+            self.pauseNode.alpha = 1
+            self.gameNode.alpha = 0.3
         } else {
-            return false
+            self.hudController.timer.resumeTimer()
+            self.pauseNode.alpha = 0
+            self.gameNode.alpha = 1
         }
+
+        print("The game will be paused")
     }
-    
+	
+	///		Override of the function Update, called 
+	///	every frame update, sets the aim new position 
+	///	based on the controller mode.
+	///
+	/// - Parameters:
+	///   - currentTime: TimeInterval
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        self.aimNode.position.x = max(min(self.aimNode.position.x + panVel.x + tiltVel.x * motionMovement, maxX), -maxX)
-        self.aimNode.position.y = max(min(self.aimNode.position.y - panVel.y - tiltVel.y * motionMovement, maxY), -maxY)
-        
-        tiltVel = CGPoint.zero
-        //if needsUpdatePan {
-        
-        if panVel.x * panVel.x + panVel.y * panVel.y < 1 {
-            needsUpdatePan = false
-            panVel = CGPoint.zero
+    
+        if lastUpdateTimeInterval == 0 {
+            lastUpdateTimeInterval = currentTime
+            return
         }
-        panVel.x = panVel.x * dampening
-        panVel.y = panVel.y * dampening
         
-        /*}
-        else{
-            panVel = CGPoint.zero
-        }*/
+        let deltaTime = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        
+        entityManager.update(deltaTime)
+        
+        // Called before each frame is rendered
+        playerAimArray[0].removeAllActions()
+    
+		if !controllerSwipeMode {
+			
+			playerAimArray[0].position = currentAimPosition
+			
+		} else {
+			
+			let currToPosX = self.currentTouchPosition.x
+			let currToPosY = self.currentTouchPosition.y
+			
+			let movementPerSec:CGFloat = 750.0
+			let timeInterval: CGFloat = 1.0/60.0
+			
+			let p_x:CGFloat = 450
+			let p_y:CGFloat = 300
+			
+			var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
+			var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval
+			
+			posX = (posX.magnitude > p_x.magnitude) ? playerAimArray[0].position.x : posX
+			posY = (posY.magnitude > p_y.magnitude) ? playerAimArray[0].position.y : posY
+
+			playerAimArray[0].position.x = posX
+			playerAimArray[0].position.y = posY
+			
+		}
+
     }
     
+	///		Function that is called whenever there is a change in
+	/// the controller motion, sets the aim new position based on
+	/// the controller mode.
+	///
+	/// - Parameters:
+	///   - motion: GCMotion
     func motionUpdate(motion: GCMotion) {
-        // Called whenever there is a change in the controller motion
-        
-        /// Motion Config
-        //let x:CGFloat = CGFloat(motion.gravity.x)
-        //let y:CGFloat = -(CGFloat)(motion.gravity.y)
-        let p_x:CGFloat = 0.6
-        let p_y:CGFloat = 0.35
-        let g_x:CGFloat = CGFloat(motion.gravity.x) //min(max(CGFloat(motion.gravity.x), -p_x), p_x) / p_x
-        let g_y:CGFloat = CGFloat(motion.gravity.y) //min(max(CGFloat(motion.gravity.y), -p_y), p_y) / p_y
-        
-        //currentAimPosition = CGPoint(x: min(p_x,max(-p_x,CGFloat(x))) / p_x * maxX, y: min(p_y,max(-p_y,CGFloat(y))) / p_y * maxY)
-        
-        tiltVel.x = g_x - prevTilt.x
-        tiltVel.y = g_y - prevTilt.y
-        prevTilt = CGPoint(x: g_x, y: g_y)
-        currentTilt = prevTilt
-        
-        
-        /// Swipe Config
-        //let x = motion.controller?.microGamepad?.dpad.xAxis.value
-        //let y = motion.controller?.microGamepad?.dpad.yAxis.value
-        //currentAimPosition = (CGFloat(x!) * maxX, min(0.5,max(-0.5,CGFloat(y!))) * 2 * maxY)
-        
-        //currentAimPosition = (CGFloat() * maxX, min(0.5,max(-0.5,CGFloat())) * 2 * maxY)
-        //print(motion.gravity)
-        //print(motion.userAcceleration)
+		
+		if !controllerSwipeMode {
+			let x = motion.gravity.x
+			let y = -motion.gravity.y
+			let p_x:Double = 0.7
+			let p_y:Double = 0.35
+			let maxX = Double(self.size.width/2)
+			let maxY = Double(self.size.height/2)
+			
+			
+			let newX = min(p_x,max(-p_x,x)) / p_x * maxX
+			let newY = min(p_y,max(-p_y,y)) / p_y * maxY
+			//Movimento mais suave
+			currentAimPosition = CGPoint(x: (newX + lastX)/2, y: (newY + lastY)/2)
+			//Movimento direto
+			//		currentAimPosition = CGPoint(x: newX, y: newY)
+			
+			lastX = newX
+			lastY = newY
+			
+		} else {
+			
+			/// Swipe Config
+			let x = CGFloat((motion.controller?.microGamepad?.dpad.xAxis.value)!)
+			let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
+			currentTouchPosition = CGPoint(x: x, y: y)
+		}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

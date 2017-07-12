@@ -81,34 +81,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-PQ-9rj" userLabel="Game Over">
-                                <rect key="frame" x="395" y="238" width="1130" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="1130" id="pdO-Bv-mgs"/>
-                                    <constraint firstAttribute="height" constant="200" id="xDq-Kp-W9p"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="GAME OVER">
-                                        <attributes>
-                                            <font key="NSFont" size="200" name="DoubleFeature"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="MV5-mK-8fk" firstAttribute="top" secondItem="mgr-Td-RNW" secondAttribute="bottom" constant="326" id="8If-ev-XrC" userLabel="Stack bottom"/>
-                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="top" secondItem="Dbf-L7-2XU" secondAttribute="bottom" constant="238" id="9Nu-SD-wre" userLabel="GameOver Top"/>
                             <constraint firstItem="mgr-Td-RNW" firstAttribute="width" secondItem="QdU-h7-PJc" secondAttribute="width" multiplier="0.5" id="Exk-mb-iqS" userLabel="Stack width"/>
-                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Gie-XV-OJf" userLabel="GameOver horizontal"/>
                             <constraint firstItem="mgr-Td-RNW" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Vun-jc-l0w" userLabel="Stack horizontal"/>
                             <constraint firstItem="mgr-Td-RNW" firstAttribute="height" secondItem="QdU-h7-PJc" secondAttribute="height" multiplier="0.2" id="rJb-7D-9uZ" userLabel="Stack height "/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="gameOverLabel" destination="A2i-PQ-9rj" id="T2S-fu-n2t"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SyB-j2-yDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

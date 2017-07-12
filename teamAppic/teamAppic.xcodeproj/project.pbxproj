@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1834D7A41F166B70008B3B7E /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1834D7A31F166B70008B3B7E /* GameOverScene.sks */; };
 		184F1CA01F0C01E100F3B684 /* shoot1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9D1F0C01E100F3B684 /* shoot1.mp3 */; };
 		184F1CA11F0C01E100F3B684 /* shoot2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9E1F0C01E100F3B684 /* shoot2.mp3 */; };
 		184F1CA21F0C01E100F3B684 /* shoot3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1C9F1F0C01E100F3B684 /* shoot3.mp3 */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1834D7A31F166B70008B3B7E /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		184F1C9D1F0C01E100F3B684 /* shoot1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot1.mp3; sourceTree = "<group>"; };
 		184F1C9E1F0C01E100F3B684 /* shoot2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot2.mp3; sourceTree = "<group>"; };
 		184F1C9F1F0C01E100F3B684 /* shoot3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot3.mp3; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		1F78854F1F0D0C3800F57921 /* Sks */ = {
 			isa = PBXGroup;
 			children = (
+				1834D7A31F166B70008B3B7E /* GameOverScene.sks */,
 				1F1E0F571F03C996007B5825 /* GameScene.sks */,
 				B0E729F41F13C6D40089DF9F /* AboutScene.sks */,
 				1F1E0F591F03C996007B5825 /* Actions.sks */,
@@ -249,6 +252,7 @@
 				1F1E0F5A1F03C996007B5825 /* Actions.sks in Resources */,
 				1F1E0F5C1F03C996007B5825 /* Game.xcassets in Resources */,
 				184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */,
+				1834D7A41F166B70008B3B7E /* GameOverScene.sks in Resources */,
 				1FCE9E8F1F140B4C008E535C /* circusSound.mp3 in Resources */,
 				B0E729F51F13C6D40089DF9F /* AboutScene.sks in Resources */,
 				1F1D9A501F0E817500C202B5 /* Assets.xcassets in Resources */,

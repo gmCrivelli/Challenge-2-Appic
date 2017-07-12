@@ -10,12 +10,6 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-/// protocol to load game scene
-protocol GameVCProtocol : NSObjectProtocol {
-    /// loads the game scene
-    func loadScene()
-}
-
 class GameOverViewController: UIViewController {
     
     @IBOutlet weak var gameOverLabel: UILabel!
@@ -46,7 +40,7 @@ class GameOverViewController: UIViewController {
     
     @IBAction func restartGame(_ sender: UIButton) {
         // loads the game scene before dissmis the gama over segue 
-        self.delegateGameVC?.loadScene()
+        self.delegateGameVC?.loadGameScene()
         self.dismiss(animated: false, completion: nil)
     }
     

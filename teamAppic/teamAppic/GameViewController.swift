@@ -17,10 +17,48 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadScene()
+        loadMenuScene()
     }
     
-    public func loadScene() {
+    public func loadMenuScene() {
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "MenuScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+                let menuScene = scene as! MenuScene
+                menuScene.delegateGameVC = self
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    public func loadGameOverScene() {
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameOverScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    public func loadGameScene() {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -42,19 +80,23 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        // when the scene will disappear, setups the game over configuration
-        self.gameScene.gameOverSetups()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        // when the scene will disappear, setups the game over configuration
+//        self.gameScene.gameOverSetups()
+//    }
     
-    public func gameOver() {
-        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
-    }
+//    public func gameOver() {
+//        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
+//    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destVC = segue.destination as? GameOverViewController {
-            destVC.delegateGameVC = self
-        }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destVC = segue.destination as? GameOverViewController {
+//            destVC.delegateGameVC = self
+//        }
+//    }
+    
+    public func goToAbout() {
+        performSegue(withIdentifier: "aboutSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {

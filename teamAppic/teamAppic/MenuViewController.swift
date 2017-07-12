@@ -12,12 +12,8 @@ import GameplayKit
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var appLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        appLabel.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'

@@ -17,7 +17,7 @@ protocol GameOVerProtocol: NSObjectProtocol {
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 6
+    private let GAMEPLAYTIME : Int = 60
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
@@ -60,7 +60,7 @@ class GameTimer {
         }
         //Case there is a label to assign the value
         if (timerLabelNode != nil) {
-            self.timerLabelNode?.text = "Time: \(getTimer())"
+            self.timerLabelNode?.text = "\(getTimer())"
         }
     }
     

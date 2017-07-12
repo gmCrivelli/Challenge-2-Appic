@@ -17,7 +17,7 @@ protocol GameOVerProtocol: NSObjectProtocol {
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 21
+    private let GAMEPLAYTIME : Int = 3
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()

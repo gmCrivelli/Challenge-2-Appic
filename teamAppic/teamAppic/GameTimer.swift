@@ -11,13 +11,13 @@ import SpriteKit
 
 /// protocol to present game over view controller
 protocol GameOVerProtocol: NSObjectProtocol {
-    func gameOver()
+    func loadGameOverScene()
 }
 
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 60
+    private let GAMEPLAYTIME : Int = 21
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
@@ -55,7 +55,7 @@ class GameTimer {
         } else {
             // game over
             if let gameOverDelegate = gameDelegate {
-                gameOverDelegate.gameOver()
+                gameOverDelegate.loadGameOverScene()
             }
         }
         //Case there is a label to assign the value

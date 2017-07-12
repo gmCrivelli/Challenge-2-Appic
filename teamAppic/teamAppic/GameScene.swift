@@ -11,7 +11,7 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-class GameScene: SKScene, ReactToMotionEvents {
+class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
     let music = SKAudioNode(fileNamed: "sound.mp3")
     
@@ -215,6 +215,20 @@ class GameScene: SKScene, ReactToMotionEvents {
 			let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
 			currentTouchPosition = CGPoint(x: x, y: y)
 		}
+    }
+    
+    /// selects what control will be used
+    ///
+    /// - Parameter typeOfControl: string that can be "swipe" or "motion" to select these two types of controls. Any other string passed as this parameter will have no effects
+    func selectRemoteType(typeOfControl: String) {
+        switch typeOfControl {
+        case "swipe":
+            self.controllerSwipeMode = true
+        case "motion":
+            self.controllerSwipeMode = false
+        default:
+            break
+        }
     }
 }
 

@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "tv",
+      "filename" : "gyroRemoteButton.png",
       "scale" : "1x"
     }
   ],

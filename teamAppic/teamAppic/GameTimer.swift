@@ -9,15 +9,10 @@
 import Foundation
 import SpriteKit
 
-/// protocol to present game over view controller
-protocol GameOVerProtocol: NSObjectProtocol {
-    func loadGameOverScene()
-}
-
 class GameTimer {
 
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 3
+    private let GAMEPLAYTIME : Int = 60
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
@@ -31,7 +26,7 @@ class GameTimer {
     private var timer : Timer?
     
     /// delegate to present game over
-    public weak var gameDelegate: GameOVerProtocol?
+    public weak var gameDelegate: GameVCProtocol?
     
     public init () {
         self.timerCount = GAMEPLAYTIME

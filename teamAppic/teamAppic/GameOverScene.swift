@@ -1,5 +1,5 @@
 //
-//  MenuScene.swift
+//  GameOverScene.swift
 //  teamAppic
 //
 //  Created by Rodrigo Maximo on 11/07/17.
@@ -11,35 +11,39 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-/// protocol to load all scenes using the game view controller
-protocol GameVCProtocol : NSObjectProtocol {
-    /// presents the game scene
-    func presentGameScene()
-    /// loads the game scene
-    func loadGameScene()
-    /// loads and presents the game over scene
-    func loadGameOverScene()
-    /// loads and presents  the menu scene
-    func loadMenuScene()
-    /// loads and presents  the remote control selection scene
-    func loadRemoteScene()
-    /// segue to performSegue to about view controller
-    func goToAbout()
-}
-
-class MenuScene : SKScene {
+class GameOverScene : SKScene {
     
-    /// label to show the highscore
+    /// delay to restart
+    let DELAYTOLOAD : TimeInterval = 1
+    /// delay to fade
+    let DELAYTOFADE : TimeInterval = 0.2
+    
     private var highScore = SKLabelNode()
     
-    /// <#Description#>
+    private var buttonsArray = [SKSpriteNode]()
+    
     public weak var delegateGameVC : GameVCProtocol?
     
     private var buttonsManager = ButtonsManager()
     
     override func didMove(to view: SKView) {
-        setupNodes()
-        setupGestures()
+        setup()
+    }
+    
+    func setup() {
+        let setupNodes = SKAction.run {
+            self.setupNodes()
+        }
+        let setupGestures = SKAction.run {
+            self.setupGestures()
+        }
+        let showLabels = SKAction.run {
+            for button in self.buttonsArray {
+                button.run(SKAction.fadeIn(withDuration: self.DELAYTOFADE))
+            }
+        }
+        let delay = SKAction.wait(forDuration: DELAYTOLOAD)
+        self.run(SKAction.sequence([setupNodes, delay, showLabels, setupGestures]))
     }
     
     func setupGestures() {
@@ -63,22 +67,19 @@ class MenuScene : SKScene {
         self.highScore.text = String(Score.getHighScore())
         
         // loading singlePlayer "button"
-        let buttonsArray = [self.childNode(withName: "SinglePlayer") as! SKSpriteNode,
-                            self.childNode(withName: "MultiPlayer") as! SKSpriteNode,
-                            self.childNode(withName: "About") as! SKSpriteNode
-                            ]
+        self.buttonsArray = [self.childNode(withName: "restart") as! SKSpriteNode,
+                            self.childNode(withName: "menu") as! SKSpriteNode]
+        
         buttonsManager.insertButton(nodeArray: buttonsArray)
     }
     
     func selectTapped(_ sender: UITapGestureRecognizer) {
         switch self.buttonsManager.pointerButton {
         case 0:
-            self.delegateGameVC?.loadRemoteScene()
+            self.delegateGameVC?.loadGameScene()
+            self.delegateGameVC?.presentGameScene()
         case 1:
-            // multiplayer
-            break
-        case 2:
-            self.delegateGameVC?.goToAbout()
+            self.delegateGameVC?.loadMenuScene()
         default:
             break
         }

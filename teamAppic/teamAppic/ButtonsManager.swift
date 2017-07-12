@@ -14,7 +14,7 @@ import QuartzCore
 class ButtonsManager {
     
     /// action to increase the button
-    let increaseAction = SKAction.scale(by: 1.2, duration: 0.3)
+    let increaseAction = SKAction.scale(by: 1.1, duration: 0.3)
     
     /// array that contains all buttons
     private var buttons = [SKSpriteNode]()

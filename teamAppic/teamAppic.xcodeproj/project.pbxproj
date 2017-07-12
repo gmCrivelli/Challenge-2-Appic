@@ -20,6 +20,9 @@
 		184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1CA41F0C026400F3B684 /* splashSound2.mp3 */; };
 		187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */; };
 		187A3F801F0BE5BA00AE46CC /* DoubleFeature21.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */; };
+		1F046F0B1F16902C0021DC7C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F046F0A1F16902C0021DC7C /* GameOverScene.swift */; };
+		1F046F0D1F1696240021DC7C /* RemoteSelectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */; };
+		1F046F0F1F1697630021DC7C /* RemoteSelectionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F046F0E1F1697630021DC7C /* RemoteSelectionScene.sks */; };
 		1F1D9A501F0E817500C202B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1D9A4F1F0E817500C202B5 /* Assets.xcassets */; };
 		1F1D9A521F0E821300C202B5 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D9A511F0E821300C202B5 /* GameTimer.swift */; };
 		1F1E0F561F03C996007B5825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F551F03C996007B5825 /* AppDelegate.swift */; };
@@ -55,6 +58,9 @@
 		184F1CA41F0C026400F3B684 /* splashSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound2.mp3; sourceTree = "<group>"; };
 		187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature21.ttf; sourceTree = "<group>"; };
 		187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1F046F0A1F16902C0021DC7C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSelectionScene.swift; sourceTree = "<group>"; };
+		1F046F0E1F1697630021DC7C /* RemoteSelectionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoteSelectionScene.sks; sourceTree = "<group>"; };
 		1F1D9A4F1F0E817500C202B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F1D9A511F0E821300C202B5 /* GameTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		1F1E0F521F03C996007B5825 /* teamAppic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teamAppic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +161,8 @@
 				1F1E0F5D1F03C996007B5825 /* GameScene.swift */,
 				B0E729F21F13C67B0089DF9F /* AboutScene.swift */,
 				1F5267A21F155B5A0091519C /* MenuScene.swift */,
+				1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */,
+				1F046F0A1F16902C0021DC7C /* GameOverScene.swift */,
 				1FAEBF491F166DFB00590871 /* ButtonsManager.swift */,
 				1F78854F1F0D0C3800F57921 /* Sks */,
 			);
@@ -164,6 +172,7 @@
 		1F78854F1F0D0C3800F57921 /* Sks */ = {
 			isa = PBXGroup;
 			children = (
+				1F046F0E1F1697630021DC7C /* RemoteSelectionScene.sks */,
 				1834D7A51F1684E5008B3B7E /* AboutScene.sks */,
 				1834D7A61F1684E5008B3B7E /* Actions.sks */,
 				1834D7A71F1684E5008B3B7E /* GameOverScene.sks */,
@@ -217,7 +226,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7T8R3N4U6X;
+						DevelopmentTeam = K3MJ38Y24S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -251,6 +260,7 @@
 				1FCE9E8F1F140B4C008E535C /* circusSound.mp3 in Resources */,
 				1834D7AE1F1684E5008B3B7E /* GameScene.sks in Resources */,
 				1F1D9A501F0E817500C202B5 /* Assets.xcassets in Resources */,
+				1F046F0F1F1697630021DC7C /* RemoteSelectionScene.sks in Resources */,
 				184F1CA51F0C026400F3B684 /* splashSound1.mp3 in Resources */,
 				184F1CA01F0C01E100F3B684 /* shoot1.mp3 in Resources */,
 				1834D7AB1F1684E5008B3B7E /* AboutScene.sks in Resources */,
@@ -276,10 +286,12 @@
 				1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */,
 				B03601781F0C22940000673A /* Splash.swift in Sources */,
 				1F1E0F5E1F03C996007B5825 /* GameScene.swift in Sources */,
+				1F046F0B1F16902C0021DC7C /* GameOverScene.swift in Sources */,
 				1F7885571F0D7BB600F57921 /* Player.swift in Sources */,
 				1F1D9A521F0E821300C202B5 /* GameTimer.swift in Sources */,
 				1F7885531F0D769900F57921 /* HudController.swift in Sources */,
 				1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */,
+				1F046F0D1F1696240021DC7C /* RemoteSelectionScene.swift in Sources */,
 				1FAEBF4A1F166DFB00590871 /* ButtonsManager.swift in Sources */,
 				1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */,
 				1F1E0F561F03C996007B5825 /* AppDelegate.swift in Sources */,
@@ -402,7 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
@@ -416,7 +428,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";

@@ -19,6 +19,10 @@ class MusicManager {
     var gameAudioPlayer = AVAudioPlayer()
     var gameOverAudioPlayer = AVAudioPlayer()
     
+    /// minimum/maximum audio Volume
+    let minimumVolume: Float = 0.2
+    let maximumVolume: Float = 1.0
+    
     private init() { } // private singleton init
     
     /// loading music (circus music)
@@ -55,6 +59,17 @@ class MusicManager {
         gameAudioPlayer.prepareToPlay()
     }
     
+    /// Get the game audio volume down
+    func lowGameAudio() {
+        gameAudioPlayer.volume = minimumVolume
+    }
+    
+    /// Get the game audio volume up
+    func highGameAudio() {
+        gameAudioPlayer.volume = maximumVolume
+    }
+    
+    
     /// plays the Game Over music
     func playGameOverAudio() {
         gameOverAudioPlayer.play()
@@ -66,5 +81,7 @@ class MusicManager {
         gameOverAudioPlayer.currentTime = 0
         gameOverAudioPlayer.prepareToPlay()
     }
+    
+    
 
 }

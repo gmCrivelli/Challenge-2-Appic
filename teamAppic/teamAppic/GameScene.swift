@@ -133,10 +133,15 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             self.hudController.timer.pauseTimer()
             self.pauseNode.alpha = 1
             self.gameNode.alpha = 0.3
+            
+            MusicManager.instance.lowGameAudio()
+            
         } else {
             self.hudController.timer.resumeTimer()
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
+            
+            MusicManager.instance.highGameAudio()
         }
 
         print("The game will be paused")

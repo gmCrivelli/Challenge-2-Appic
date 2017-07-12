@@ -229,7 +229,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = K3MJ38Y24S;
+						DevelopmentTeam = 7T8R3N4U6X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -418,10 +418,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = K3MJ38Y24S;
+				DEVELOPMENT_TEAM = 7T8R3N4U6X;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
+				PRODUCT_BUNDLE_IDENTIFIER = br.org.eldorado.bepid.teamAppic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -432,10 +432,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = K3MJ38Y24S;
+				DEVELOPMENT_TEAM = 7T8R3N4U6X;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
+				PRODUCT_BUNDLE_IDENTIFIER = br.org.eldorado.bepid.teamAppic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

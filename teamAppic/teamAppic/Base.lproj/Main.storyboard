@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16B2657" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xYS-ru-j4r">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="499-42-d0g">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,211 +22,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <connections>
-                        <segue destination="fUC-ZE-pv4" kind="show" identifier="gameOverSegue" id="DNZ-wN-dBi"/>
+                        <segue destination="odv-Qi-j3H" kind="show" identifier="aboutSegue" id="kP5-tD-L6K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Nd-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1271" y="-3376"/>
-        </scene>
-        <!--Game Over View Controller-->
-        <scene sceneID="N5R-JD-8OW">
-            <objects>
-                <viewController id="fUC-ZE-pv4" customClass="GameOverViewController" customModule="teamAppic" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Dbf-L7-2XU"/>
-                        <viewControllerLayoutGuide type="bottom" id="MV5-mK-8fk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QdU-h7-PJc" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="mgr-Td-RNW">
-                                <rect key="frame" x="480" y="538" width="960" height="216"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BmN-pW-8TQ" userLabel="Menu">
-                                        <rect key="frame" x="0.0" y="0.0" width="465" height="216"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="MENU">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="60" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <segue destination="xYS-ru-j4r" kind="show" id="Cow-xQ-opd"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SFZ-id-9jl" userLabel="Restart">
-                                        <rect key="frame" x="495" y="0.0" width="465" height="216"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="RESTART">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="60" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <action selector="restartGame:" destination="fUC-ZE-pv4" eventType="primaryActionTriggered" id="OGw-e2-kYF"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-PQ-9rj" userLabel="Game Over">
-                                <rect key="frame" x="395" y="238" width="1130" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="1130" id="pdO-Bv-mgs"/>
-                                    <constraint firstAttribute="height" constant="200" id="xDq-Kp-W9p"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="GAME OVER">
-                                        <attributes>
-                                            <font key="NSFont" size="200" name="DoubleFeature"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="MV5-mK-8fk" firstAttribute="top" secondItem="mgr-Td-RNW" secondAttribute="bottom" constant="326" id="8If-ev-XrC" userLabel="Stack bottom"/>
-                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="top" secondItem="Dbf-L7-2XU" secondAttribute="bottom" constant="238" id="9Nu-SD-wre" userLabel="GameOver Top"/>
-                            <constraint firstItem="mgr-Td-RNW" firstAttribute="width" secondItem="QdU-h7-PJc" secondAttribute="width" multiplier="0.5" id="Exk-mb-iqS" userLabel="Stack width"/>
-                            <constraint firstItem="A2i-PQ-9rj" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Gie-XV-OJf" userLabel="GameOver horizontal"/>
-                            <constraint firstItem="mgr-Td-RNW" firstAttribute="centerX" secondItem="QdU-h7-PJc" secondAttribute="centerX" id="Vun-jc-l0w" userLabel="Stack horizontal"/>
-                            <constraint firstItem="mgr-Td-RNW" firstAttribute="height" secondItem="QdU-h7-PJc" secondAttribute="height" multiplier="0.2" id="rJb-7D-9uZ" userLabel="Stack height "/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="gameOverLabel" destination="A2i-PQ-9rj" id="T2S-fu-n2t"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SyB-j2-yDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1828" y="-3322"/>
-        </scene>
-        <!--Menu View Controller-->
-        <scene sceneID="dKr-12-tCh">
-            <objects>
-                <viewController id="xYS-ru-j4r" customClass="MenuViewController" customModule="teamAppic" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N0X-jL-g0z"/>
-                        <viewControllerLayoutGuide type="bottom" id="pbS-xG-xcp"/>
-                    </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6yV-3C-4Vc" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="9xn-EU-sj3">
-                                <rect key="frame" x="710" y="554" width="500" height="426"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ld-X4-jDT">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="84"/>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Single Player">
-                                                    <attributes>
-                                                        <font key="NSFont" size="38" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <segue destination="499-42-d0g" kind="show" id="QvQ-UP-U3X"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHy-wL-dnv">
-                                        <rect key="frame" x="0.0" y="114" width="500" height="84"/>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Multiplayer">
-                                                    <attributes>
-                                                        <font key="NSFont" size="38" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2e-X9-nfZ">
-                                        <rect key="frame" x="0.0" y="228" width="500" height="84"/>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Settings">
-                                                    <attributes>
-                                                        <font key="NSFont" size="38" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEt-oK-yxo">
-                                        <rect key="frame" x="0.0" y="342" width="500" height="84"/>
-                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="About">
-                                                    <attributes>
-                                                        <font key="NSFont" size="38" name="ComicSansMS"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <segue destination="odv-Qi-j3H" kind="show" id="9Vu-4B-XKV">
-                                                <nil key="action"/>
-                                            </segue>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="500" id="p4K-An-sJG"/>
-                                </constraints>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-Vh-cXB">
-                                <rect key="frame" x="632" y="175" width="657" height="270"/>
-                                <color key="tintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="270" id="esd-yO-7Os"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="LOREM">
-                                        <attributes>
-                                            <font key="NSFont" size="200" name="DoubleFeature"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="qjY-Vh-cXB" firstAttribute="top" secondItem="N0X-jL-g0z" secondAttribute="bottom" constant="175" id="60W-DW-bIf"/>
-                            <constraint firstItem="pbS-xG-xcp" firstAttribute="top" secondItem="9xn-EU-sj3" secondAttribute="bottom" constant="100" id="J8Y-Kf-aJF"/>
-                            <constraint firstItem="9xn-EU-sj3" firstAttribute="centerX" secondItem="6yV-3C-4Vc" secondAttribute="centerX" id="Zes-Sa-eOi"/>
-                            <constraint firstItem="qjY-Vh-cXB" firstAttribute="centerX" secondItem="6yV-3C-4Vc" secondAttribute="centerX" id="sJn-5H-x5L"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="appLabel" destination="qjY-Vh-cXB" id="vte-6m-Kri"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X3k-wX-oFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1828" y="-1423"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="zN9-DL-VpC">
@@ -245,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnm-Ny-fDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-1423"/>
+            <point key="canvasLocation" x="3762" y="-3376"/>
         </scene>
     </scenes>
 </document>

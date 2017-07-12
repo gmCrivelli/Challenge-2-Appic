@@ -26,14 +26,14 @@ class Score {
     public init() {
         self.currentScore = 0
         self.bonusScore = 0
-        Score.highScore = getHighScore()
+        Score.highScore = Score.getHighScore()
     }
     
     
     /// sets the highscore
     ///
     /// - Parameter newValue: new value to high score
-    public func setHighScore(newValue : Int) {
+    private func setHighScore(newValue : Int) {
         UserDefaults.standard.set(newValue, forKey: "HighScore")
     }
     
@@ -41,7 +41,7 @@ class Score {
     /// returns the high score stored by UserDefaults
     ///
     /// - Returns: high score
-    public func getHighScore() -> Int {
+    static public func getHighScore() -> Int {
         if let highScore = UserDefaults.standard.integer(forKey: "HighScore") as Int? {
             return highScore
         } else {
@@ -52,18 +52,16 @@ class Score {
     /// function that increase the current score of a player
     public func updatesScore() {
         self.currentScore += (NORMALSCORE + self.bonusScore)
-        print (self.currentScore)
-    }
-    
-    
-    /// reinitialize all score class parameters and save the high score if it was reached
-    public func gameOverScore() {
         // updating high score
         if (self.currentScore > Score.highScore) {
             Score.highScore = self.currentScore
             setHighScore(newValue: Score.highScore)
         }
-        
+    }
+    
+    
+    /// reinitialize all score class parameters
+    public func reInitScore() {
         // restarting currentScore and bonus score 
         self.currentScore = 0
         self.bonusScore = 0

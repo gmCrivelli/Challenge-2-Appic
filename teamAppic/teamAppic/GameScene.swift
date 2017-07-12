@@ -108,6 +108,8 @@ class GameScene: SKScene, ReactToMotionEvents, UIGestureRecognizerDelegate {
     /// setups the game over configurations
     func gameOverSetups() {
         MusicManager.instance.stop()
+        // initializes current score of all players
+        hudController.gameOverHighScore()
         // sures that every node will be removed when the game overs or menu is selected
         self.gameNode.removeAllChildren()
         self.gameNode.removeFromParent()
@@ -139,6 +141,7 @@ class GameScene: SKScene, ReactToMotionEvents, UIGestureRecognizerDelegate {
         // insert players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
+        print("HIGHSCORE : \(Score.getHighScore())")
 	}
 
 	func setupGestures(){

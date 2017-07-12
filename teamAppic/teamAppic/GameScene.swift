@@ -48,13 +48,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 	
     /// setups the circus music when the game is being played
     func setupMusics() {
-        MusicManager.instance.setup()
-        MusicManager.instance.play()
+        MusicManager.instance.setupGame()
+        MusicManager.instance.playGameAudio()
     }
     
     /// setups the game over configurations
     func gameOverSetups() {
-        MusicManager.instance.stop()
+        MusicManager.instance.stopGameAudio()
         // initializes current score of all players
         hudController.gameOverHighScore()
         // sures that every node will be removed when the game overs or menu is selected

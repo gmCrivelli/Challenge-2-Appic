@@ -16,15 +16,27 @@ class MusicManager {
     static let instance = MusicManager()
     
     /// audioPlayer
-    var audioPlayer = AVAudioPlayer()
+    var gameAudioPlayer = AVAudioPlayer()
+    var gameOverAudioPlayer = AVAudioPlayer()
     
     private init() { } // private singleton init
     
     /// loading music (circus music)
-    func setup() {
+    func setupGame() {
         do {
-            audioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "circusSound", ofType: "mp3")!))
-            audioPlayer.prepareToPlay()
+            gameAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "circusSound", ofType: "mp3")!))
+            gameAudioPlayer.prepareToPlay()
+            
+        } catch {
+            print (error)
+        }
+    }
+    
+    /// loading Game Over music (circus music)
+    func setupGameOver() {
+        do {
+            gameOverAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "gameOver", ofType: "mp3")!))
+            gameOverAudioPlayer.prepareToPlay()
             
         } catch {
             print (error)
@@ -32,15 +44,27 @@ class MusicManager {
     }
     
     /// plays the music
-    func play() {
-        audioPlayer.play()
+    func playGameAudio() {
+        gameAudioPlayer.play()
     }
     
     /// stops the music
-    func stop() {
-        audioPlayer.stop()
-        audioPlayer.currentTime = 0
-        audioPlayer.prepareToPlay()
+    func stopGameAudio() {
+        gameAudioPlayer.stop()
+        gameAudioPlayer.currentTime = 0
+        gameAudioPlayer.prepareToPlay()
+    }
+    
+    /// plays the Game Over music
+    func playGameOverAudio() {
+        gameOverAudioPlayer.play()
+    }
+    
+    /// stops the Game Over music
+    func stopGameOverAudio() {
+        gameOverAudioPlayer.stop()
+        gameOverAudioPlayer.currentTime = 0
+        gameOverAudioPlayer.prepareToPlay()
     }
 
 }

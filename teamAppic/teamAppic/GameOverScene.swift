@@ -28,6 +28,7 @@ class GameOverScene : SKScene {
     
     override func didMove(to view: SKView) {
         setup()
+        setupGameOverMusics()
     }
     
     func setup() {
@@ -44,6 +45,12 @@ class GameOverScene : SKScene {
         }
         let delay = SKAction.wait(forDuration: DELAYTOLOAD)
         self.run(SKAction.sequence([setupNodes, delay, showLabels, setupGestures]))
+    }
+    
+    /// setups the Game Over music when the Game Over scene is called
+    func setupGameOverMusics() {
+        MusicManager.instance.setupGameOver()
+        MusicManager.instance.playGameOverAudio()
     }
     
     func setupGestures() {

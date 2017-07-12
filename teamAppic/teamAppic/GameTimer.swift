@@ -51,6 +51,8 @@ class GameTimer {
             // game over
             if let gameOverDelegate = gameDelegate {
                 gameOverDelegate.loadGameOverScene()
+                
+                MusicManager.instance.stopGameAudio()
             }
         }
         //Case there is a label to assign the value

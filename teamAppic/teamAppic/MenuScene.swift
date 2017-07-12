@@ -11,19 +11,22 @@ import GameplayKit
 import GameController
 import QuartzCore
 
+/// protocol to load game scene
+protocol GameVCProtocol : NSObjectProtocol {
+    /// loads the game scene
+    func loadGameScene()
+    func loadGameOverScene()
+    func loadMenuScene()
+    func goToAbout()
+}
+
 class MenuScene : SKScene {
-    
-    let increaseAction = SKAction.scale(by: 1.2, duration: 0.3)
     
     private var highScore = SKLabelNode()
     
-    private var buttons = [SKSpriteNode]()
-    
-    private var buttonsBool = [Bool]()
-    
-    private var pointerButton : Int = 0
-    
     public weak var delegateGameVC : GameVCProtocol?
+    
+    private var buttonsManager = ButtonsManager()
     
     override func didMove(to view: SKView) {
         setupNodes()
@@ -51,54 +54,32 @@ class MenuScene : SKScene {
         self.highScore.text = String(Score.getHighScore())
         
         // loading singlePlayer "button"
-        self.buttons.append(self.childNode(withName: "SinglePlayer") as! SKSpriteNode)
-        self.buttons.append(self.childNode(withName: "MultiPlayer") as! SKSpriteNode)
-        self.buttons.append(self.childNode(withName: "About") as! SKSpriteNode)
-        
-        increaseScale(node: self.buttons[self.pointerButton])
-    }
-    
-    private func increaseScale(node : SKSpriteNode) {
-        node.run(increaseAction)
-    }
-    
-    private func decreaseScale(node : SKSpriteNode) {
-        node.run(increaseAction.reversed())
-    }
-    
-    func swipeUp(_ sender: UISwipeGestureRecognizer) {
-        decreaseScale(node: self.buttons[self.pointerButton])
-        downPointer()
-        increaseScale(node: self.buttons[self.pointerButton])
-    }
-    
-    func swipeDown(_ sender: UISwipeGestureRecognizer) {
-        decreaseScale(node: self.buttons[self.pointerButton])
-        upPointer()
-        increaseScale(node: self.buttons[self.pointerButton])
+        let buttonsArray = [self.childNode(withName: "SinglePlayer") as! SKSpriteNode,
+                            self.childNode(withName: "MultiPlayer") as! SKSpriteNode,
+                            self.childNode(withName: "About") as! SKSpriteNode
+                            ]
+        buttonsManager.insertButton(nodeArray: buttonsArray)
     }
     
     func selectTapped(_ sender: UITapGestureRecognizer) {
-        switch self.pointerButton {
+        switch self.buttonsManager.pointerButton {
         case 0:
             self.delegateGameVC?.loadGameScene()
         case 1:
+            // multiplayer
             break
         case 2:
-            self.delegateGameVC?.loadMenuScene()
+            self.delegateGameVC?.goToAbout()
         default:
             break
         }
     }
     
-    private func upPointer() {
-        if (self.pointerButton < (self.buttons.count - 1)) {
-            self.pointerButton += 1
-        }
+    func swipeUp(_ sender: UISwipeGestureRecognizer) {
+        buttonsManager.swipeUp()
     }
-    private func downPointer() {
-        if (self.pointerButton > 0) {
-            self.pointerButton -= 1
-        }
+    
+    func swipeDown(_ sender: UISwipeGestureRecognizer) {
+        buttonsManager.swipeDown()
     }
 }

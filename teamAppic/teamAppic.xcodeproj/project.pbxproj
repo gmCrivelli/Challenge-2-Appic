@@ -34,6 +34,7 @@
 		1F7885531F0D769900F57921 /* HudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885521F0D769900F57921 /* HudController.swift */; };
 		1F7885551F0D7BAC00F57921 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885541F0D7BAC00F57921 /* Score.swift */; };
 		1F7885571F0D7BB600F57921 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885561F0D7BB600F57921 /* Player.swift */; };
+		1FAEBF4A1F166DFB00590871 /* ButtonsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAEBF491F166DFB00590871 /* ButtonsManager.swift */; };
 		1FCE9E8F1F140B4C008E535C /* circusSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE9E8E1F140B4C008E535C /* circusSound.mp3 */; };
 		1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE9E901F14170F008E535C /* MusicManager.swift */; };
 		B03601781F0C22940000673A /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03601771F0C22940000673A /* Splash.swift */; };
@@ -71,6 +72,7 @@
 		1F7885521F0D769900F57921 /* HudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudController.swift; sourceTree = "<group>"; };
 		1F7885541F0D7BAC00F57921 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		1F7885561F0D7BB600F57921 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1FAEBF491F166DFB00590871 /* ButtonsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsManager.swift; sourceTree = "<group>"; };
 		1FCE9E8E1F140B4C008E535C /* circusSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = circusSound.mp3; sourceTree = "<group>"; };
 		1FCE9E901F14170F008E535C /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		B03601771F0C22940000673A /* Splash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				1F1E0F5D1F03C996007B5825 /* GameScene.swift */,
 				B0E729F21F13C67B0089DF9F /* AboutScene.swift */,
 				1F5267A21F155B5A0091519C /* MenuScene.swift */,
+				1FAEBF491F166DFB00590871 /* ButtonsManager.swift */,
 				1F78854F1F0D0C3800F57921 /* Sks */,
 			);
 			name = Scenes;
@@ -217,7 +220,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7T8R3N4U6X;
+						DevelopmentTeam = K3MJ38Y24S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -281,6 +284,7 @@
 				187A3F7F1F0BE2BE00AE46CC /* MenuViewController.swift in Sources */,
 				1F7885531F0D769900F57921 /* HudController.swift in Sources */,
 				1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */,
+				1FAEBF4A1F166DFB00590871 /* ButtonsManager.swift in Sources */,
 				1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */,
 				1F1E0F561F03C996007B5825 /* AppDelegate.swift in Sources */,
 				1F7885511F0D13A100F57921 /* PlayersColors.swift in Sources */,
@@ -402,7 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
@@ -416,7 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = K3MJ38Y24S;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";

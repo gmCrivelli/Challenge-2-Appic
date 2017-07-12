@@ -10,14 +10,6 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-/// protocol to load game scene
-protocol GameVCProtocol : NSObjectProtocol {
-    /// loads the game scene
-    func loadGameScene()
-    func loadGameOverScene()
-    func loadMenuScene()
-}
-
 class GameOverViewController: UIViewController {
     
     @IBOutlet weak var gameOverLabel: UILabel!

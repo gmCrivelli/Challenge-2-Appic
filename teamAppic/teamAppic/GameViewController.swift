@@ -29,9 +29,9 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
                 
                 // Present the scene
                 view.presentScene(scene)
+                let menuScene = scene as! MenuScene
+                menuScene.delegateGameVC = self
             }
-            
-            
             
             view.ignoresSiblingOrder = true
             

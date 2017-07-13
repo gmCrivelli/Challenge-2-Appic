@@ -193,8 +193,8 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 			let movementPerSec:CGFloat = 750.0
 			let timeInterval: CGFloat = 1.0/60.0
 			
-			let p_x:CGFloat = 450
-			let p_y:CGFloat = 300
+			let p_x:CGFloat = self.size.width/2
+			let p_y:CGFloat = self.size.height/2
 			
 			var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
 			var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval

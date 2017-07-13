@@ -20,7 +20,9 @@
 		184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184F1CA41F0C026400F3B684 /* splashSound2.mp3 */; };
 		187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */; };
 		187A3F801F0BE5BA00AE46CC /* DoubleFeature21.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */; };
+		18841AE71F17CE8A00A557EC /* menuSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18841AE61F17CE8A00A557EC /* menuSound.mp3 */; };
 		18D0B5401F16D92F002FFD70 /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18D0B53F1F16D92F002FFD70 /* gameOver.mp3 */; };
+		18FD3DF41F17C72700AC2F06 /* Circus.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FD3DF31F17C72400AC2F06 /* Circus.ttf */; };
 		1F046F0B1F16902C0021DC7C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F046F0A1F16902C0021DC7C /* GameOverScene.swift */; };
 		1F046F0D1F1696240021DC7C /* RemoteSelectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */; };
 		1F046F0F1F1697630021DC7C /* RemoteSelectionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F046F0E1F1697630021DC7C /* RemoteSelectionScene.sks */; };
@@ -59,7 +61,9 @@
 		184F1CA41F0C026400F3B684 /* splashSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound2.mp3; sourceTree = "<group>"; };
 		187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature21.ttf; sourceTree = "<group>"; };
 		187A3F7A1F0BE14100AE46CC /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		18841AE61F17CE8A00A557EC /* menuSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menuSound.mp3; sourceTree = "<group>"; };
 		18D0B53F1F16D92F002FFD70 /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
+		18FD3DF31F17C72400AC2F06 /* Circus.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Circus.ttf; sourceTree = "<group>"; };
 		1F046F0A1F16902C0021DC7C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSelectionScene.swift; sourceTree = "<group>"; };
 		1F046F0E1F1697630021DC7C /* RemoteSelectionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoteSelectionScene.sks; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				187A3F791F0BE0D700AE46CC /* DoubleFeature21.ttf */,
+				18FD3DF31F17C72400AC2F06 /* Circus.ttf */,
+				18841AE61F17CE8A00A557EC /* menuSound.mp3 */,
 				184F1CA31F0C026400F3B684 /* splashSound1.mp3 */,
 				184F1CA41F0C026400F3B684 /* splashSound2.mp3 */,
 				1FCE9E8E1F140B4C008E535C /* circusSound.mp3 */,
@@ -258,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1E0F5C1F03C996007B5825 /* Game.xcassets in Resources */,
+				18841AE71F17CE8A00A557EC /* menuSound.mp3 in Resources */,
 				1834D7AD1F1684E5008B3B7E /* GameOverScene.sks in Resources */,
 				184F1CA61F0C026400F3B684 /* splashSound2.mp3 in Resources */,
 				1FCE9E8F1F140B4C008E535C /* circusSound.mp3 in Resources */,
@@ -267,6 +274,7 @@
 				184F1CA51F0C026400F3B684 /* splashSound1.mp3 in Resources */,
 				18D0B5401F16D92F002FFD70 /* gameOver.mp3 in Resources */,
 				184F1CA01F0C01E100F3B684 /* shoot1.mp3 in Resources */,
+				18FD3DF41F17C72700AC2F06 /* Circus.ttf in Resources */,
 				1834D7AB1F1684E5008B3B7E /* AboutScene.sks in Resources */,
 				1834D7AC1F1684E5008B3B7E /* Actions.sks in Resources */,
 				187A3F801F0BE5BA00AE46CC /* DoubleFeature21.ttf in Resources */,

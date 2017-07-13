@@ -41,6 +41,7 @@ class MenuScene : SKScene {
     override func didMove(to view: SKView) {
         setupNodes()
         setupGestures()
+        setupMusics()
     }
     
     /// Setups all gestures.
@@ -71,6 +72,12 @@ class MenuScene : SKScene {
                             self.childNode(withName: "About") as! SKSpriteNode
                             ]
         buttonsManager.insertButton(nodeArray: buttonsArray)
+    }
+    
+    /// Setups menu music when the app is loaded
+    func setupMusics() {
+        MusicManager.instance.setupMenu()
+        MusicManager.instance.playMenuAudio()
     }
     
     /// functin called when the select button from siri remote is tapped

@@ -24,6 +24,9 @@ class MusicManager {
     let minimumVolume: Float = 0.2
     let maximumVolume: Float = 1.0
     
+    /// menu sound volume
+    let menuVolume: Float = 0.3
+    
     private init() { } // private singleton init
     
     /// loading music (circus music)
@@ -51,7 +54,7 @@ class MusicManager {
     /// loading Menu music
     func setupMenu() {
         do {
-            menuAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "menu", ofType: "mp3")!))
+            menuAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "menuSound", ofType: "mp3")!))
             menuAudioPlayer.prepareToPlay()
             
         } catch {
@@ -94,8 +97,10 @@ class MusicManager {
         gameOverAudioPlayer.prepareToPlay()
     }
     
-    /// plays the menu music
+    /// plays the menu music with low volume
     func playMenuAudio() {
+        menuAudioPlayer.volume = menuVolume
+        menuAudioPlayer.numberOfLoops = -1
         menuAudioPlayer.play()
     }
     

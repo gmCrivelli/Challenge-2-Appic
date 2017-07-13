@@ -12,8 +12,10 @@ import GameplayKit
 
 class AboutViewController: UIViewController {
 	
-	override func viewDidLoad() {
+	override func viewDidLoad(){
 		super.viewDidLoad()
+        
+        loadAboutScene()
 	}
     
     /// loads and presents the about scene

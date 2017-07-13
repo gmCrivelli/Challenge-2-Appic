@@ -93,6 +93,8 @@ class RemoteSelectionScene : SKScene {
         // the game scene will be presented and the remote selection will be selected
         self.delegateGameVC?.presentGameScene()
         self.delegateGameScene?.selectRemoteType(typeOfControl: typeOfControl!)
+        
+        MusicManager.instance.stopMenuAudio()
     }
     
     /// Function called when the swipe left is done and the swipe left effect will be obtained in the buttons.

@@ -63,8 +63,16 @@ class TargetController: NSObject {
     }
 	
     func detectHit (_ location: CGPoint, player : Int) {
-        for t in entityManager.entities.reversed() {
-            
+        // We do what we must.
+        for t in Array(entityManager.entities).sorted(by: { t1, t2 in
+            if let s1 = t1.component(ofType: SpriteComponent.self),
+            let s2 = t2.component(ofType: SpriteComponent.self) {
+                return s1.node.zPosition > s2.node.zPosition
+            }
+            else { return false }
+        })
+        
+        {
             guard let spriteComponent = t.component(ofType: SpriteComponent.self),
                 let typeComponent = t.component(ofType : TypeComponent.self) else { continue }
             

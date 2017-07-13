@@ -87,18 +87,18 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     func setupEntities() {
         entityManager = EntityManager(scene: self)
         
-//        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
-//                                    cannonStep: CGPoint(x: 100, y: 0),
-//                                    numberOfTargets: 10,
-//                                    targetScale: 0.7,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 0, y: 500),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.3],
-//                                    entityManager: entityManager)
-//
+        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
+                                    cannonStep: CGPoint(x: 100, y: 0),
+                                    numberOfTargets: 10,
+                                    targetScale: 0.7,
+                                    targetTypeArray: [TargetType.target],
+                                    baseTargetSpeed: float2(x: 0, y: 500),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.3],
+                                    entityManager: entityManager)
+
         
-        let cannon2 = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
+        let ducks = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
                                     cannonStep: CGPoint(x: 0, y: 0),
                                     numberOfTargets: 50,
                                     targetScale: 1.0,
@@ -107,28 +107,28 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
                                     baseTargetAccel: float2(x: 0, y: 0),
                                     timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
                                     entityManager: entityManager)
-//
-//        let cannon3 = PatternCannon(baseLocation: CGPoint(x: 0, y: 0),
-//                                    cannonStep: CGPoint(x: 0, y: 0),
-//                                    numberOfTargets: 80,
-//                                    targetScale: 1,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 0, y: 200),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.5],
-//                                    entityManager: entityManager)
-//        
-//        let _ = DuckCannon(baseLocation: CGPoint(x: 0, y: 0),
-//                                 cannonStep: CGPoint(x: 0, y: 0),
-//                                 numberOfTargets: 1,
-//                                 targetScale: 0.7,
-//                                 targetTypeArray: [TargetType.duck],
-//                                 baseTargetSpeed: float2(x: 0, y: 0),
-//                                 baseTargetAccel: float2(x: 0, y: 0),
-//                                 timeDelayArray: [1.0],
-//                                 entityManager: entityManager)
-        
 
+        let cannon3 = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
+                                    cannonStep: CGPoint(x: 0, y: 50),
+                                    numberOfTargets: 80,
+                                    targetScale: 0.5,
+                                    targetTypeArray: [TargetType.target],
+                                    baseTargetSpeed: float2(x: 400, y: 300),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.5],
+                                    entityManager: entityManager)
+
+        let cannon4 = PatternCannon(baseLocation: CGPoint(x: 960, y: -300),
+                                    cannonStep: CGPoint(x: 0, y: 50),
+                                    numberOfTargets: 80,
+                                    targetScale: 0.5,
+                                    targetTypeArray: [TargetType.target],
+                                    baseTargetSpeed: float2(x: -400, y: 300),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.5],
+                                    entityManager: entityManager)
+
+        
     }
     
 	///		Setup the Nodes.

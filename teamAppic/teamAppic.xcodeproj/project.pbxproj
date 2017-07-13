@@ -53,6 +53,7 @@
 		FEC04C531F17EEFF0032584D /* TargetComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC04C451F17EEFF0032584D /* TargetComponent.swift */; };
 		FEC04C581F17F1B60032584D /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FEC04C571F17F1B50032584D /* GameOverScene.sks */; };
 		FEC04C5A1F17F1FD0032584D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FEC04C591F17F1FD0032584D /* GameScene.sks */; };
+		FEC04C5E1F1818D30032584D /* PatternInstantiatorInstantiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC04C5D1F1818D30032584D /* PatternInstantiatorInstantiator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		FEC04C451F17EEFF0032584D /* TargetComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetComponent.swift; sourceTree = "<group>"; };
 		FEC04C571F17F1B50032584D /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		FEC04C591F17F1FD0032584D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		FEC04C5D1F1818D30032584D /* PatternInstantiatorInstantiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternInstantiatorInstantiator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 				FEC04C3B1F17EEFF0032584D /* EntityManager.swift */,
 				FEC04C3D1F17EEFF0032584D /* Target.swift */,
 				FEC04C3E1F17EEFF0032584D /* PatternInstantiator.swift */,
+				FEC04C5D1F1818D30032584D /* PatternInstantiatorInstantiator.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				FEC04C4A1F17EEFF0032584D /* TypeComponent.swift in Sources */,
 				187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */,
 				1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */,
+				FEC04C5E1F1818D30032584D /* PatternInstantiatorInstantiator.swift in Sources */,
 				B03601781F0C22940000673A /* Splash.swift in Sources */,
 				1F1E0F5E1F03C996007B5825 /* GameScene.swift in Sources */,
 				1F046F0B1F16902C0021DC7C /* GameOverScene.swift in Sources */,

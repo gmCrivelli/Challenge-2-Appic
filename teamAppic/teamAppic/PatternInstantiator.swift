@@ -46,22 +46,27 @@ class PatternCannon {
     
     @objc func launchTarget() {
         
-        if launchedCounter >= numberOfTargets {
-            timer.invalidate()
-            return
+        while(true) {
+
+            if launchedCounter >= numberOfTargets {
+                timer.invalidate()
+                return
+            }
+            
+            entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
+                                      location: baseLocation,
+                                      scale: targetScale,
+                                      initialVelocity: baseTargetSpeed,
+                                      maxSpeed: maxSpeed,
+                                      maxAccel: maxAccel,
+                                      moveType: MoveType.gravity,
+                                      path: nil)
+            
+            self.baseLocation = self.baseLocation + self.cannonStep
+            self.launchedCounter += 1
+            
+            if timeDelayArray[launchedCounter % timeDelayArray.count] != 0.0 { break }
         }
-        
-        entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
-                                  location: baseLocation,
-                                  scale: targetScale,
-                                  initialVelocity: baseTargetSpeed,
-                                  maxSpeed: maxSpeed,
-                                  maxAccel: maxAccel,
-                                  moveType: MoveType.gravity,
-                                  path: nil)
-        
-        self.baseLocation = self.baseLocation + self.cannonStep
-        self.launchedCounter += 1
         
         if timeDelayArray.count > 0 {
             timer.invalidate()

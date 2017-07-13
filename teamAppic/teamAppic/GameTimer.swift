@@ -15,7 +15,7 @@ class GameTimer {
     let INTERVALTIME : TimeInterval = 1
     
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 50
+    private let GAMEPLAYTIME : Int = 5
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()

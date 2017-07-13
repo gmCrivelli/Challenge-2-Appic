@@ -131,6 +131,7 @@
 		1F1E0F541F03C996007B5825 /* teamAppic */ = {
 			isa = PBXGroup;
 			children = (
+				1FAEBF491F166DFB00590871 /* ButtonsManager.swift */,
 				1F1E0F551F03C996007B5825 /* AppDelegate.swift */,
 				B03601771F0C22940000673A /* Splash.swift */,
 				1F7885501F0D13A100F57921 /* PlayersColors.swift */,
@@ -166,7 +167,6 @@
 				1F5267A21F155B5A0091519C /* MenuScene.swift */,
 				1F046F0C1F1696240021DC7C /* RemoteSelectionScene.swift */,
 				1F046F0A1F16902C0021DC7C /* GameOverScene.swift */,
-				1FAEBF491F166DFB00590871 /* ButtonsManager.swift */,
 				1F78854F1F0D0C3800F57921 /* Sks */,
 			);
 			name = Scenes;

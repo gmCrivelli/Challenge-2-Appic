@@ -13,20 +13,22 @@ import QuartzCore
 
 class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
-    let music = SKAudioNode(fileNamed: "sound.mp3")
-    
 	//Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
 	var targetController : TargetController!
-    // Hud
+    
+    // hud controller
     let hudController = HudController.hudInstance
-	//Controller mode
+	
+    //Controller mode
 	var controllerSwipeMode: Bool = false
-	//Positions
+	
+    //Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
-	//Motion update
+	
+    //Motion update
 	var lastX: Double! = 0
 	var lastY : Double! = 0
     
@@ -34,6 +36,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     var playerNameArray = [String]()
     var playerAimArray = [SKSpriteNode]()
     
+    /// delegate to game view controller to have access to loading and presention of all scenes
     public weak var delegateGameVC : GameVCProtocol?
 	
 	///		Called after moving to the View,
@@ -48,34 +51,37 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         setupMusics()
     }
 	
-    /// setups the circus music when the game is being played
+    /// Setups the circus music when the game is being played
     func setupMusics() {
         MusicManager.instance.setupGame()
         MusicManager.instance.playGameAudio()
     }
     
-    /// setups the game over configurations
+    /// Setups the game over configurations
     func gameOverSetups() {
+        // tops the game music
         MusicManager.instance.stopGameAudio()
+        
         // initializes current score of all players
         hudController.gameOverHighScore()
+        
         // sures that every node will be removed when the game overs or menu is selected
         self.gameNode.removeAllChildren()
         self.gameNode.removeFromParent()
+        
+        // invalidate the scheduled timer
         hudController.timer.pauseTimer()
     }
     
-	///		Setup the Scenes.
-	///
+	/// Setups the Scenes.
 	func setupScenes() {
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		appDelegate.motionDelegate = self
 	}
 	
-	///		Setup the Nodes.
-	///
+	/// Setups the Nodes.
 	func setupNodes(){
-        
+        // getting the reference of gameNode and pauseNode from sks
 		self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
@@ -93,37 +99,44 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         let targetNode2 = targetController.addTarget(debugging: false, typeOfNode: "sprite")
 		targetController.moveBetweenSides(node: targetNode2)
         
-        // insert players (single player)
+        // inserts players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
 	}
 	
-	///		Setup the gestures.
-	///
+	/// Setups the gestures.
 	func setupGestures(){
-		let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
+		
+        // setups the select (button of siri remote) gesture
+        let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
 		let pressType = UIPressType.select
         selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
 		self.view?.addGestureRecognizer(selectGestureRecognizer)
         
+        // setups the play/pause (button of siri remote) gesture
         let pauseGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.pauseTapped(_:)))
         let pauseType = UIPressType.playPause
         pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
         self.view?.addGestureRecognizer(pauseGestureRecognizer)
 	
+        // setups the menu (button of siri remote) gesture
         let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.menuTapped(_:)))
         let menuType = UIPressType.menu
         menuGestureRecognizer.allowedPressTypes = [NSNumber(value: menuType.rawValue)];
         self.view?.addGestureRecognizer(menuGestureRecognizer)
     }
     
+    /// Function that catches the gesture for menu in siri remote and loads the menu scene after setups all game over setups.
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
     func menuTapped(_ sender: UITapGestureRecognizer) {
+        // does everything needed after the game ends and loads the menu scene
         self.gameOverSetups()
         self.delegateGameVC?.loadMenuScene()
     }
 	
-	///		Function that catches the Gesture for tap in
+	/// Function that catches the Gesture for tap in
 	///	in the controller, executes the target controller 
 	///	detectHit function.
 	///
@@ -137,30 +150,27 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         }
     }
     
-    /// catches the gesture for pause in the tv control and pauses the game
+    /// Catches the gesture for pause in the tv control and pauses the game.
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func pauseTapped(_ sender : UITapGestureRecognizer) {
         self.isPaused = !(self.isPaused)
+        
+        // reduces the alpha of all game, presents the pause menu and reduces the music volume if the game is paused
         if (self.isPaused) {
             self.hudController.timer.pauseTimer()
             self.pauseNode.alpha = 1
             self.gameNode.alpha = 0.3
-            
             MusicManager.instance.lowGameAudio()
-            
         } else {
             self.hudController.timer.resumeTimer()
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
-            
             MusicManager.instance.highGameAudio()
         }
-
-        print("The game will be paused")
     }
 	
-	///		Override of the function Update, called 
+	/// Override of the function Update, called
 	///	every frame update, sets the aim new position 
 	///	based on the controller mode.
 	///
@@ -235,7 +245,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 		}
     }
     
-    /// selects what control will be used
+    /// Selects what control will be used.
     ///
     /// - Parameter typeOfControl: string that can be "swipe" or "motion" to select these two types of controls. Any other string passed as this parameter will have no effects
     func selectRemoteType(typeOfControl: String) {

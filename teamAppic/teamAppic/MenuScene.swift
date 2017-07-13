@@ -32,9 +32,10 @@ class MenuScene : SKScene {
     /// label to show the highscore
     private var highScore = SKLabelNode()
     
-    /// <#Description#>
+    /// delegate to have access to the loading of other scenes
     public weak var delegateGameVC : GameVCProtocol?
     
+    /// instance of buttons manager to use some nodes as buttons
     private var buttonsManager = ButtonsManager()
     
     override func didMove(to view: SKView) {
@@ -42,6 +43,7 @@ class MenuScene : SKScene {
         setupGestures()
     }
     
+    /// Setups all gestures.
     func setupGestures() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp(_:)))
         swipeUp.direction = .up
@@ -57,6 +59,7 @@ class MenuScene : SKScene {
         self.view?.addGestureRecognizer(selectGestureRecognizer)
     }
     
+    /// Setups all nodes of scene.
     func setupNodes() {
         // inserting the high score in the text of the high score label
         self.highScore = self.childNode(withName: "highScoreValue") as! SKLabelNode
@@ -70,24 +73,40 @@ class MenuScene : SKScene {
         buttonsManager.insertButton(nodeArray: buttonsArray)
     }
     
+    /// functin called when the select button from siri remote is tapped
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
+        
         switch self.buttonsManager.pointerButton {
+        // singleplayer button tapped
         case 0:
             self.delegateGameVC?.loadRemoteScene()
+        
+        // multiplayer button tapped
         case 1:
             // multiplayer
             break
+        
+        // about button tapped
         case 2:
             self.delegateGameVC?.goToAbout()
+        
         default:
             break
         }
     }
     
+    /// Function called when the swipe up is done and the swipe up effect will be obtained in the buttons.
+    ///
+    /// - Parameter sender: UISwipeGestureRecognizer
     func swipeUp(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeUp()
     }
     
+    /// Function called when the swipe down is done and the swipe down effect will be obtained in the buttons.
+    ///
+    /// - Parameter sender: UISwipeGestureRecognizer
     func swipeDown(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeDown()
     }

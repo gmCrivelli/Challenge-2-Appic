@@ -11,6 +11,9 @@ import SpriteKit
 
 class GameTimer {
 
+    /// constant to use as timeInterval in the scheduled timer (1 second)
+    let INTERVALTIME : TimeInterval = 1
+    
     /// constant that indicates the gameplay time
     private let GAMEPLAYTIME : Int = 5
     
@@ -23,6 +26,7 @@ class GameTimer {
 	/// Timer Label
 	private var timerLabelNode : SKLabelNode?
     
+    /// used to schedule a timer
     private var timer : Timer?
     
     /// delegate to present game over
@@ -63,7 +67,7 @@ class GameTimer {
     
     /// setups the scheduled timer
     private func setupTimer() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countsTimer), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: INTERVALTIME, target: self, selector: #selector(self.countsTimer), userInfo: nil, repeats: false)
     }
     
     /// returns the remaining time of timer

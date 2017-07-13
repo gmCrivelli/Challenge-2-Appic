@@ -36,7 +36,7 @@ class HudController : NSObject, HudProtocol {
 		self.nameLabelNodeArray = []
     }
     
-    /// inserts players in hud (each one will have their score object)
+    /// Inserts players in hud (each one will have their score object).
     ///
     /// - Parameters:
     ///   - playerNameArray: array of players name
@@ -50,7 +50,7 @@ class HudController : NSObject, HudProtocol {
         }
     }
 
-    /// updates score of the player passed as parameter
+    /// Updates score of the player passed as parameter.
     ///
     /// - Parameter player: this value is the number of player decreased by one
     public func updateScore(player: Int) {
@@ -62,7 +62,7 @@ class HudController : NSObject, HudProtocol {
         }
     }
 	
-	/// Sets the Hud Scores, Player Names and timer, suports 4 players
+	/// Sets the Hud Scores, Player Names and timer, suports 4 players.
 	///
 	/// - Parameter gameScene: scene that contains the Score, combo, Names labels
 	public func setHUD(gameNode: SKNode){

@@ -35,14 +35,14 @@ class ButtonsManager {
         node.run(increaseAction.reversed())
     }
     
-    /// responsible to make the effect of swipe up in the buttons
+    /// decreases the scale of last button (in leading of array), and increases the scale of the current button (in trailing of array)
     public func swipeUp() {
         decreaseScale(node: self.buttons[self.pointerButton])
         downPointer()
         increaseScale(node: self.buttons[self.pointerButton])
     }
     
-    /// responsible to make the effect of swipe down in the buttons
+    /// decreases the scale of last button (in trailing of array), and increases the scale of the current button (in leading of array)
     public func swipeDown() {
         decreaseScale(node: self.buttons[self.pointerButton])
         upPointer()

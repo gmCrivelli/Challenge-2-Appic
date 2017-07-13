@@ -25,7 +25,10 @@ class AboutScene: SKScene, ReactToMotionEvents {
 	var lastX: Double! = 0
 	var lastY : Double! = 0
 	
+	/// aim of the player
 	var playerAim: SKSpriteNode!
+    
+	/// background used as a target to be possible to hit the scene with splashes
 	var backgroundTargetNode: SKSpriteNode!
 	
 	///		Called after moving to the View,
@@ -61,10 +64,11 @@ class AboutScene: SKScene, ReactToMotionEvents {
 		backgroundTargetNode = gameNode.childNode(withName: "backgroundTarget") as! SKSpriteNode
 	}
 	
-	///		Setup the gestures.
+	///	Setup the gestures.
 	///
 	func setupGestures(){
-		let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
+		// setups the select (button of siri remote) gesture
+        let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
 		let pressType = UIPressType.select
 		selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
 		self.view?.addGestureRecognizer(selectGestureRecognizer)
@@ -77,9 +81,6 @@ class AboutScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - sender: UITapGestureRecognizer
 	func selectTapped(_ sender: UITapGestureRecognizer) {
-//		if (!self.gameNode.isPaused) {
-//			targetController.detectHit(playerAim.position, player: 0)
-//		}
 		targetController.addSplashToTarget(node: backgroundTargetNode, position: playerAim.position)
 	}
 	

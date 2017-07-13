@@ -17,10 +17,11 @@ class GameViewController: UIViewController, GameVCProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // loads the menu scene, that is, the first scene when the app is opened
         loadMenuScene()
     }
     
-    /// loads and presents  the menu scene
+    /// loads and presents the menu scene
     public func loadMenuScene() {
         if let view = self.view as! SKView? {
             if let scene = SKScene(fileNamed: "MenuScene") {
@@ -35,8 +36,8 @@ class GameViewController: UIViewController, GameVCProtocol{
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
     
@@ -56,8 +57,8 @@ class GameViewController: UIViewController, GameVCProtocol{
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
     
@@ -107,8 +108,8 @@ class GameViewController: UIViewController, GameVCProtocol{
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
     

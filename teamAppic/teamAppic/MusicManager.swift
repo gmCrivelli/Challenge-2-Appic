@@ -105,5 +105,4 @@ class MusicManager {
         menuAudioPlayer.currentTime = 0
         menuAudioPlayer.prepareToPlay()
     }
-
 }

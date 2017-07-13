@@ -17,10 +17,18 @@ class Target: GKEntity {
     init(targetType: TargetType, moveType: MoveType, maxSpeed: Float?, maxAccel: Float?, entityManager: EntityManager) {
         super.init()
         let texture = SKTexture(imageNamed: targetType.getImageName())
-        let spriteComponent = SpriteComponent(texture: texture)
+        let spriteComponent = SpriteComponent(imageNamed: targetType.getImageName())
         addComponent(spriteComponent)
         addComponent(TypeComponent(targetType: targetType))
-        addComponent(MoveComponent(maxSpeed: maxSpeed, maxAcceleration: maxAccel, radius: Float(texture.size().width * 0.3), moveType: moveType, entityManager: entityManager))
+        
+        switch targetType {
+            
+        case .duck:
+            addComponent(DuckMovement(entityManager: entityManager))
+            self.component(ofType: DuckMovement.self)?.run()
+        default:
+            addComponent(MoveComponent(maxSpeed: maxSpeed, maxAcceleration: maxAccel, radius: Float(texture.size().width * 0.3), moveType: moveType, entityManager: entityManager))
+        }
     }
     
     func setPath(path: GKPath) {

@@ -32,7 +32,7 @@ import GameplayKit
 // Each pattern is a list of tuples
 // Each tuple contains the above elements
 let patterns = [[(imageName: "Spaceship",
-                   targetType: TargetType.type1,
+                   targetType: TargetType.target,
                    location: CGPoint(x: -0.1, y: -0.1),
                    scale: CGFloat(0.3),
                    moveType: MoveType.path,
@@ -48,7 +48,7 @@ let patterns = [[(imageName: "Spaceship",
                 
                 
                 [(imageName: "Spaceship",
-                  targetType: TargetType.type1,
+                  targetType: TargetType.target,
                   location: CGPoint(x: 0.1, y: -0.1),
                   scale: CGFloat(0.3),
                   moveType: MoveType.gravity,
@@ -63,7 +63,7 @@ let patterns = [[(imageName: "Spaceship",
                   timeToNext: 0.5),
                  
                  (imageName: "Spaceship",
-                  targetType: TargetType.type1,
+                  targetType: TargetType.target,
                   location: CGPoint(x: 0.3, y: -0.1),
                   scale: CGFloat(0.3),
                   moveType: MoveType.gravity,
@@ -78,7 +78,7 @@ let patterns = [[(imageName: "Spaceship",
                   timeToNext: 0.5),
                  
                  (imageName: "Spaceship",
-                  targetType: TargetType.type1,
+                  targetType: TargetType.target,
                   location: CGPoint(x: 0.5, y: -0.1),
                   scale: CGFloat(0.3),
                   moveType: MoveType.gravity,

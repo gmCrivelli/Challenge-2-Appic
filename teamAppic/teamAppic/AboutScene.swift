@@ -66,7 +66,7 @@ class AboutScene: SKScene, ReactToMotionEvents {
 		
 		targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
 		
-        let bgTarget = Target(targetType: .type1, moveType: .gravity, maxSpeed: 0.0, maxAccel: 0.0, entityManager: entityManager)
+        let bgTarget = Target(targetType: .target, moveType: .gravity, maxSpeed: 0.0, maxAccel: 0.0, entityManager: entityManager)
         
 		entityManager.add(bgTarget)
 		

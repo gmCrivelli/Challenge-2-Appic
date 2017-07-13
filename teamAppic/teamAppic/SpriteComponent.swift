@@ -13,6 +13,7 @@ import GameplayKit
 class SpriteComponent: GKComponent {
     
     let node: SKShapeNode
+    let size: CGRect
     
 //    init(texture: SKTexture) {
 //        self.node = SKSpriteNode(texture: texture, color: .white, size: texture.size())
@@ -21,13 +22,24 @@ class SpriteComponent: GKComponent {
 //        super.init()
 //    }
 
-    init(texture: SKTexture) {
+    init(imageNamed: String) {
         
-        let shapeNode = SKShapeNode(circleOfRadius: texture.size().width/2)
+        let texture = SKTexture(imageNamed: imageNamed)
+        var shapeNode: SKShapeNode
+        if imageNamed == "target" {
+            shapeNode = SKShapeNode(circleOfRadius: texture.size().width/2)
+        } else {
+            shapeNode = SKShapeNode(rectOf: texture.size())
+        }
         shapeNode.fillTexture = texture
         shapeNode.fillColor = SKColor.white
         shapeNode.strokeColor = .clear
         self.node = shapeNode
+        
+        let width = texture.size().width
+        let height = texture.size().height
+        
+        self.size = CGRect(x: -width/2, y: -height/2, width: width, height: height)
         super.init()
     }
     

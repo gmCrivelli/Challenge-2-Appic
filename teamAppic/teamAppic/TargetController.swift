@@ -63,7 +63,7 @@ class TargetController: NSObject {
     }
 	
     func detectHit (_ location: CGPoint, player : Int) {
-        for t in entityManager.entities {
+        for t in entityManager.entities.reversed() {
             
             guard let spriteComponent = t.component(ofType: SpriteComponent.self),
                 let typeComponent = t.component(ofType : TypeComponent.self) else { continue }
@@ -76,9 +76,10 @@ class TargetController: NSObject {
 				var convertedLocation = CGPoint(x: convert.x, y: convert.y)
                 
                 print("HIT!", location, convertedLocation)
-                let path = typeComponent.targetType.getBZPathForType()
+               
+                print(spriteComponent.node.frame)
                 
-                let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: spriteComponent.node.frame, splashPosition: convertedLocation)
+                let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: spriteComponent.size, splashPosition: convertedLocation, targetType: typeComponent.targetType)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
 //                // these values must be the same of t.targetNode 
@@ -88,7 +89,7 @@ class TargetController: NSObject {
                 splashNode.colorBlendFactor = 1
                 // player 1 color
                 splashNode.color = PlayersColors.playerColor(player: 1)
-				splashNode.zPosition = 1
+				splashNode.zPosition = 0
                 spriteComponent.node.addChild(splashNode)
 	
                 let randomSound: Int = Int(arc4random_uniform(UInt32(numberOfShootSounds)))

@@ -11,19 +11,23 @@ import SpriteKit
 import GameplayKit
 
 enum TargetType : Int{
-    case type1 = 1
-    case type2 = 2
+    case target = 1
+    case duck = 2
     
-    static let allValues = [type1, type2]
+    static let allValues = [target, duck]
     
     func toFollow() -> TargetType {
         switch self {
-        default: return .type2
+        default: return .duck
         }
     }
     
     func getImageName() -> String {
-        return "target"
+        switch self {
+        case .duck:
+            return "duck"
+        default: return "target"
+        }
     }
     
     func getBZPathForType() -> UIBezierPath {

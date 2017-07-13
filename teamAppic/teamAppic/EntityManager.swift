@@ -21,6 +21,18 @@ class EntityManager {
     var toRemove = Set<GKEntity>()
     let scene: SKScene
     
+    static var _zPosition : CGFloat = 0
+    static var zPosition : CGFloat {
+        get {
+            let aux = _zPosition
+            _zPosition += 0.00001
+            return aux
+        }
+        set {
+            _zPosition = newValue
+        }
+    }
+    
     init(scene: SKScene) {
         self.scene = scene
     }
@@ -72,7 +84,7 @@ class EntityManager {
         
         if let spriteComponent = target.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = location
-            spriteComponent.node.zPosition = 1000
+            spriteComponent.node.zPosition = EntityManager.zPosition
             spriteComponent.node.setScale(scale)
         }
         add(target)

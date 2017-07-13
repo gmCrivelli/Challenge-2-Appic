@@ -28,7 +28,6 @@
 		1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F5F1F03C996007B5825 /* GameViewController.swift */; };
 		1F1E0F631F03C996007B5825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1E0F611F03C996007B5825 /* Main.storyboard */; };
 		1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6C1F03CB15007B5825 /* TargetController.swift */; };
-		1F1E0F6F1F03CBE9007B5825 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E0F6E1F03CBE9007B5825 /* Target.swift */; };
 		1F5267A31F155B5A0091519C /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5267A21F155B5A0091519C /* MenuScene.swift */; };
 		1F7885511F0D13A100F57921 /* PlayersColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885501F0D13A100F57921 /* PlayersColors.swift */; };
 		1F7885531F0D769900F57921 /* HudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7885521F0D769900F57921 /* HudController.swift */; };
@@ -39,6 +38,19 @@
 		1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE9E901F14170F008E535C /* MusicManager.swift */; };
 		B03601781F0C22940000673A /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03601771F0C22940000673A /* Splash.swift */; };
 		B0E729F31F13C67B0089DF9F /* AboutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E729F21F13C67B0089DF9F /* AboutScene.swift */; };
+		FE40AA541F16942300627F65 /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA461F16942300627F65 /* MoveComponent.swift */; };
+		FE40AA551F16942300627F65 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA471F16942300627F65 /* Target.swift */; };
+		FE40AA561F16942300627F65 /* PatternInstantiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA481F16942300627F65 /* PatternInstantiator.swift */; };
+		FE40AA571F16942300627F65 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA491F16942300627F65 /* CGPointExtension.swift */; };
+		FE40AA581F16942300627F65 /* TypeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4A1F16942300627F65 /* TypeComponent.swift */; };
+		FE40AA591F16942300627F65 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4B1F16942300627F65 /* EntityManager.swift */; };
+		FE40AA5A1F16942300627F65 /* Patterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4C1F16942300627F65 /* Patterns.swift */; };
+		FE40AA5B1F16942300627F65 /* AgentMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4D1F16942300627F65 /* AgentMoveComponent.swift */; };
+		FE40AA5C1F16942300627F65 /* GravityBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4E1F16942300627F65 /* GravityBehavior.swift */; };
+		FE40AA5D1F16942300627F65 /* PointByPointBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA4F1F16942300627F65 /* PointByPointBehavior.swift */; };
+		FE40AA5E1F16942300627F65 /* PathBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA501F16942300627F65 /* PathBehavior.swift */; };
+		FE40AA5F1F16942300627F65 /* FollowBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA511F16942300627F65 /* FollowBehavior.swift */; };
+		FE40AA601F16942300627F65 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE40AA521F16942300627F65 /* SpriteComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +77,6 @@
 		1F1E0F621F03C996007B5825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1F1E0F661F03C996007B5825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1E0F6C1F03CB15007B5825 /* TargetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetController.swift; sourceTree = "<group>"; };
-		1F1E0F6E1F03CBE9007B5825 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		1F5267A21F155B5A0091519C /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		1F7885501F0D13A100F57921 /* PlayersColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersColors.swift; sourceTree = "<group>"; };
 		1F7885521F0D769900F57921 /* HudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudController.swift; sourceTree = "<group>"; };
@@ -76,6 +87,19 @@
 		1FCE9E901F14170F008E535C /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		B03601771F0C22940000673A /* Splash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		B0E729F21F13C67B0089DF9F /* AboutScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScene.swift; sourceTree = "<group>"; };
+		FE40AA461F16942300627F65 /* MoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
+		FE40AA471F16942300627F65 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		FE40AA481F16942300627F65 /* PatternInstantiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternInstantiator.swift; sourceTree = "<group>"; };
+		FE40AA491F16942300627F65 /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		FE40AA4A1F16942300627F65 /* TypeComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeComponent.swift; sourceTree = "<group>"; };
+		FE40AA4B1F16942300627F65 /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		FE40AA4C1F16942300627F65 /* Patterns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patterns.swift; sourceTree = "<group>"; };
+		FE40AA4D1F16942300627F65 /* AgentMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentMoveComponent.swift; sourceTree = "<group>"; };
+		FE40AA4E1F16942300627F65 /* GravityBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityBehavior.swift; sourceTree = "<group>"; };
+		FE40AA4F1F16942300627F65 /* PointByPointBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointByPointBehavior.swift; sourceTree = "<group>"; };
+		FE40AA501F16942300627F65 /* PathBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathBehavior.swift; sourceTree = "<group>"; };
+		FE40AA511F16942300627F65 /* FollowBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowBehavior.swift; sourceTree = "<group>"; };
+		FE40AA521F16942300627F65 /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,11 +146,14 @@
 		1F1E0F541F03C996007B5825 /* teamAppic */ = {
 			isa = PBXGroup;
 			children = (
+				FE40AA641F16944200627F65 /* Utilities */,
+				FE40AA451F1693A900627F65 /* Components */,
+				FE40AA621F16943500627F65 /* Entities */,
+				FE40AA631F16943900627F65 /* Behaviors */,
 				1F1E0F551F03C996007B5825 /* AppDelegate.swift */,
 				B03601771F0C22940000673A /* Splash.swift */,
 				1F7885501F0D13A100F57921 /* PlayersColors.swift */,
 				1FCE9E901F14170F008E535C /* MusicManager.swift */,
-				1F1E0F6E1F03CBE9007B5825 /* Target.swift */,
 				1F1E0F611F03C996007B5825 /* Main.storyboard */,
 				187A3F741F0BE0C100AE46CC /* Media */,
 				1F78854D1F0D097900F57921 /* Controllers */,
@@ -185,6 +212,47 @@
 			name = HudController;
 			sourceTree = "<group>";
 		};
+		FE40AA451F1693A900627F65 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FE40AA461F16942300627F65 /* MoveComponent.swift */,
+				FE40AA4A1F16942300627F65 /* TypeComponent.swift */,
+				FE40AA521F16942300627F65 /* SpriteComponent.swift */,
+				FE40AA4D1F16942300627F65 /* AgentMoveComponent.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		FE40AA621F16943500627F65 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				FE40AA481F16942300627F65 /* PatternInstantiator.swift */,
+				FE40AA4C1F16942300627F65 /* Patterns.swift */,
+				FE40AA4B1F16942300627F65 /* EntityManager.swift */,
+				FE40AA471F16942300627F65 /* Target.swift */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		FE40AA631F16943900627F65 /* Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+				FE40AA4E1F16942300627F65 /* GravityBehavior.swift */,
+				FE40AA4F1F16942300627F65 /* PointByPointBehavior.swift */,
+				FE40AA501F16942300627F65 /* PathBehavior.swift */,
+				FE40AA511F16942300627F65 /* FollowBehavior.swift */,
+			);
+			name = Behaviors;
+			sourceTree = "<group>";
+		};
+		FE40AA641F16944200627F65 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FE40AA491F16942300627F65 /* CGPointExtension.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -217,7 +285,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7T8R3N4U6X;
+						DevelopmentTeam = UMGS9WR96D;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -273,20 +341,32 @@
 			files = (
 				1F5267A31F155B5A0091519C /* MenuScene.swift in Sources */,
 				187A3F7C1F0BE14100AE46CC /* AboutViewController.swift in Sources */,
+				FE40AA601F16942300627F65 /* SpriteComponent.swift in Sources */,
+				FE40AA5F1F16942300627F65 /* FollowBehavior.swift in Sources */,
 				1F1E0F6D1F03CB15007B5825 /* TargetController.swift in Sources */,
 				B03601781F0C22940000673A /* Splash.swift in Sources */,
+				FE40AA561F16942300627F65 /* PatternInstantiator.swift in Sources */,
+				FE40AA571F16942300627F65 /* CGPointExtension.swift in Sources */,
+				FE40AA5C1F16942300627F65 /* GravityBehavior.swift in Sources */,
 				1F1E0F5E1F03C996007B5825 /* GameScene.swift in Sources */,
 				1F7885571F0D7BB600F57921 /* Player.swift in Sources */,
+				FE40AA591F16942300627F65 /* EntityManager.swift in Sources */,
+				FE40AA551F16942300627F65 /* Target.swift in Sources */,
 				1F1D9A521F0E821300C202B5 /* GameTimer.swift in Sources */,
 				1F7885531F0D769900F57921 /* HudController.swift in Sources */,
+				FE40AA581F16942300627F65 /* TypeComponent.swift in Sources */,
+				FE40AA541F16942300627F65 /* MoveComponent.swift in Sources */,
 				1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */,
+				FE40AA5D1F16942300627F65 /* PointByPointBehavior.swift in Sources */,
 				1FAEBF4A1F166DFB00590871 /* ButtonsManager.swift in Sources */,
+				FE40AA5A1F16942300627F65 /* Patterns.swift in Sources */,
 				1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */,
 				1F1E0F561F03C996007B5825 /* AppDelegate.swift in Sources */,
+				FE40AA5B1F16942300627F65 /* AgentMoveComponent.swift in Sources */,
 				1F7885511F0D13A100F57921 /* PlayersColors.swift in Sources */,
 				1F7885551F0D7BAC00F57921 /* Score.swift in Sources */,
+				FE40AA5E1F16942300627F65 /* PathBehavior.swift in Sources */,
 				B0E729F31F13C67B0089DF9F /* AboutScene.swift in Sources */,
-				1F1E0F6F1F03CBE9007B5825 /* Target.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = UMGS9WR96D;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";
@@ -416,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7T8R3N4U6X;
+				DEVELOPMENT_TEAM = UMGS9WR96D;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.teamAppic-Rodrigo";

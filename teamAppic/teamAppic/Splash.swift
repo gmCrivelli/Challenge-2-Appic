@@ -14,8 +14,8 @@ class Splash{
     let SPLASHSIZE : CGFloat = 15
 	var splashTexture: SKTexture!
 	
-	init(imageNamed: String, targetRect: CGRect, splashPosition: CGPoint) {
-		let image = cropImage(imageName: imageNamed, targetRect: targetRect, splashPosition: splashPosition)
+    init(imageNamed: String, targetRect: CGRect, splashPosition: CGPoint) {
+        let image = cropImage(imageName: imageNamed, targetRect: targetRect, splashPosition: splashPosition)
 		splashTexture = SKTexture(image: image)
 		
 	}
@@ -26,7 +26,7 @@ class Splash{
 	///   - imageName: String
 	///   - targetRect: CGRect
 	///   - splashPosition: CGPoint
-	func cropImage(imageName: String, targetRect: CGRect, splashPosition: CGPoint) -> UIImage{
+    func cropImage(imageName: String, targetRect: CGRect, splashPosition: CGPoint) -> UIImage{
 		UIGraphicsBeginImageContext(targetRect.size)
 
 		// graphic context
@@ -36,10 +36,10 @@ class Splash{
 		let r:CGFloat = targetRect.size.width/2
 		var x:CGFloat = targetRect.size.width/2
 		var y:CGFloat = targetRect.size.width/2
+        
 		let clipPath = UIBezierPath()
 		clipPath.addArc(withCenter: CGPoint(x: x, y: y), radius: r, startAngle: 0, endAngle: 360, clockwise: true)
 		clipPath.addClip()
-        
 		
 		// adds image to the desired position
 		ctx.saveGState()

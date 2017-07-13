@@ -33,7 +33,10 @@ class GameScene: SKScene, ReactToMotionEvents {
     // this two array must have the same length
     var playerNameArray = [String]()
     var playerAimArray = [SKSpriteNode]()
-	
+    
+    var lastUpdateTimeInterval : TimeInterval = 0
+    var entityManager: EntityManager!
+
 	///		Called after moving to the View,
 	///	call all setup Functions.
 	///
@@ -41,6 +44,7 @@ class GameScene: SKScene, ReactToMotionEvents {
 	///   - view: SKView
     override func didMove(to view: SKView) {
 		setupScenes()
+        setupEntities()
 		setupNodes()
 		setupGestures()
         setupMusics()
@@ -69,6 +73,42 @@ class GameScene: SKScene, ReactToMotionEvents {
 		appDelegate.motionDelegate = self
 	}
 	
+    func setupEntities() {
+        entityManager = EntityManager(scene: self)
+        
+        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
+                                    cannonStep: CGPoint(x: 100, y: 0),
+                                    numberOfTargets: 10,
+                                    targetScale: 0.6,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: 0, y: 500),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.3],
+                                    entityManager: entityManager)
+
+        
+        let cannon2 = PatternCannon(baseLocation: CGPoint(x: -600, y: -300),
+                                    cannonStep: CGPoint(x: 0, y: 0),
+                                    numberOfTargets: 50,
+                                    targetScale: 0.25,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: 500, y: 0),
+                                    baseTargetAccel: float2(x: 0, y: 0),
+                                    timeDelayArray: [1.0],
+                                    entityManager: entityManager)
+        
+        let cannon3 = PatternCannon(baseLocation: CGPoint(x: self.size.width + 50, y: 50),
+                                    cannonStep: CGPoint(x: 0, y: 150),
+                                    numberOfTargets: 8,
+                                    targetScale: 0.25,
+                                    targetTypeArray: [TargetType.type1],
+                                    baseTargetSpeed: float2(x: -500, y: 200),
+                                    baseTargetAccel: float2(x: 0, y: -100),
+                                    timeDelayArray: [0.0],
+                                    entityManager: entityManager)
+
+    }
+    
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
@@ -80,15 +120,9 @@ class GameScene: SKScene, ReactToMotionEvents {
         playerNameArray = ["Player 1"]
         playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
 		
-		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
+		targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
         
         self.targetController.delegateHud = self.hudController
-		
-        let targetNode1 = targetController.addTarget(debugging: true, typeOfNode: "shape")
-		targetController.moveBetweenSides(node: targetNode1)
-		
-        let targetNode2 = targetController.addTarget(debugging: false, typeOfNode: "sprite")
-		targetController.moveBetweenSides(node: targetNode2)
         
         // insert players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
@@ -149,6 +183,16 @@ class GameScene: SKScene, ReactToMotionEvents {
 	/// - Parameters:
 	///   - currentTime: TimeInterval
     override func update(_ currentTime: TimeInterval) {
+        
+        if lastUpdateTimeInterval == 0 {
+            lastUpdateTimeInterval = currentTime
+            return
+        }
+        
+        let deltaTime = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        
+        entityManager.update(deltaTime)
         
         // Called before each frame is rendered
         playerAimArray[0].removeAllActions()

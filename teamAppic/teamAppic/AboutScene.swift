@@ -27,6 +27,9 @@ class AboutScene: SKScene, ReactToMotionEvents {
 	
 	var playerAim: SKSpriteNode!
 	var backgroundTargetNode: SKSpriteNode!
+    
+    var lastUpdateTimeInterval : TimeInterval = 0
+    var entityManager: EntityManager!
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -35,6 +38,7 @@ class AboutScene: SKScene, ReactToMotionEvents {
 	///   - view: SKView
 	override func didMove(to view: SKView) {
 		setupScenes()
+        setupEntities()
 		setupNodes()
 		setupGestures()
 	}
@@ -46,6 +50,10 @@ class AboutScene: SKScene, ReactToMotionEvents {
 		appDelegate.motionDelegate = self
 	}
 	
+    func setupEntities() {
+        entityManager = EntityManager(scene: self)
+    }
+    
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
@@ -53,10 +61,11 @@ class AboutScene: SKScene, ReactToMotionEvents {
 		
 		playerAim = gameNode.childNode(withName: "aim1") as! SKSpriteNode
 		
-		targetController = TargetController(screenSize: self.size, gameNode: gameNode)
+		targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
 		
-		let targetNode1 = targetController.addTarget(debugging: true, typeOfNode: "shape")
-		targetController.moveBetweenSides(node: targetNode1)
+        let bgTarget = Target(targetType: .type1, moveType: .gravity, maxSpeed: 0.0, maxAccel: 0.0, entityManager: entityManager)
+        
+		entityManager.add(bgTarget)
 		
 		backgroundTargetNode = gameNode.childNode(withName: "backgroundTarget") as! SKSpriteNode
 	}
@@ -92,6 +101,16 @@ class AboutScene: SKScene, ReactToMotionEvents {
 	///   - currentTime: TimeInterval
 	override func update(_ currentTime: TimeInterval) {
 		
+        if lastUpdateTimeInterval == 0 {
+            lastUpdateTimeInterval = currentTime
+            return
+        }
+        
+        let deltaTime = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        
+        entityManager.update(deltaTime)
+        
 		// Called before each frame is rendered
 		playerAim.removeAllActions()
 		

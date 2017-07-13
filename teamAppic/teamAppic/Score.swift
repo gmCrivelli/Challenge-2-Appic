@@ -30,7 +30,7 @@ class Score {
     }
     
     
-    /// sets the highscore
+    /// Sets the highscore.
     ///
     /// - Parameter newValue: new value to high score
     private func setHighScore(newValue : Int) {
@@ -38,7 +38,7 @@ class Score {
     }
     
     
-    /// returns the high score stored by UserDefaults
+    /// Returns the high score stored by UserDefaults.
     ///
     /// - Returns: high score
     static public func getHighScore() -> Int {
@@ -49,7 +49,7 @@ class Score {
         }
     }
     
-    /// function that increase the current score of a player
+    /// Function that increase the current score of a player.
     public func updatesScore() {
         self.currentScore += (NORMALSCORE + self.bonusScore)
         // updating high score
@@ -59,8 +59,7 @@ class Score {
         }
     }
     
-    
-    /// reinitialize all score class parameters
+    /// Reinitialize all score class parameters.
     public func reInitScore() {
         // restarting currentScore and bonus score 
         self.currentScore = 0

@@ -72,7 +72,7 @@ class EntityManager {
         
         if let spriteComponent = target.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = location
-            spriteComponent.node.zPosition = 2
+            spriteComponent.node.zPosition = 1000
             spriteComponent.node.setScale(scale)
         }
         add(target)

@@ -16,15 +16,46 @@ class MusicManager {
     static let instance = MusicManager()
     
     /// audioPlayer
-    var audioPlayer = AVAudioPlayer()
+    var gameAudioPlayer = AVAudioPlayer()
+    var gameOverAudioPlayer = AVAudioPlayer()
+    var menuAudioPlayer = AVAudioPlayer()
+    
+    /// minimum/maximum audio Volume
+    let minimumVolume: Float = 0.2
+    let maximumVolume: Float = 1.0
+    
+    /// menu sound volume
+    let menuVolume: Float = 0.3
     
     private init() { } // private singleton init
     
     /// loading music (circus music)
-    func setup() {
+    func setupGame() {
         do {
-            audioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "circusSound", ofType: "mp3")!))
-            audioPlayer.prepareToPlay()
+            gameAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "circusSound", ofType: "mp3")!))
+            gameAudioPlayer.prepareToPlay()
+            
+        } catch {
+            print (error)
+        }
+    }
+    
+    /// loading Game Over music
+    func setupGameOver() {
+        do {
+            gameOverAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "gameOver", ofType: "mp3")!))
+            gameOverAudioPlayer.prepareToPlay()
+            
+        } catch {
+            print (error)
+        }
+    }
+    
+    /// loading Menu music
+    func setupMenu() {
+        do {
+            menuAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "menuSound", ofType: "mp3")!))
+            menuAudioPlayer.prepareToPlay()
             
         } catch {
             print (error)
@@ -32,15 +63,51 @@ class MusicManager {
     }
     
     /// plays the music
-    func play() {
-        audioPlayer.play()
+    func playGameAudio() {
+        gameAudioPlayer.play()
     }
     
     /// stops the music
-    func stop() {
-        audioPlayer.stop()
-        audioPlayer.currentTime = 0
-        audioPlayer.prepareToPlay()
+    func stopGameAudio() {
+        gameAudioPlayer.stop()
+        gameAudioPlayer.currentTime = 0
+        gameAudioPlayer.prepareToPlay()
     }
-
+    
+    /// Get the game audio volume down
+    func lowGameAudio() {
+        gameAudioPlayer.volume = minimumVolume
+    }
+    
+    /// Get the game audio volume up
+    func highGameAudio() {
+        gameAudioPlayer.volume = maximumVolume
+    }
+    
+    
+    /// plays the Game Over music
+    func playGameOverAudio() {
+        gameOverAudioPlayer.play()
+    }
+    
+    /// stops the Game Over music
+    func stopGameOverAudio() {
+        gameOverAudioPlayer.stop()
+        gameOverAudioPlayer.currentTime = 0
+        gameOverAudioPlayer.prepareToPlay()
+    }
+    
+    /// plays the menu music with low volume
+    func playMenuAudio() {
+        menuAudioPlayer.volume = menuVolume
+        menuAudioPlayer.numberOfLoops = -1
+        menuAudioPlayer.play()
+    }
+    
+    /// stops the menu music
+    func stopMenuAudio() {
+        menuAudioPlayer.stop()
+        menuAudioPlayer.currentTime = 0
+        menuAudioPlayer.prepareToPlay()
+    }
 }

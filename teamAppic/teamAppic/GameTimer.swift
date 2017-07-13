@@ -9,13 +9,11 @@
 import Foundation
 import SpriteKit
 
-/// protocol to present game over view controller
-protocol GameOVerProtocol: NSObjectProtocol {
-    func loadGameOverScene()
-}
-
 class GameTimer {
 
+    /// constant to use as timeInterval in the scheduled timer (1 second)
+    let INTERVALTIME : TimeInterval = 1
+    
     /// constant that indicates the gameplay time
     private let GAMEPLAYTIME : Int = 50
     
@@ -28,10 +26,11 @@ class GameTimer {
 	/// Timer Label
 	private var timerLabelNode : SKLabelNode?
     
+    /// used to schedule a timer
     private var timer : Timer?
     
     /// delegate to present game over
-    public weak var gameDelegate: GameOVerProtocol?
+    public weak var gameDelegate: GameVCProtocol?
     
     public init () {
         self.timerCount = GAMEPLAYTIME
@@ -56,6 +55,8 @@ class GameTimer {
             // game over
             if let gameOverDelegate = gameDelegate {
                 gameOverDelegate.loadGameOverScene()
+                
+                MusicManager.instance.stopGameAudio()
             }
         }
         //Case there is a label to assign the value
@@ -66,7 +67,7 @@ class GameTimer {
     
     /// setups the scheduled timer
     private func setupTimer() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countsTimer), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: INTERVALTIME, target: self, selector: #selector(self.countsTimer), userInfo: nil, repeats: false)
     }
     
     /// returns the remaining time of timer

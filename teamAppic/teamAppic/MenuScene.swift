@@ -11,28 +11,40 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-/// protocol to load game scene
+/// protocol to load all scenes using the game view controller
 protocol GameVCProtocol : NSObjectProtocol {
+    /// presents the game scene
+    func presentGameScene()
     /// loads the game scene
     func loadGameScene()
+    /// loads and presents the game over scene
     func loadGameOverScene()
+    /// loads and presents  the menu scene
     func loadMenuScene()
+    /// loads and presents  the remote control selection scene
+    func loadRemoteScene()
+    /// segue to performSegue to about view controller
     func goToAbout()
 }
 
 class MenuScene : SKScene {
     
+    /// label to show the highscore
     private var highScore = SKLabelNode()
     
+    /// delegate to have access to the loading of other scenes
     public weak var delegateGameVC : GameVCProtocol?
     
+    /// instance of buttons manager to use some nodes as buttons
     private var buttonsManager = ButtonsManager()
     
     override func didMove(to view: SKView) {
         setupNodes()
         setupGestures()
+        setupMusics()
     }
     
+    /// Setups all gestures.
     func setupGestures() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp(_:)))
         swipeUp.direction = .up
@@ -48,6 +60,7 @@ class MenuScene : SKScene {
         self.view?.addGestureRecognizer(selectGestureRecognizer)
     }
     
+    /// Setups all nodes of scene.
     func setupNodes() {
         // inserting the high score in the text of the high score label
         self.highScore = self.childNode(withName: "highScoreValue") as! SKLabelNode
@@ -61,24 +74,46 @@ class MenuScene : SKScene {
         buttonsManager.insertButton(nodeArray: buttonsArray)
     }
     
+    /// Setups menu music when the app is loaded
+    func setupMusics() {
+        MusicManager.instance.setupMenu()
+        MusicManager.instance.playMenuAudio()
+    }
+    
+    /// functin called when the select button from siri remote is tapped
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
+        
         switch self.buttonsManager.pointerButton {
+        // singleplayer button tapped
         case 0:
-            self.delegateGameVC?.loadGameScene()
+            self.delegateGameVC?.loadRemoteScene()
+        
+        // multiplayer button tapped
         case 1:
             // multiplayer
             break
+        
+        // about button tapped
         case 2:
             self.delegateGameVC?.goToAbout()
+        
         default:
             break
         }
     }
     
+    /// Function called when the swipe up is done and the swipe up effect will be obtained in the buttons.
+    ///
+    /// - Parameter sender: UISwipeGestureRecognizer
     func swipeUp(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeUp()
     }
     
+    /// Function called when the swipe down is done and the swipe down effect will be obtained in the buttons.
+    ///
+    /// - Parameter sender: UISwipeGestureRecognizer
     func swipeDown(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeDown()
     }

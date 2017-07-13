@@ -77,15 +77,14 @@ class TargetController: NSObject {
                 
                 print("HIT!", location, convertedLocation)
                 let path = typeComponent.targetType.getBZPathForType()
-                //path.apply(CGAffineTransform.init(scaleX: spriteComponent.node.xScale, y: spriteComponent.node.yScale))
                 
                 let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: spriteComponent.node.frame, splashPosition: convertedLocation)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
-                // these values must be the same of t.targetNode 
-                splashNode.size.height = self.radius*2
-                splashNode.size.width = self.radius*2
-                
+//                // these values must be the same of t.targetNode 
+//                splashNode.size.height = self.radius*2
+//                splashNode.size.width = self.radius*2
+//                
                 splashNode.colorBlendFactor = 1
                 // player 1 color
                 splashNode.color = PlayersColors.playerColor(player: 1)

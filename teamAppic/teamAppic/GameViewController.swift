@@ -10,19 +10,20 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
+class GameViewController: UIViewController, GameVCProtocol{
     
     /// scene where the game actions are implemented
     var gameScene : GameScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // loads the menu scene, that is, the first scene when the app is opened
         loadMenuScene()
     }
     
+    /// loads and presents the menu scene
     public func loadMenuScene() {
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "MenuScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
@@ -35,11 +36,12 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
     
+    /// loads and presents the game over scene
     public func loadGameOverScene() {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -49,6 +51,28 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
                 
                 // Present the scene
                 view.presentScene(scene)
+                let gameOverScene = scene as! GameOverScene
+                gameOverScene.delegateGameVC = self
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = false
+            view.showsNodeCount = false
+        }
+    }
+    
+    /// loads the game scene
+    public func loadGameScene() {
+        if let view = self.view as! SKView? {
+            if let scene = SKScene(fileNamed: "GameScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                self.gameScene = scene as! GameScene
+                
+                self.gameScene.hudController.timer.gameDelegate = self
+                self.gameScene.delegateGameVC = self
             }
             
             view.ignoresSiblingOrder = true
@@ -58,43 +82,38 @@ class GameViewController: UIViewController, GameOVerProtocol, GameVCProtocol{
         }
     }
     
-    public func loadGameScene() {
+    /// presents the game scene
+    public func presentGameScene() {
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            // Present the scene
+            view.presentScene(self.gameScene)
+        }
+    }
+    
+    /// loads and presents  the remote control selection scene
+    public func loadRemoteScene() {
+        loadGameScene()
+        if let view = self.view as! SKView? {
+            if let scene = SKScene(fileNamed: "RemoteSelectionScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
                 view.presentScene(scene)
                 
-                self.gameScene = scene as! GameScene
-                
-                self.gameScene.hudController.timer.gameDelegate = self
+                let remoteScene = scene as! RemoteSelectionScene
+                remoteScene.delegateGameVC = self
+                remoteScene.delegateGameScene = self.gameScene
             }
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        // when the scene will disappear, setups the game over configuration
-//        self.gameScene.gameOverSetups()
-//    }
     
-//    public func gameOver() {
-//        self.performSegue(withIdentifier: "gameOverSegue", sender: self)
-//    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destVC = segue.destination as? GameOverViewController {
-//            destVC.delegateGameVC = self
-//        }
-//    }
-    
+    /// segue to performSegue to about view controller
     public func goToAbout() {
         performSegue(withIdentifier: "aboutSegue", sender: self)
     }

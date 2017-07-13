@@ -12,12 +12,22 @@ import GameplayKit
 
 class SpriteComponent: GKComponent {
     
-    let node: SKSpriteNode
+    let node: SKShapeNode
     
-    init(texture: SKTexture, path: UIBezierPath) {
-        self.node = SKSpriteNode(texture: texture, color: .white, size: texture.size())
-        //let hitbox = SKShapeNode(circleOfRadius: texture.size().width - 12)
-        //rself.node.addChild(hitbox)
+//    init(texture: SKTexture) {
+//        self.node = SKSpriteNode(texture: texture, color: .white, size: texture.size())
+//        //let hitbox = SKShapeNode(circleOfRadius: texture.size().width - 12)
+//        //rself.node.addChild(hitbox)
+//        super.init()
+//    }
+
+    init(texture: SKTexture) {
+        
+        let shapeNode = SKShapeNode(circleOfRadius: texture.size().width/2)
+        shapeNode.fillTexture = texture
+        shapeNode.fillColor = SKColor.white
+        shapeNode.strokeColor = .clear
+        self.node = shapeNode
         super.init()
     }
     

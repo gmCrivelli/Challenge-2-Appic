@@ -12,6 +12,7 @@ import GameplayKit
 
 enum MoveType : Int {
    // case followAgent = 1
+    case noGravity = 1
     case gravity = 2
     case path = 3
 }
@@ -40,6 +41,11 @@ class MoveComponent : GKComponent {
         self.maxAcceleration = maxAcceleration
         self.radius = radius
         self.mass = 0.01
+        
+        if moveType == .noGravity {
+            self.moveType = .gravity
+            accelVector = float2(x: 0.0, y: 0.0)
+        }
         
     }
     
@@ -77,7 +83,7 @@ class MoveComponent : GKComponent {
 //            guard let movePath = path else { return }
 //            
 //            behavior = PathBehavior(targetSpeed: maxSpeed, path: movePath, forward: true, avoid: [])
-//            
+//
         case .gravity:
             guard let entity = entity,
                 let spriteComponent = entity.component(ofType: SpriteComponent.self) else {

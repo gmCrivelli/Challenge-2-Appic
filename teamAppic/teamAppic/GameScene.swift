@@ -11,22 +11,24 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-class GameScene: SKScene, ReactToMotionEvents {
-    
-    let music = SKAudioNode(fileNamed: "sound.mp3")
+class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
 	//Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
 	var targetController : TargetController!
-    // Hud
+    
+    // hud controller
     let hudController = HudController.hudInstance
-	//Controller mode
+	
+    //Controller mode
 	var controllerSwipeMode: Bool = false
-	//Positions
+	
+    //Positions
 	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
 	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
-	//Motion update
+	
+    //Motion update
 	var lastX: Double! = 0
 	var lastY : Double! = 0
     
@@ -37,6 +39,10 @@ class GameScene: SKScene, ReactToMotionEvents {
     var lastUpdateTimeInterval : TimeInterval = 0
     var entityManager: EntityManager!
 
+    
+    /// delegate to game view controller to have access to loading and presention of all scenes
+    public weak var delegateGameVC : GameVCProtocol?
+	
 	///		Called after moving to the View,
 	///	call all setup Functions.
 	///
@@ -50,24 +56,29 @@ class GameScene: SKScene, ReactToMotionEvents {
         setupMusics()
     }
 	
-    /// setups the circus music when the game is being played
+    /// Setups the circus music when the game is being played
     func setupMusics() {
-        MusicManager.instance.setup()
-        MusicManager.instance.play()
+        MusicManager.instance.setupGame()
+        MusicManager.instance.playGameAudio()
     }
     
-    /// setups the game over configurations
+    /// Setups the game over configurations
     func gameOverSetups() {
-        MusicManager.instance.stop()
+        // tops the game music
+        MusicManager.instance.stopGameAudio()
+        
         // initializes current score of all players
         hudController.gameOverHighScore()
+        
         // sures that every node will be removed when the game overs or menu is selected
         self.gameNode.removeAllChildren()
         self.gameNode.removeFromParent()
+        
+        // invalidate the scheduled timer
+        hudController.timer.pauseTimer()
     }
     
-	///		Setup the Scenes.
-	///
+	/// Setups the Scenes.
 	func setupScenes() {
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		appDelegate.motionDelegate = self
@@ -79,7 +90,7 @@ class GameScene: SKScene, ReactToMotionEvents {
         let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
                                     cannonStep: CGPoint(x: 100, y: 0),
                                     numberOfTargets: 10,
-                                    targetScale: 0.6,
+                                    targetScale: 1.0,
                                     targetTypeArray: [TargetType.type1],
                                     baseTargetSpeed: float2(x: 0, y: 500),
                                     baseTargetAccel: float2(x: 0, y: -100),
@@ -87,10 +98,10 @@ class GameScene: SKScene, ReactToMotionEvents {
                                     entityManager: entityManager)
 
         
-        let cannon2 = PatternCannon(baseLocation: CGPoint(x: -600, y: -300),
+        let cannon2 = DuckCannon(baseLocation: CGPoint(x: -600, y: -300),
                                     cannonStep: CGPoint(x: 0, y: 0),
                                     numberOfTargets: 50,
-                                    targetScale: 0.25,
+                                    targetScale: 1.0,
                                     targetTypeArray: [TargetType.type1],
                                     baseTargetSpeed: float2(x: 500, y: 0),
                                     baseTargetAccel: float2(x: 0, y: 0),
@@ -100,19 +111,30 @@ class GameScene: SKScene, ReactToMotionEvents {
         let cannon3 = PatternCannon(baseLocation: CGPoint(x: self.size.width + 50, y: 50),
                                     cannonStep: CGPoint(x: 0, y: 150),
                                     numberOfTargets: 8,
-                                    targetScale: 0.25,
+                                    targetScale: 1.0,
                                     targetTypeArray: [TargetType.type1],
                                     baseTargetSpeed: float2(x: -500, y: 200),
                                     baseTargetAccel: float2(x: 0, y: -100),
                                     timeDelayArray: [0.0],
                                     entityManager: entityManager)
+        
+        let _ = DuckCannon(baseLocation: CGPoint(x: 0, y: 0),
+                                 cannonStep: CGPoint(x: 0, y: 0),
+                                 numberOfTargets: 1,
+                                 targetScale: 1,
+                                 targetTypeArray: [TargetType.type1],
+                                 baseTargetSpeed: float2(x: 0, y: 0),
+                                 baseTargetAccel: float2(x: 0, y: 0),
+                                 timeDelayArray: [1.0],
+                                 entityManager: entityManager)
+        
 
     }
     
 	///		Setup the Nodes.
 	///
 	func setupNodes(){
-        
+        // getting the reference of gameNode and pauseNode from sks
 		self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
@@ -124,27 +146,44 @@ class GameScene: SKScene, ReactToMotionEvents {
         
         self.targetController.delegateHud = self.hudController
         
-        // insert players (single player)
+        // inserts players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
 	}
 	
-	///		Setup the gestures.
-	///
+	/// Setups the gestures.
 	func setupGestures(){
-		let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
+		
+        // setups the select (button of siri remote) gesture
+        let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
 		let pressType = UIPressType.select
         selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
 		self.view?.addGestureRecognizer(selectGestureRecognizer)
         
+        // setups the play/pause (button of siri remote) gesture
         let pauseGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.pauseTapped(_:)))
         let pauseType = UIPressType.playPause
         pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
         self.view?.addGestureRecognizer(pauseGestureRecognizer)
-	}
 	
-	///		Function that catches the Gesture for tap in
+        // setups the menu (button of siri remote) gesture
+        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.menuTapped(_:)))
+        let menuType = UIPressType.menu
+        menuGestureRecognizer.allowedPressTypes = [NSNumber(value: menuType.rawValue)];
+        self.view?.addGestureRecognizer(menuGestureRecognizer)
+    }
+    
+    /// Function that catches the gesture for menu in siri remote and loads the menu scene after setups all game over setups.
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
+    func menuTapped(_ sender: UITapGestureRecognizer) {
+        // does everything needed after the game ends and loads the menu scene
+        self.gameOverSetups()
+        self.delegateGameVC?.loadMenuScene()
+    }
+	
+	/// Function that catches the Gesture for tap in
 	///	in the controller, executes the target controller 
 	///	detectHit function.
 	///
@@ -158,25 +197,27 @@ class GameScene: SKScene, ReactToMotionEvents {
         }
     }
     
-    /// catches the gesture for pause in the tv control and pauses the game
+    /// Catches the gesture for pause in the tv control and pauses the game.
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func pauseTapped(_ sender : UITapGestureRecognizer) {
         self.isPaused = !(self.isPaused)
+        
+        // reduces the alpha of all game, presents the pause menu and reduces the music volume if the game is paused
         if (self.isPaused) {
             self.hudController.timer.pauseTimer()
             self.pauseNode.alpha = 1
             self.gameNode.alpha = 0.3
+            MusicManager.instance.lowGameAudio()
         } else {
             self.hudController.timer.resumeTimer()
             self.pauseNode.alpha = 0
             self.gameNode.alpha = 1
+            MusicManager.instance.highGameAudio()
         }
-
-        print("The game will be paused")
     }
 	
-	///		Override of the function Update, called 
+	/// Override of the function Update, called
 	///	every frame update, sets the aim new position 
 	///	based on the controller mode.
 	///
@@ -209,8 +250,8 @@ class GameScene: SKScene, ReactToMotionEvents {
 			let movementPerSec:CGFloat = 750.0
 			let timeInterval: CGFloat = 1.0/60.0
 			
-			let p_x:CGFloat = 450
-			let p_y:CGFloat = 300
+			let p_x:CGFloat = self.size.width/2
+			let p_y:CGFloat = self.size.height/2
 			
 			var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
 			var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval
@@ -259,6 +300,20 @@ class GameScene: SKScene, ReactToMotionEvents {
 			let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
 			currentTouchPosition = CGPoint(x: x, y: y)
 		}
+    }
+    
+    /// Selects what control will be used.
+    ///
+    /// - Parameter typeOfControl: string that can be "swipe" or "motion" to select these two types of controls. Any other string passed as this parameter will have no effects
+    func selectRemoteType(typeOfControl: String) {
+        switch typeOfControl {
+        case "swipe":
+            self.controllerSwipeMode = true
+        case "motion":
+            self.controllerSwipeMode = false
+        default:
+            break
+        }
     }
 }
 

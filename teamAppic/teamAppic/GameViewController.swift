@@ -71,6 +71,7 @@ class GameViewController: UIViewController, GameVCProtocol{
                 self.gameScene = scene as! GameScene
                 
                 self.gameScene.hudController.timer.gameDelegate = self
+                self.gameScene.delegateGameVC = self
             }
             
             view.ignoresSiblingOrder = true

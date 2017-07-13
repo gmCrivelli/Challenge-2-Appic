@@ -18,6 +18,7 @@ class MusicManager {
     /// audioPlayer
     var gameAudioPlayer = AVAudioPlayer()
     var gameOverAudioPlayer = AVAudioPlayer()
+    var menuAudioPlayer = AVAudioPlayer()
     
     /// minimum/maximum audio Volume
     let minimumVolume: Float = 0.2
@@ -36,11 +37,22 @@ class MusicManager {
         }
     }
     
-    /// loading Game Over music (circus music)
+    /// loading Game Over music
     func setupGameOver() {
         do {
             gameOverAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "gameOver", ofType: "mp3")!))
             gameOverAudioPlayer.prepareToPlay()
+            
+        } catch {
+            print (error)
+        }
+    }
+    
+    /// loading Menu music
+    func setupMenu() {
+        do {
+            menuAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "menu", ofType: "mp3")!))
+            menuAudioPlayer.prepareToPlay()
             
         } catch {
             print (error)
@@ -82,6 +94,16 @@ class MusicManager {
         gameOverAudioPlayer.prepareToPlay()
     }
     
+    /// plays the menu music
+    func playMenuAudio() {
+        menuAudioPlayer.play()
+    }
     
+    /// stops the menu music
+    func stopMenuAudio() {
+        menuAudioPlayer.stop()
+        menuAudioPlayer.currentTime = 0
+        menuAudioPlayer.prepareToPlay()
+    }
 
 }

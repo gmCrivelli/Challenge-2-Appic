@@ -66,6 +66,15 @@ class GameOverScene : SKScene {
         let pressType = UIPressType.select
         selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
         self.view?.addGestureRecognizer(selectGestureRecognizer)
+        
+        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.menuTapped(_:)))
+        let menuType = UIPressType.menu
+        menuGestureRecognizer.allowedPressTypes = [NSNumber(value: menuType.rawValue)];
+        self.view?.addGestureRecognizer(menuGestureRecognizer)
+    }
+    
+    func menuTapped(_ sender: UITapGestureRecognizer) {
+        self.delegateGameVC?.loadMenuScene()
     }
     
     func setupNodes() {
@@ -83,8 +92,7 @@ class GameOverScene : SKScene {
     func selectTapped(_ sender: UITapGestureRecognizer) {
         switch self.buttonsManager.pointerButton {
         case 0:
-            self.delegateGameVC?.loadGameScene()
-            self.delegateGameVC?.presentGameScene()
+            self.delegateGameVC?.loadRemoteScene()
         case 1:
             self.delegateGameVC?.loadMenuScene()
         default:

@@ -33,6 +33,8 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     // this two array must have the same length
     var playerNameArray = [String]()
     var playerAimArray = [SKSpriteNode]()
+    
+    public weak var delegateGameVC : GameVCProtocol?
 	
 	///		Called after moving to the View,
 	///	call all setup Functions.
@@ -60,6 +62,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         // sures that every node will be removed when the game overs or menu is selected
         self.gameNode.removeAllChildren()
         self.gameNode.removeFromParent()
+        hudController.timer.pauseTimer()
     }
     
 	///		Setup the Scenes.
@@ -108,7 +111,17 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         let pauseType = UIPressType.playPause
         pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
         self.view?.addGestureRecognizer(pauseGestureRecognizer)
-	}
+	
+        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.menuTapped(_:)))
+        let menuType = UIPressType.menu
+        menuGestureRecognizer.allowedPressTypes = [NSNumber(value: menuType.rawValue)];
+        self.view?.addGestureRecognizer(menuGestureRecognizer)
+    }
+    
+    func menuTapped(_ sender: UITapGestureRecognizer) {
+        self.gameOverSetups()
+        self.delegateGameVC?.loadMenuScene()
+    }
 	
 	///		Function that catches the Gesture for tap in
 	///	in the controller, executes the target controller 

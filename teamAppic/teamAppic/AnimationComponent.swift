@@ -35,7 +35,9 @@ class AnimationComponent : GKComponent {
 		super.init()
 		//Deve ser mudado caso as imagens mudem
 		switch name {
-		case "duck":
+		case "duckLeft":
+            fallthrough
+        case "duckRight":
 			self.animationType = .duck
 		case "duckStick":
 			self.animationType = .duckStick

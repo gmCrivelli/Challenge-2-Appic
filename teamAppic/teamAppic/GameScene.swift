@@ -13,24 +13,24 @@ import QuartzCore
 
 class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
-	//Nodes and TargetController
+    //Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
-	var targetController : TargetController!
+    var targetController : TargetController!
     
     // hud controller
     let hudController = HudController.hudInstance
-	
+    
     //Controller mode
-	var controllerSwipeMode: Bool = false
-	
+    var controllerSwipeMode: Bool = false
+    
     //Positions
-	var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
-	var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
-	
+    var currentAimPosition:CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var currentTouchPosition: CGPoint! = CGPoint(x: 0.0, y: 0.0)
+    
     //Motion update
-	var lastX: Double! = 0
-	var lastY : Double! = 0
+    var lastX: Double! = 0
+    var lastY : Double! = 0
     
     // this two array must have the same length
     var playerNameArray = [String]()
@@ -39,26 +39,22 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     var lastUpdateTimeInterval : TimeInterval = 0
     var entityManager: EntityManager!
     
-    var stick : PatternCannon!
-    var duck : PatternCannon!
-
-    
     /// delegate to game view controller to have access to loading and presention of all scenes
     public weak var delegateGameVC : GameVCProtocol?
-	
-	///		Called after moving to the View,
-	///	call all setup Functions.
-	///
-	/// - Parameters:
-	///   - view: SKView
+    
+    ///		Called after moving to the View,
+    ///	call all setup Functions.
+    ///
+    /// - Parameters:
+    ///   - view: SKView
     override func didMove(to view: SKView) {
-		setupScenes()
+        setupScenes()
         setupEntities()
-		setupNodes()
-		setupGestures()
+        setupNodes()
+        setupGestures()
         setupMusics()
     }
-	
+    
     /// Setups the circus music when the game is being played
     func setupMusics() {
         MusicManager.instance.setupGame()
@@ -81,104 +77,72 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         hudController.timer.pauseTimer()
     }
     
-	/// Setups the Scenes.
-	func setupScenes() {
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		appDelegate.motionDelegate = self
-	}
-	
+    /// Setups the Scenes.
+    func setupScenes() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.motionDelegate = self
+    }
+    
     func setupEntities() {
         entityManager = EntityManager(scene: self)
         entityManager.delegateGameScene = self
         
-//        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
-//                                    cannonStep: CGPoint(x: 100, y: 0),
-//                                    numberOfTargets: 10,
-//                                    targetScale: 0.7,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 0, y: 500),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.3],
-//                                    entityManager: entityManager)
-		
-		//Duck with Stick implementation
-		self.stick = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
-								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 1,
-								targetScale: 1.0,
-								targetTypeArray: [TargetType.stick],
-								baseTargetSpeed: float2(x: 500, y: 0),
-								baseTargetAccel: float2(x: 0, y: 0),
-								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-								entityManager: entityManager)
-		
-        self.duck = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
-								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 1,
-								targetScale: 1.0,
-								targetTypeArray: [TargetType.duck],
-								baseTargetSpeed: float2(x: 500, y: 0),
-								baseTargetAccel: float2(x: 0, y: 0),
-								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-								entityManager: entityManager)
-
-//        let cannon3 = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
-//                                    cannonStep: CGPoint(x: 0, y: 50),
-//                                    numberOfTargets: 80,
-//                                    targetScale: 0.5,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 400, y: 300),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.5],
-//                                    entityManager: entityManager)
-
-//        let _ = PatternCannon(baseLocation: CGPoint(x: 960, y: -300),
-//                                    cannonStep: CGPoint(x: 0, y: 50),
-//                                    numberOfTargets: 5,
-//                                    targetScale: 0.5,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: -400, y: 300),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.5],
-//                                    entityManager: entityManager)
+        let patternInstantiator = PatternInstantiator(entityManager: entityManager)
+        
+        var actionSequence = [SKAction]()
+        
+        for (t, pc) in patternInstantiator.patternArray {
+            
+            let waitAction = SKAction.wait(forDuration: t)
+            
+            let cannonAction = SKAction.run {
+                self.run(SKAction.sequence(pc.sequence))
+            }
+            
+            actionSequence.append(waitAction)
+            actionSequence.append(cannonAction)
+        }
+        
+        self.run(SKAction.sequence(actionSequence))
     }
     
-	///		Setup the Nodes.
-	///
-	func setupNodes(){
+    ///		Setup the Nodes.
+    ///
+    func setupNodes(){
         // getting the reference of gameNode and pauseNode from sks
-		self.gameNode = self.childNode(withName: "gameNode")!
+        self.gameNode = self.childNode(withName: "gameNode")!
         self.pauseNode = self.childNode(withName: "pauseNode") as! SKSpriteNode
         
         // initializing player array and aim array (single player for now)
         playerNameArray = ["Player 1"]
         playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
-		
-		targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
+        
+        targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
         
         self.targetController.delegateHud = self.hudController
         
         // inserts players (single player)
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
-		hudController.setHUD(gameNode: gameNode)
+        hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
-    }
 
-	/// Setups the gestures.
-	func setupGestures(){
-		
+    }
+    
+    /// Setups the gestures.
+    func setupGestures(){
+        
         // setups the select (button of siri remote) gesture
         let selectGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectTapped(_:)))
-		let pressType = UIPressType.select
+        let pressType = UIPressType.select
         selectGestureRecognizer.allowedPressTypes = [NSNumber(value: pressType.rawValue)];
-		self.view?.addGestureRecognizer(selectGestureRecognizer)
+        self.view?.addGestureRecognizer(selectGestureRecognizer)
         
         // setups the play/pause (button of siri remote) gesture
         let pauseGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.pauseTapped(_:)))
         let pauseType = UIPressType.playPause
         pauseGestureRecognizer.allowedPressTypes = [NSNumber(value: pauseType.rawValue)];
         self.view?.addGestureRecognizer(pauseGestureRecognizer)
-	
+        
         // setups the menu (button of siri remote) gesture
         let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.menuTapped(_:)))
         let menuType = UIPressType.menu
@@ -194,13 +158,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         self.gameOverSetups()
         self.delegateGameVC?.loadMenuScene()
     }
-	
-	/// Function that catches the Gesture for tap in
-	///	in the controller, executes the target controller 
-	///	detectHit function.
-	///
-	/// - Parameters:
-	///   - sender: UITapGestureRecognizer
+    
+    /// Function that catches the Gesture for tap in
+    ///	in the controller, executes the target controller
+    ///	detectHit function.
+    ///
+    /// - Parameters:
+    ///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
         if (!self.gameNode.isPaused) {
             targetController.detectHit(playerAimArray[0].position, player: 0)
@@ -209,18 +173,21 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         }
     }
     
-//    func addNodesEntities() {
-//        print("ENTIDADES: \(entityManager.entities)")
-//        for ent in entityManager.entities {
-//            print(ent.component(ofType: SpriteComponent.self)?.node)
-//        }
-//    }
+    //    func addNodesEntities() {
+    //        print("ENTIDADES: \(entityManager.entities)")
+    //        for ent in entityManager.entities {
+    //            print(ent.component(ofType: SpriteComponent.self)?.node)
+    //        }
+    //    }
     
     /// Catches the gesture for pause in the tv control and pauses the game.
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func pauseTapped(_ sender : UITapGestureRecognizer) {
         self.isPaused = !(self.isPaused)
+        if self.isPaused == false {
+            lastUpdateTimeInterval = 0
+        }
         
         // reduces the alpha of all game, presents the pause menu and reduces the music volume if the game is paused
         if (self.isPaused) {
@@ -235,13 +202,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             MusicManager.instance.highGameAudio()
         }
     }
-	
-	/// Override of the function Update, called
-	///	every frame update, sets the aim new position 
-	///	based on the controller mode.
-	///
-	/// - Parameters:
-	///   - currentTime: TimeInterval
+    
+    /// Override of the function Update, called
+    ///	every frame update, sets the aim new position
+    ///	based on the controller mode.
+    ///
+    /// - Parameters:
+    ///   - currentTime: TimeInterval
     override func update(_ currentTime: TimeInterval) {
         
         if lastUpdateTimeInterval == 0 {
@@ -256,69 +223,69 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         
         // Called before each frame is rendered
         playerAimArray[0].removeAllActions()
-
-		if !controllerSwipeMode {
-			
-			playerAimArray[0].position = currentAimPosition
-			
-		} else {
-			
-			let currToPosX = self.currentTouchPosition.x
-			let currToPosY = self.currentTouchPosition.y
-			
-			let movementPerSec:CGFloat = 750.0
-			let timeInterval: CGFloat = 1.0/60.0
-			
-			let p_x:CGFloat = self.size.width/2
-			let p_y:CGFloat = self.size.height/2
-			
-			var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
-			var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval
-			
-			posX = (posX.magnitude > p_x.magnitude) ? playerAimArray[0].position.x : posX
-			posY = (posY.magnitude > p_y.magnitude) ? playerAimArray[0].position.y : posY
-
-			playerAimArray[0].position.x = posX
-			playerAimArray[0].position.y = posY
-			
-		}
-
+        
+        if !controllerSwipeMode {
+            
+            playerAimArray[0].position = currentAimPosition
+            
+        } else {
+            
+            let currToPosX = self.currentTouchPosition.x
+            let currToPosY = self.currentTouchPosition.y
+            
+            let movementPerSec:CGFloat = 750.0
+            let timeInterval: CGFloat = 1.0/60.0
+            
+            let p_x:CGFloat = self.size.width/2
+            let p_y:CGFloat = self.size.height/2
+            
+            var posX = playerAimArray[0].position.x + currToPosX * movementPerSec * timeInterval
+            var posY = playerAimArray[0].position.y + currToPosY * movementPerSec * timeInterval
+            
+            posX = (posX.magnitude > p_x.magnitude) ? playerAimArray[0].position.x : posX
+            posY = (posY.magnitude > p_y.magnitude) ? playerAimArray[0].position.y : posY
+            
+            playerAimArray[0].position.x = posX
+            playerAimArray[0].position.y = posY
+            
+        }
+        
     }
     
-	///		Function that is called whenever there is a change in
-	/// the controller motion, sets the aim new position based on
-	/// the controller mode.
-	///
-	/// - Parameters:
-	///   - motion: GCMotion
+    ///		Function that is called whenever there is a change in
+    /// the controller motion, sets the aim new position based on
+    /// the controller mode.
+    ///
+    /// - Parameters:
+    ///   - motion: GCMotion
     func motionUpdate(motion: GCMotion) {
-		
-		if !controllerSwipeMode {
-			let x = motion.gravity.x
-			let y = -motion.gravity.y
-			let p_x:Double = 0.7
-			let p_y:Double = 0.35
-			let maxX = Double(self.size.width/2)
-			let maxY = Double(self.size.height/2)
-			
-			
-			let newX = min(p_x,max(-p_x,x)) / p_x * maxX
-			let newY = min(p_y,max(-p_y,y)) / p_y * maxY
-			//Movimento mais suave
-			currentAimPosition = CGPoint(x: (newX + lastX)/2, y: (newY + lastY)/2)
-			//Movimento direto
-			//		currentAimPosition = CGPoint(x: newX, y: newY)
-			
-			lastX = newX
-			lastY = newY
-			
-		} else {
-			
-			/// Swipe Config
-			let x = CGFloat((motion.controller?.microGamepad?.dpad.xAxis.value)!)
-			let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
-			currentTouchPosition = CGPoint(x: x, y: y)
-		}
+        
+        if !controllerSwipeMode {
+            let x = motion.gravity.x
+            let y = -motion.gravity.y
+            let p_x:Double = 0.7
+            let p_y:Double = 0.35
+            let maxX = Double(self.size.width/2)
+            let maxY = Double(self.size.height/2)
+            
+            
+            let newX = min(p_x,max(-p_x,x)) / p_x * maxX
+            let newY = min(p_y,max(-p_y,y)) / p_y * maxY
+            //Movimento mais suave
+            currentAimPosition = CGPoint(x: (newX + lastX)/2, y: (newY + lastY)/2)
+            //Movimento direto
+            //		currentAimPosition = CGPoint(x: newX, y: newY)
+            
+            lastX = newX
+            lastY = newY
+            
+        } else {
+            
+            /// Swipe Config
+            let x = CGFloat((motion.controller?.microGamepad?.dpad.xAxis.value)!)
+            let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
+            currentTouchPosition = CGPoint(x: x, y: y)
+        }
     }
     
     /// Selects what control will be used.

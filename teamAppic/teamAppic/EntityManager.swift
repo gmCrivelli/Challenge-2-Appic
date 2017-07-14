@@ -25,6 +25,7 @@ class EntityManager {
     var entities = Set<GKEntity>()
     var toRemove = Set<GKEntity>()
     let scene: SKScene
+    var isPaused = false
     
     static var _zPosition : CGFloat = 0.00001
     static var zPosition : CGFloat {
@@ -64,6 +65,7 @@ class EntityManager {
 	
 	func addAnimationComponent(_ entity: GKEntity) {
 		if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
+            
 			for animationComponentSystem in animationComponentSystem {
 				animationComponentSystem.addComponent(foundIn: entity)
 			}
@@ -97,15 +99,16 @@ class EntityManager {
         toRemove.removeAll()
     }
     
-    func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, maxSpeed: Float?, maxAccel: Float?, moveType: MoveType, path: GKPath?) {
+    func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, initialAccel: float2, maxSpeed: Float, maxAccel: Float?, moveType: MoveType, path: GKPath?) {
         
-        let target = Target(targetType: targetType, moveType: moveType, maxSpeed: maxSpeed, maxAccel: maxAccel, entityManager: self)
+        let target = Target(targetType: targetType, moveType: moveType, maxSpeed: initialVelocity.x, maxAccel: maxAccel, entityManager: self)
         
         if let movePath = path {
             target.setPath(path: movePath)
         }
         
         target.setInitialVelocity(velocity: initialVelocity)
+        target.setInitialAccel(accel: initialAccel)
         
         if let spriteComponent = target.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = location
@@ -115,19 +118,33 @@ class EntityManager {
         add(target)
     }
 	
-	func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, maxSpeed: Float?, maxAccel: Float?, moveType: MoveType, path: GKPath?, returnEntity: Bool) -> Target {
+	func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, initialAccel: float2, maxSpeed: Float, maxAccel: Float?, moveType: MoveType, path: GKPath?, returnEntity: Bool) -> Target {
 		
-		let target = Target(targetType: targetType, moveType: moveType, maxSpeed: maxSpeed, maxAccel: maxAccel, entityManager: self)
+		let target = Target(targetType: targetType, moveType: moveType, maxSpeed: initialVelocity.x, maxAccel: maxAccel, entityManager: self)
 		
 		if let movePath = path {
 			target.setPath(path: movePath)
 		}
 		
 		target.setInitialVelocity(velocity: initialVelocity)
+        target.setInitialAccel(accel: initialAccel)
 		
 		if let spriteComponent = target.component(ofType: SpriteComponent.self) {
 			spriteComponent.node.position = location
 			spriteComponent.node.zPosition = EntityManager.zPosition
+            switch targetType {
+                
+            case .duckLeft :
+                fallthrough
+            case .stickLeft :
+                spriteComponent.node.zPosition += 1
+                
+            case .duckRight :
+                fallthrough
+            case .stickRight :
+                spriteComponent.node.zPosition += 2
+            default : break
+            }
 			spriteComponent.node.setScale(scale)
 		}
 		add(target)

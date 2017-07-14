@@ -15,26 +15,24 @@ class Target: GKEntity {
     weak var entityManager : EntityManager!
 	var relatedEntity: GKEntity?
     
-    init(targetType: TargetType, moveType: MoveType, maxSpeed: Float?, maxAccel: Float?, entityManager: EntityManager) {
+    init(targetType: TargetType, moveType: MoveType, maxSpeed: Float, maxAccel: Float?, entityManager: EntityManager) {
         super.init()
         let texture = SKTexture(imageNamed: targetType.getImageName())
 		//Solution for the tipe of node, gets the image name as identifier for the Sprite type
 		//MUST be replaced
 		self.name = targetType.getImageName()
         let spriteComponent = SpriteComponent(imageNamed: targetType.getImageName())
+        
         addComponent(spriteComponent)
         addComponent(TypeComponent(targetType: targetType))
         
         switch targetType {
-            
-        case .duck:
-            addComponent(DuckMovement(entityManager: entityManager))
-            self.component(ofType: DuckMovement.self)?.run()
-		case .stick:
-			addComponent(StickMovement(entityManager: entityManager))
-			self.component(ofType: StickMovement.self)?.run()
-        default:
+        
+        case .target:
             addComponent(MoveComponent(maxSpeed: maxSpeed, maxAcceleration: maxAccel, radius: Float(texture.size().width * 0.3), moveType: moveType, entityManager: entityManager))
+        default:
+            addComponent(DuckMovement(duckSpeed: maxSpeed, entityManager: entityManager))
+            self.component(ofType: DuckMovement.self)?.run()
         }
     }
     
@@ -47,6 +45,12 @@ class Target: GKEntity {
     func setInitialVelocity(velocity: float2) {
         if let moveComponent = self.component(ofType: MoveComponent.self) {
             moveComponent.setSpeedVector(speedVector: velocity)
+        }
+    }
+    
+    func setInitialAccel(accel: float2) {
+        if let moveComponent = self.component(ofType: MoveComponent.self) {
+            moveComponent.setAccelVector(accelVector: accel)
         }
     }
 	

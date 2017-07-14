@@ -67,6 +67,7 @@ class MoveComponent : GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         
+    
         super.update(deltaTime: seconds)
         
         lifeTime += seconds
@@ -110,9 +111,12 @@ class DuckMovement : GKComponent {
     
     let entityManager : EntityManager
     
-    init(entityManager : EntityManager) {
+    var duckSpeed : Float = 300
+    
+    init(duckSpeed : Float, entityManager : EntityManager) {
         
         self.entityManager = entityManager
+        self.duckSpeed = duckSpeed
         super.init()
     }
     
@@ -124,7 +128,7 @@ class DuckMovement : GKComponent {
         }
         
         //Move target foward with easy in easy out
-        let moveFowardAction = SKAction.moveBy(x: 300, y: 0, duration: DuckMovement.targetTravelTime)
+        let moveFowardAction = SKAction.moveBy(x: CGFloat(duckSpeed), y: 0, duration: DuckMovement.targetTravelTime)
         moveFowardAction.timingMode = .easeInEaseOut
         //target wait for small duration
         let waitAction = SKAction.wait(forDuration: DuckMovement.targetTravelTime * 0.2)

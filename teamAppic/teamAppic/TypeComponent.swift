@@ -12,22 +12,22 @@ import GameplayKit
 
 enum TargetType : Int{
     case target = 1
-    case duck = 2
-	case stick = 3
+    case duckLeft = 2
+    case duckRight = 3
+	case stickLeft = 4
+    case stickRight = 5
     
-    static let allValues = [target, duck, stick]
-    
-    func toFollow() -> TargetType {
-        switch self {
-        default: return .duck
-        }
-    }
+    static let allValues = [target, duckLeft, duckRight, stickLeft, stickRight]
     
     func getImageName() -> String {
         switch self {
-        case .duck:
-            return "duck"
-		case .stick:
+        case .duckLeft:
+            return "duckLeft"
+        case .duckRight:
+            return "duckRight"
+        case .stickRight:
+            fallthrough
+		case .stickLeft:
 			return "duckStick"
         default: return "target"
         }

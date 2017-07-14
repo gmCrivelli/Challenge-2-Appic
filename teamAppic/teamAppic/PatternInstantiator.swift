@@ -21,13 +21,15 @@ class PatternCannon {
     var timeDelayArray : [TimeInterval] = [0.0]
     
     var randomizingRange : CGPoint!
-    var maxSpeed : Float!
-    var maxAccel : Float!
+    var maxSpeed : Float = 300
+    var maxAccel : Float = 100
     
     let entityManager : EntityManager
     
     var timer : Timer!
     var launchedCounter : Int = 0
+    
+    var sequence : [SKAction]!
     
     init(baseLocation : CGPoint, cannonStep: CGPoint, numberOfTargets : Int, targetScale : CGFloat, targetTypeArray: [TargetType], baseTargetSpeed : float2, baseTargetAccel : float2, timeDelayArray : [TimeInterval], entityManager : EntityManager) {
         
@@ -46,10 +48,11 @@ class PatternCannon {
         // instantiating the number of ducks and sticks
         
         var i = 0
-        var sequence = [SKAction]()
+        sequence = []
         while i < numberOfTargets {
             
-            sequence.append(SKAction.run { self.launchTarget() } )
+            sequence.append(SKAction.run {
+                self.launchTarget() } )
             
             if self.timeDelayArray[self.launchedCounter % self.timeDelayArray.count] > 0 {
                 sequence.append(SKAction.wait(forDuration: (self.timeDelayArray[self.launchedCounter % self.timeDelayArray.count])))
@@ -57,7 +60,10 @@ class PatternCannon {
                 i += 1
             }
         }
-        self.run(sequence)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func launchTarget() {
@@ -68,24 +74,47 @@ class PatternCannon {
         //                return
         //            }
         
-        entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
+        let t1 = entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
                                   location: baseLocation,
                                   scale: targetScale,
                                   initialVelocity: baseTargetSpeed,
-                                  maxSpeed: maxSpeed,
+                                  initialAccel: baseTargetAccel,
+                                  maxSpeed: baseTargetSpeed.x,
                                   maxAccel: maxAccel,
                                   moveType: MoveType.gravity,
-                                  path: nil)
+                                  path: nil,
+                                  returnEntity: true)
         
-        if targetTypeArray[launchedCounter % targetTypeArray.count] == .duck {
-            entityManager.spawnTarget(targetType: stick,
-                                      location: baseLocation,
+        if targetTypeArray[launchedCounter % targetTypeArray.count] == .stickLeft {
+            let t2 = entityManager.spawnTarget(targetType: .duckLeft,
+                                      location: CGPoint(x: baseLocation.x, y: baseLocation.y + 100),
                                       scale: targetScale,
                                       initialVelocity: baseTargetSpeed,
-                                      maxSpeed: maxSpeed,
+                                      initialAccel: baseTargetAccel,
+                                      maxSpeed: baseTargetSpeed.x,
                                       maxAccel: maxAccel,
                                       moveType: MoveType.gravity,
-                                      path: nil)
+                                      path: nil,
+                                      returnEntity: true)
+            
+            t1.relatedEntity = t2
+            t2.relatedEntity = t1
+        }
+        
+        if targetTypeArray[launchedCounter % targetTypeArray.count] == .stickRight {
+            let t2 = entityManager.spawnTarget(targetType: .duckRight,
+                                               location: CGPoint(x: baseLocation.x, y: baseLocation.y + 100),
+                                               scale: targetScale,
+                                               initialVelocity: baseTargetSpeed,
+                                               initialAccel: baseTargetAccel,
+                                               maxSpeed: maxSpeed,
+                                               maxAccel: maxAccel,
+                                               moveType: MoveType.gravity,
+                                               path: nil,
+                                               returnEntity: true)
+            
+            t1.relatedEntity = t2
+            t2.relatedEntity = t1
         }
         
         self.baseLocation = self.baseLocation + self.cannonStep
@@ -102,137 +131,85 @@ class PatternCannon {
     }
 }
 
+class PatternInstantiator {
+    
+    let entityManager : EntityManager
+    var patternArray = [(TimeInterval, PatternCannon)]()
+    
+    init(entityManager: EntityManager) {
+        self.entityManager = entityManager
+        setupArray()
+    }
+    
+    func setupArray() {
+        
+        
+        // Duck patterns
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -350),
+                                          cannonStep: CGPoint(x: 0, y: 0),
+                                          numberOfTargets: 500,
+                                          targetScale: 0.9,
+                                          targetTypeArray: [TargetType.stickLeft],
+                                          baseTargetSpeed: float2(x: -300, y: 0),
+                                          baseTargetAccel: float2(x: 0, y: 0),
+                                          timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+                                          entityManager: entityManager)))
+        
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -400),
+                                cannonStep: CGPoint(x: 0, y: 0),
+                                numberOfTargets: 500,
+                                targetScale: 0.9,
+                                targetTypeArray: [TargetType.stickRight],
+                                baseTargetSpeed: float2(x: 300, y: 0),
+                                baseTargetAccel: float2(x: 0, y: 0),
+                                timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+                                entityManager: entityManager)))
+        
+        //Cross Targets
+        //1o.
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        //2o.
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        patternArray.append((10.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 150, y: 0),
+                                           numberOfTargets: 15,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 0, y: 600),
+                                           baseTargetAccel: float2(x: 0, y: -250),
+                                           timeDelayArray: [0.3],
+                                           entityManager: entityManager)))
+    }
+    
+}
 
-////
-////  PatternInstantiator.swift
-////  choraGabe
-////
-////  Created by Gustavo De Mello Crivelli on 06/07/17.
-////  Copyright © 2017 Gustavo De Mello Crivelli. All rights reserved.
-////
-//
-//import Foundation
-//import SpriteKit
-//import GameplayKit
-//
-//class PatternCannon {
-//    var baseLocation : CGPoint!
-//    var cannonStep : CGPoint!
-//    var numberOfTargets : Int!
-//    var targetScale : CGFloat!
-//    var targetTypeArray : [TargetType] = [TargetType.target]
-//    var baseTargetSpeed : float2!
-//    var baseTargetAccel : float2!
-//    var timeDelayArray : [TimeInterval] = [0.0]
-//    
-//    var randomizingRange : CGPoint!
-//    var maxSpeed : Float!
-//    var maxAccel : Float!
-//    
-//    let entityManager : EntityManager
-//    
-//    var timer : Timer!
-//    var launchedCounter : Int = 0
-//    
-//    init(baseLocation : CGPoint, cannonStep: CGPoint, numberOfTargets : Int, targetScale : CGFloat, targetTypeArray: [TargetType], baseTargetSpeed : float2, baseTargetAccel : float2, timeDelayArray : [TimeInterval], entityManager : EntityManager) {
-//        
-//        self.baseLocation = baseLocation
-//        self.cannonStep = cannonStep
-//        self.numberOfTargets = numberOfTargets
-//        self.targetScale = targetScale
-//        self.targetTypeArray = targetTypeArray
-//        self.baseTargetSpeed = baseTargetSpeed
-//        self.baseTargetAccel = baseTargetAccel
-//        self.timeDelayArray = timeDelayArray
-//        self.entityManager = entityManager
-//
-//        
-//    }
-//    
-//    func launchTarget() {
-//            
-//            entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
-//                                      location: baseLocation,
-//                                      scale: targetScale,
-//                                      initialVelocity: baseTargetSpeed,
-//                                      maxSpeed: maxSpeed,
-//                                      maxAccel: maxAccel,
-//                                      moveType: MoveType.gravity,
-//                                      path: nil)
-//            
-//            self.baseLocation = self.baseLocation + self.cannonStep
-//            self.launchedCounter += 1
-//    }
-//}
-//
-//class DoublePatternCannon {
-//	var firstBaseLocation : CGPoint!
-//	var secondBaseLocation : CGPoint!
-//	var cannonStep : CGPoint!
-//	var numberOfTargets : Int!
-//	var targetScale : CGFloat!
-//	var firstTargetTypeArray : [TargetType] = [TargetType.target]
-//	var secondTargetTypeArray : [TargetType] = [TargetType.target]
-//	var baseTargetSpeed : float2!
-//	var baseTargetAccel : float2!
-//	var timeDelayArray : [TimeInterval] = [0.0]
-//	
-//	var randomizingRange : CGPoint!
-//	var maxSpeed : Float!
-//	var maxAccel : Float!
-//	
-//	let entityManager : EntityManager
-//	
-//	var timer : Timer!
-//	var launchedCounter : Int = 0
-//	
-//	init(firstBaseLocation : CGPoint, secondBaseLocation : CGPoint, cannonStep: CGPoint, numberOfTargets : Int, targetScale : CGFloat, firstTargetTypeArray: [TargetType], secondTargetTypeArray: [TargetType], baseTargetSpeed : float2, baseTargetAccel : float2, timeDelayArray : [TimeInterval], entityManager : EntityManager) {
-//		
-//		self.firstBaseLocation = firstBaseLocation
-//		self.secondBaseLocation = secondBaseLocation
-//
-//		self.cannonStep = cannonStep
-//		self.numberOfTargets = numberOfTargets
-//		self.targetScale = targetScale
-//		self.firstTargetTypeArray = firstTargetTypeArray
-//		self.secondTargetTypeArray = secondTargetTypeArray
-//
-//		self.baseTargetSpeed = baseTargetSpeed
-//		self.baseTargetAccel = baseTargetAccel
-//		self.timeDelayArray = timeDelayArray
-//		self.entityManager = entityManager
-//		
-//	}
-//	
-//	func launchTarget() {
-//			
-//			let stick = entityManager.spawnTarget(targetType: firstTargetTypeArray[launchedCounter % firstTargetTypeArray.count],
-//			                          location: firstBaseLocation,
-//			                          scale: targetScale,
-//			                          initialVelocity: baseTargetSpeed,
-//			                          maxSpeed: maxSpeed,
-//			                          maxAccel: maxAccel,
-//			                          moveType: MoveType.gravity,
-//			                          path: nil,
-//			                          returnEntity: true)
-//			
-//			let duck = entityManager.spawnTarget(targetType: secondTargetTypeArray[launchedCounter % secondTargetTypeArray.count],
-//			                          location: secondBaseLocation,
-//			                          scale: targetScale,
-//			                          initialVelocity: baseTargetSpeed,
-//			                          maxSpeed: maxSpeed,
-//			                          maxAccel: maxAccel,
-//			                          moveType: MoveType.gravity,
-//			                          path: nil,
-//			                          returnEntity: true)
-//			
-//			stick.relatedEntity = duck
-//			duck.relatedEntity = stick
-//			
-//			self.firstBaseLocation = self.firstBaseLocation + self.cannonStep
-//			self.secondBaseLocation = self.secondBaseLocation + self.cannonStep
-//			
-//			self.launchedCounter += 1
-//			
-//	}
-//}
+
+
+
+
+
+
+

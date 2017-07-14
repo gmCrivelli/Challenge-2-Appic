@@ -17,10 +17,10 @@ class Splash{
     init(imageNamed: String, targetRect: CGRect, splashPosition: CGPoint, targetType: TargetType) {
         let image:UIImage!
         switch targetType {
-        case .duck:
-            image = cropSquareImage(imageName: imageNamed, targetRect: targetRect, splashPosition: splashPosition)
-        default:
+        case .target:
             image = cropCircleImage(imageName: imageNamed, targetRect: targetRect, splashPosition: splashPosition)
+        default:
+            image = cropSquareImage(imageName: imageNamed, targetRect: targetRect, splashPosition: splashPosition)
         }
         splashTexture = SKTexture(image: image)
         

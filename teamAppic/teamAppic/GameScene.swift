@@ -162,15 +162,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
-        
-        // instantiating the number of ducks and sticks
-        let NUMBEROFDUCKS = 2
-        let action = SKAction.run {
-            self.stick.launchTarget()
-            self.duck.launchTarget()
-        }
-        let waitAction = SKAction.wait(forDuration: (self.stick.timeDelayArray[self.stick.launchedCounter % self.stick.timeDelayArray.count]))
-        self.run(SKAction.repeat(SKAction.sequence([action,waitAction]), count: NUMBEROFDUCKS))
     }
 
 	/// Setups the gestures.

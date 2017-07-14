@@ -38,6 +38,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
     var lastUpdateTimeInterval : TimeInterval = 0
     var entityManager: EntityManager!
+    
+    var stick : PatternCannon!
+    var duck : PatternCannon!
 
     
     /// delegate to game view controller to have access to loading and presention of all scenes
@@ -86,6 +89,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 	
     func setupEntities() {
         entityManager = EntityManager(scene: self)
+        entityManager.delegateGameScene = self
         
 //        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
 //                                    cannonStep: CGPoint(x: 100, y: 0),
@@ -98,9 +102,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 //                                    entityManager: entityManager)
 		
 		//Duck with Stick implementation
-		let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
+		self.stick = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
 								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 10,
+								numberOfTargets: 1,
 								targetScale: 1.0,
 								targetTypeArray: [TargetType.stick],
 								baseTargetSpeed: float2(x: 500, y: 0),
@@ -108,9 +112,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
 								entityManager: entityManager)
 		
-        let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
+        self.duck = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
 								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 10,
+								numberOfTargets: 1,
 								targetScale: 1.0,
 								targetTypeArray: [TargetType.duck],
 								baseTargetSpeed: float2(x: 500, y: 0),
@@ -137,8 +141,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 //                                    baseTargetAccel: float2(x: 0, y: -100),
 //                                    timeDelayArray: [0.5],
 //                                    entityManager: entityManager)
-
-        
     }
     
 	///		Setup the Nodes.
@@ -160,8 +162,17 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
-	}
-	
+        
+        // instantiating the number of ducks and sticks
+        let NUMBEROFDUCKS = 2
+        let action = SKAction.run {
+            self.stick.launchTarget()
+            self.duck.launchTarget()
+        }
+        let waitAction = SKAction.wait(forDuration: (self.stick.timeDelayArray[self.stick.launchedCounter % self.stick.timeDelayArray.count]))
+        self.run(SKAction.repeat(SKAction.sequence([action,waitAction]), count: NUMBEROFDUCKS))
+    }
+
 	/// Setups the gestures.
 	func setupGestures(){
 		
@@ -206,6 +217,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
         }
     }
+    
+//    func addNodesEntities() {
+//        print("ENTIDADES: \(entityManager.entities)")
+//        for ent in entityManager.entities {
+//            print(ent.component(ofType: SpriteComponent.self)?.node)
+//        }
+//    }
     
     /// Catches the gesture for pause in the tv control and pauses the game.
     ///
@@ -324,6 +342,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         default:
             break
         }
+    }
+    
+    /// returns the gameNode reference
+    ///
+    /// - Returns: gameNode
+    func getGameNode() -> SKNode {
+        return self.gameNode 
     }
 }
 

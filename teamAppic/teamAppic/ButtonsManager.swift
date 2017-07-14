@@ -13,7 +13,7 @@ import QuartzCore
 
 /// To uses this class, you have to set the buttons sprites color to #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1) and blendfactor to 1 in sks.
 class ButtonsManager {
-    
+    //
     /// action to increase the button
     let increaseAction = SKAction.scale(by: 1.1, duration: 0.3)
     

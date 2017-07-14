@@ -26,7 +26,7 @@ class EntityManager {
     var toRemove = Set<GKEntity>()
     let scene: SKScene
     
-    static var _zPosition : CGFloat = 0
+    static var _zPosition : CGFloat = 0.00001
     static var zPosition : CGFloat {
         get {
             let aux = _zPosition

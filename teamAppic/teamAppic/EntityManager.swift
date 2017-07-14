@@ -16,6 +16,11 @@ class EntityManager {
         let moveSystem = GKComponentSystem(componentClass: MoveComponent.self)
         return [moveSystem]
     }()
+	
+	lazy var animationComponentSystem: [GKComponentSystem] = {
+		let animationSystem = GKComponentSystem(componentClass: AnimationComponent.self)
+		return [animationSystem]
+	}()
     
     var entities = Set<GKEntity>()
     var toRemove = Set<GKEntity>()
@@ -47,8 +52,20 @@ class EntityManager {
         for componentSystem in componentSystems {
             componentSystem.addComponent(foundIn: entity)
         }
+		
+		for animationComponentSystem in animationComponentSystem {
+			animationComponentSystem.addComponent(foundIn: entity)
+		}
     }
-    
+	
+	func addAnimationComponent(_ entity: GKEntity) {
+		if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
+			for animationComponentSystem in animationComponentSystem {
+				animationComponentSystem.addComponent(foundIn: entity)
+			}
+		}
+	}
+	
     func remove(_ entity: GKEntity) {
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
             spriteNode.removeFromParent()
@@ -63,6 +80,10 @@ class EntityManager {
         for componentSystem in componentSystems {
             componentSystem.update(deltaTime: deltaTime)
         }
+		
+		for animationComponentSystem in animationComponentSystem {
+			animationComponentSystem.update(deltaTime: deltaTime)
+		}
         
         for currentRemove in toRemove {
             for componentSystem in componentSystems {

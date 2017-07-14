@@ -96,26 +96,27 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 //                                    baseTargetAccel: float2(x: 0, y: -100),
 //                                    timeDelayArray: [0.3],
 //                                    entityManager: entityManager)
-
+		
+		//Duck with Stick implementation
 		let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
-		                      cannonStep: CGPoint(x: 0, y: 0),
-		                      numberOfTargets: 10,
-		                      targetScale: 1.0,
-		                      targetTypeArray: [TargetType.stick],
-		                      baseTargetSpeed: float2(x: 500, y: 0),
-		                      baseTargetAccel: float2(x: 0, y: 0),
-		                      timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-		                      entityManager: entityManager)
-        
+								cannonStep: CGPoint(x: 0, y: 0),
+								numberOfTargets: 10,
+								targetScale: 1.0,
+								targetTypeArray: [TargetType.stick],
+								baseTargetSpeed: float2(x: 500, y: 0),
+								baseTargetAccel: float2(x: 0, y: 0),
+								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+								entityManager: entityManager)
+		
         let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
-                                    cannonStep: CGPoint(x: 0, y: 0),
-                                    numberOfTargets: 10,
-                                    targetScale: 1.0,
-                                    targetTypeArray: [TargetType.duck],
-                                    baseTargetSpeed: float2(x: 500, y: 0),
-                                    baseTargetAccel: float2(x: 0, y: 0),
-                                    timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-                                    entityManager: entityManager)
+								cannonStep: CGPoint(x: 0, y: 0),
+								numberOfTargets: 10,
+								targetScale: 1.0,
+								targetTypeArray: [TargetType.duck],
+								baseTargetSpeed: float2(x: 500, y: 0),
+								baseTargetAccel: float2(x: 0, y: 0),
+								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+								entityManager: entityManager)
 
 //        let cannon3 = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
 //                                    cannonStep: CGPoint(x: 0, y: 50),

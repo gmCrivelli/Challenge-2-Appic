@@ -109,10 +109,27 @@ class TargetController: NSObject {
 				setupPlokNode(plokNode,color: PlayersColors.playerColor(player: 1))
                 // updating score of the player
                 delegateHud?.updateScore(player: player)
+				
+				
+				
 				//Add the resize component
-				let animateComponent = AnimationComponent(entityManager: entityManager, animationTime: 3, animationType: .resizeDown)
-				t.addComponent(animateComponent)
-				entityManager.addAnimationComponent(t)
+				let target = t as! Target
+				if let related = target.relatedEntity{
+					let relatedTarget = related as! Target
+					let targetAnimateComponent = AnimationComponent(entityManager: entityManager, animationTime: 3,name: target.name)
+					let relatedAnimateComponent = AnimationComponent(entityManager: entityManager, animationTime: 3,name: relatedTarget.name)
+					target.addComponent(targetAnimateComponent)
+					relatedTarget.addComponent(relatedAnimateComponent)
+					entityManager.addAnimationComponent(target)
+					entityManager.addAnimationComponent(relatedTarget)
+				} else {
+					let targetAnimateComponent = AnimationComponent(entityManager: entityManager, animationTime: 3,name: target.name)
+					target.addComponent(targetAnimateComponent)
+					entityManager.addAnimationComponent(target)
+				}
+				
+				
+				
                 return
             }
         }

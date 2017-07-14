@@ -110,8 +110,27 @@ class EntityManager {
         }
         add(target)
     }
-
-    
+	
+	func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, maxSpeed: Float?, maxAccel: Float?, moveType: MoveType, path: GKPath?, returnEntity: Bool) -> Target {
+		
+		let target = Target(targetType: targetType, moveType: moveType, maxSpeed: maxSpeed, maxAccel: maxAccel, entityManager: self)
+		
+		if let movePath = path {
+			target.setPath(path: movePath)
+		}
+		
+		target.setInitialVelocity(velocity: initialVelocity)
+		
+		if let spriteComponent = target.component(ofType: SpriteComponent.self) {
+			spriteComponent.node.position = location
+			spriteComponent.node.zPosition = EntityManager.zPosition
+			spriteComponent.node.setScale(scale)
+		}
+		add(target)
+		
+		return target
+	}
+	
     func getEntities(for targetType: TargetType?) -> [GKEntity] {
         if let type = targetType {
             return entities.flatMap{ entity in

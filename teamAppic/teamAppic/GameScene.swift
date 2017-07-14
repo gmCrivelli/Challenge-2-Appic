@@ -87,56 +87,42 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     func setupEntities() {
         entityManager = EntityManager(scene: self)
         
-//        let cannon1 = PatternCannon(baseLocation: CGPoint(x: -500, y: -500),
-//                                    cannonStep: CGPoint(x: 100, y: 0),
-//                                    numberOfTargets: 10,
-//                                    targetScale: 0.7,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 0, y: 500),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.3],
-//                                    entityManager: entityManager)
+
 		
 		//Duck with Stick implementation
-		let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
-								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 10,
-								targetScale: 1.0,
-								targetTypeArray: [TargetType.stick],
-								baseTargetSpeed: float2(x: 500, y: 0),
-								baseTargetAccel: float2(x: 0, y: 0),
-								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-								entityManager: entityManager)
+//		let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
+//								cannonStep: CGPoint(x: 0, y: 0),
+//								numberOfTargets: 10,
+//								targetScale: 1.0,
+//								targetTypeArray: [TargetType.stick],
+//								baseTargetSpeed: float2(x: 500, y: 0),
+//								baseTargetAccel: float2(x: 0, y: 0),
+//								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+//								entityManager: entityManager)
+//		
+//        let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
+//								cannonStep: CGPoint(x: 0, y: 0),
+//								numberOfTargets: 10,
+//								targetScale: 1.0,
+//								targetTypeArray: [TargetType.duck],
+//								baseTargetSpeed: float2(x: 500, y: 0),
+//								baseTargetAccel: float2(x: 0, y: 0),
+//								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+//								entityManager: entityManager)
 		
-        let _ = PatternCannon(baseLocation: CGPoint(x: -960, y: -200),
-								cannonStep: CGPoint(x: 0, y: 0),
-								numberOfTargets: 10,
-								targetScale: 1.0,
-								targetTypeArray: [TargetType.duck],
-								baseTargetSpeed: float2(x: 500, y: 0),
-								baseTargetAccel: float2(x: 0, y: 0),
-								timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-								entityManager: entityManager)
+		let _ = DoublePatternCannon(firstBaseLocation: CGPoint(x: -960, y: -300),
+		                            secondBaseLocation: CGPoint(x: -960, y: -200),
+		                            cannonStep: CGPoint(x: 0, y: 0),
+		                            numberOfTargets: 40,
+		                            targetScale: 1.0,
+		                            firstTargetTypeArray: [TargetType.stick],
+		                            secondTargetTypeArray: [TargetType.duck],
+		                            baseTargetSpeed: float2(x: 500, y: 0),
+		                            baseTargetAccel: float2(x: 0, y: 0),
+		                            timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+		                            entityManager: entityManager)
 
-//        let cannon3 = PatternCannon(baseLocation: CGPoint(x: -960, y: -300),
-//                                    cannonStep: CGPoint(x: 0, y: 50),
-//                                    numberOfTargets: 80,
-//                                    targetScale: 0.5,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: 400, y: 300),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.5],
-//                                    entityManager: entityManager)
 
-//        let _ = PatternCannon(baseLocation: CGPoint(x: 960, y: -300),
-//                                    cannonStep: CGPoint(x: 0, y: 50),
-//                                    numberOfTargets: 5,
-//                                    targetScale: 0.5,
-//                                    targetTypeArray: [TargetType.target],
-//                                    baseTargetSpeed: float2(x: -400, y: 300),
-//                                    baseTargetAccel: float2(x: 0, y: -100),
-//                                    timeDelayArray: [0.5],
-//                                    entityManager: entityManager)
 
         
     }

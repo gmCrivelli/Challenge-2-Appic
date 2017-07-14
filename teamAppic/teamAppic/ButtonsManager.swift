@@ -18,7 +18,10 @@ class ButtonsManager {
     let increaseAction = SKAction.scale(by: 1.1, duration: 0.3)
     
     /// action to gray the button
-    let grayAction = SKAction.colorize(with: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), colorBlendFactor: 1, duration: 0)
+    let grayAction = SKAction.colorize(with: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), colorBlendFactor: 0.7, duration: 0)
+    
+    /// action to light the button
+    let lightAction = SKAction.colorize(with: .white, colorBlendFactor: 1, duration: 0)
     
     /// array that contains all buttons
     private var buttons = [SKSpriteNode]()
@@ -31,7 +34,7 @@ class ButtonsManager {
     /// - Parameter node: button that will have its scale increased
     private func increaseScale(node : SKSpriteNode) {
         node.run(increaseAction)
-        node.run(grayAction.reversed())
+        node.run(lightAction)
     }
     
     /// increases the scale of a button

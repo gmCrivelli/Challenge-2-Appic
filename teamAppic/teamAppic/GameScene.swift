@@ -60,7 +60,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 	
     /// Setups the circus music when the game is being played
     func setupMusics() {
-        MusicManager.instance.setupGame()
         MusicManager.instance.playGameAudio()
     }
     

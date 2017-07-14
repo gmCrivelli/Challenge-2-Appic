@@ -13,8 +13,9 @@ import GameplayKit
 enum TargetType : Int{
     case target = 1
     case duck = 2
+	case stick = 3
     
-    static let allValues = [target, duck]
+    static let allValues = [target, duck, stick]
     
     func toFollow() -> TargetType {
         switch self {
@@ -26,6 +27,8 @@ enum TargetType : Int{
         switch self {
         case .duck:
             return "duck"
+		case .stick:
+			return "duckStick"
         default: return "target"
         }
     }

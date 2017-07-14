@@ -148,3 +148,47 @@ class DuckMovement : GKComponent {
     }
 }
 
+class StickMovement : GKComponent {
+	
+	static var targetTravelTime: TimeInterval = 2
+	
+	let entityManager : EntityManager
+	
+	init(entityManager : EntityManager) {
+		
+		self.entityManager = entityManager
+		super.init()
+	}
+	
+	func run() {
+		guard let entity = entity,
+			let spriteComponent = entity.component(ofType: SpriteComponent.self) else {
+				print("Sticks must have a sprite component!")
+				return
+		}
+		
+		//Move target foward with easy in easy out
+		let moveFowardAction = SKAction.moveBy(x: 300, y: 0, duration: StickMovement.targetTravelTime)
+		moveFowardAction.timingMode = .easeInEaseOut
+		//target wait for small duration
+		let waitAction = SKAction.wait(forDuration: StickMovement.targetTravelTime * 0.2)
+		
+		//Action block for target removal
+		let removeAction = SKAction.run {
+			if !self.entityManager.scene.intersects(spriteComponent.node){
+				spriteComponent.node.removeAllChildren()
+				self.entityManager.remove(entity)
+			}
+		}
+		
+		//Action Sequence
+		let sequenceAction = SKAction.sequence([waitAction, moveFowardAction, removeAction])
+		//run action
+		spriteComponent.node.run(SKAction.repeatForever(sequenceAction))
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+}
+

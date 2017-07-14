@@ -26,6 +26,9 @@ class Target: GKEntity {
         case .duck:
             addComponent(DuckMovement(entityManager: entityManager))
             self.component(ofType: DuckMovement.self)?.run()
+		case .stick:
+			addComponent(StickMovement(entityManager: entityManager))
+			self.component(ofType: StickMovement.self)?.run()
         default:
             addComponent(MoveComponent(maxSpeed: maxSpeed, maxAcceleration: maxAccel, radius: Float(texture.size().width * 0.3), moveType: moveType, entityManager: entityManager))
         }

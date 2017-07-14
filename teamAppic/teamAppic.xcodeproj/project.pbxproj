@@ -42,6 +42,7 @@
 		1FCE9E8F1F140B4C008E535C /* circusSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE9E8E1F140B4C008E535C /* circusSound.mp3 */; };
 		1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE9E901F14170F008E535C /* MusicManager.swift */; };
 		B03601781F0C22940000673A /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03601771F0C22940000673A /* Splash.swift */; };
+		B0BE7ED31F18846D00007FF5 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BE7ED21F18846D00007FF5 /* AnimationComponent.swift */; };
 		B0E729F31F13C67B0089DF9F /* AboutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E729F21F13C67B0089DF9F /* AboutScene.swift */; };
 		FEC04C461F17EEFF0032584D /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC04C381F17EEFF0032584D /* SpriteComponent.swift */; };
 		FEC04C471F17EEFF0032584D /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC04C391F17EEFF0032584D /* MoveComponent.swift */; };
@@ -95,6 +96,7 @@
 		1FCE9E8E1F140B4C008E535C /* circusSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = circusSound.mp3; sourceTree = "<group>"; };
 		1FCE9E901F14170F008E535C /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		B03601771F0C22940000673A /* Splash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		B0BE7ED21F18846D00007FF5 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
 		B0E729F21F13C67B0089DF9F /* AboutScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScene.swift; sourceTree = "<group>"; };
 		FEC04C381F17EEFF0032584D /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		FEC04C391F17EEFF0032584D /* MoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				FEC04C381F17EEFF0032584D /* SpriteComponent.swift */,
 				FEC04C391F17EEFF0032584D /* MoveComponent.swift */,
+				B0BE7ED21F18846D00007FF5 /* AnimationComponent.swift */,
 				FEC04C451F17EEFF0032584D /* TargetComponent.swift */,
 				FEC04C3C1F17EEFF0032584D /* TypeComponent.swift */,
 			);
@@ -281,7 +284,7 @@
 				TargetAttributes = {
 					1F1E0F511F03C995007B5825 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = UMGS9WR96D;
+						DevelopmentTeam = D6FBY3CTDY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -358,6 +361,7 @@
 				1F7885531F0D769900F57921 /* HudController.swift in Sources */,
 				1FCE9E911F14170F008E535C /* MusicManager.swift in Sources */,
 				1F046F0D1F1696240021DC7C /* RemoteSelectionScene.swift in Sources */,
+				B0BE7ED31F18846D00007FF5 /* AnimationComponent.swift in Sources */,
 				FEC04C4E1F17EEFF0032584D /* Patterns.swift in Sources */,
 				1FAEBF4A1F166DFB00590871 /* ButtonsManager.swift in Sources */,
 				1F1E0F601F03C996007B5825 /* GameViewController.swift in Sources */,
@@ -482,7 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = UMGS9WR96D;
+				DEVELOPMENT_TEAM = D6FBY3CTDY;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.org.eldorado.bepid.teamAppic;
@@ -496,7 +500,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = UMGS9WR96D;
+				DEVELOPMENT_TEAM = D6FBY3CTDY;
 				INFOPLIST_FILE = teamAppic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.org.eldorado.bepid.teamAppic;

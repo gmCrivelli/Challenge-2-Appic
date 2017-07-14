@@ -38,6 +38,9 @@ class EntityManager {
         }
     }
     
+    /// delegate to game scene to select the type of control
+    public weak var delegateGameScene : GameSceneProtocol?
+    
     init(scene: SKScene) {
         self.scene = scene
     }
@@ -46,7 +49,8 @@ class EntityManager {
         entities.insert(entity)
         
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
-            scene.addChild(spriteNode)
+            let gameNode = self.delegateGameScene?.getGameNode()
+            gameNode?.addChild(spriteNode)
         }
         
         for componentSystem in componentSystems {

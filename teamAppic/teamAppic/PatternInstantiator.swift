@@ -41,17 +41,18 @@ class PatternCannon {
         self.timeDelayArray = timeDelayArray
         self.entityManager = entityManager
         
-        timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.launchTarget), userInfo: nil, repeats: timeDelayArray.count <= 1)
+//        timer = Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(self.launchTarget), userInfo: nil, repeats: false)
+//        self.launchTarget()
+        
     }
     
-    @objc func launchTarget() {
+    func launchTarget() {
         
-        while(true) {
-
-            if launchedCounter >= numberOfTargets {
-                timer.invalidate()
-                return
-            }
+//        while(true) {
+//            if launchedCounter >= numberOfTargets {
+//                timer.invalidate()
+//                return
+//            }
             
             entityManager.spawnTarget(targetType: targetTypeArray[launchedCounter % targetTypeArray.count],
                                       location: baseLocation,
@@ -65,14 +66,14 @@ class PatternCannon {
             self.baseLocation = self.baseLocation + self.cannonStep
             self.launchedCounter += 1
             
-            if timeDelayArray[launchedCounter % timeDelayArray.count] != 0.0 { break }
-        }
+//            if timeDelayArray[launchedCounter % timeDelayArray.count] != 0.0 { break }
+//        }
         
-        if timeDelayArray.count > 0 {
-            timer.invalidate()
-            timer = Timer.scheduledTimer(timeInterval: timeDelayArray[launchedCounter % timeDelayArray.count], target: self,
-                                         selector: #selector(self.launchTarget), userInfo: nil, repeats: false)
-        }
+//        if timeDelayArray.count > 0 {
+//            timer.invalidate()
+////            timer = Timer.scheduledTimer(timeInterval: timeDelayArray[launchedCounter % timeDelayArray.count], target: self,
+////                                         selector: #selector(self.launchTarget), userInfo: nil, repeats: false)
+//        }
     }
 }
 

@@ -38,6 +38,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
     var lastUpdateTimeInterval : TimeInterval = 0
     var entityManager: EntityManager!
+    
+    var stick : PatternCannon!
+    var duck : PatternCannon!
 
     
     /// delegate to game view controller to have access to loading and presention of all scenes
@@ -86,6 +89,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
 	
     func setupEntities() {
         entityManager = EntityManager(scene: self)
+        entityManager.delegateGameScene = self
         
 
 		
@@ -146,8 +150,17 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         hudController.insertPlayers(playerNameArray: playerNameArray, playerAimArray: playerAimArray)
 		hudController.setHUD(gameNode: gameNode)
         print("HIGHSCORE : \(Score.getHighScore())")
-	}
-	
+        
+        // instantiating the number of ducks and sticks
+        let NUMBEROFDUCKS = 2
+        let action = SKAction.run {
+            self.stick.launchTarget()
+            self.duck.launchTarget()
+        }
+        let waitAction = SKAction.wait(forDuration: (self.stick.timeDelayArray[self.stick.launchedCounter % self.stick.timeDelayArray.count]))
+        self.run(SKAction.repeat(SKAction.sequence([action,waitAction]), count: NUMBEROFDUCKS))
+    }
+
 	/// Setups the gestures.
 	func setupGestures(){
 		
@@ -192,6 +205,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
         }
     }
+    
+//    func addNodesEntities() {
+//        print("ENTIDADES: \(entityManager.entities)")
+//        for ent in entityManager.entities {
+//            print(ent.component(ofType: SpriteComponent.self)?.node)
+//        }
+//    }
     
     /// Catches the gesture for pause in the tv control and pauses the game.
     ///
@@ -310,6 +330,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         default:
             break
         }
+    }
+    
+    /// returns the gameNode reference
+    ///
+    /// - Returns: gameNode
+    func getGameNode() -> SKNode {
+        return self.gameNode 
     }
 }
 

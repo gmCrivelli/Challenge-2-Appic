@@ -14,6 +14,10 @@ import QuartzCore
 /// protocol to access game scene, in order to selects the type of control that will be used in the game
 protocol GameSceneProtocol : NSObjectProtocol {
     func selectRemoteType(typeOfControl : String)
+    /// returns the reference to gameNode
+    ///
+    /// - Returns: gameNode from gameScene
+    func getGameNode() -> SKNode
 }
 
 class RemoteSelectionScene : SKScene {

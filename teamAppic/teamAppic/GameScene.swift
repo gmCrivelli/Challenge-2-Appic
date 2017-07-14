@@ -60,7 +60,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
     
     /// Setups the circus music when the game is being played
     func setupMusics() {
-        MusicManager.instance.setupGame()
         MusicManager.instance.playGameAudio()
     }
     
@@ -237,12 +236,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
             playerAimArray[0].position = currentAimPosition
             
         } else {
-            
-            let currToPosX = self.currentTouchPosition.x
-            let currToPosY = self.currentTouchPosition.y
-            
-            let movementPerSec:CGFloat = 750.0
-            let timeInterval: CGFloat = 1.0/60.0
             
             let maxX:CGFloat = self.size.width/2
             let maxY:CGFloat = self.size.height/2

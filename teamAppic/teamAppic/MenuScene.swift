@@ -32,6 +32,15 @@ class MenuScene : SKScene {
     /// label to show the highscore
     private var highScore = SKLabelNode()
     
+    /// node to show the button sound button
+    private var soundButton = SKSpriteNode()
+    
+    /// node to show the sound icon button
+    private var soundIcon = SKSpriteNode()
+    
+    /// node to show the no sound icon button
+    private var noSoundIcon = SKSpriteNode()
+    
     /// delegate to have access to the loading of other scenes
     public weak var delegateGameVC : GameVCProtocol?
     
@@ -66,17 +75,23 @@ class MenuScene : SKScene {
         self.highScore = self.childNode(withName: "highScoreValue") as! SKLabelNode
         self.highScore.text = String(Score.getHighScore())
         
+        // loading the sound button
+        self.soundButton = self.childNode(withName: "soundButton") as! SKSpriteNode
+//        self.soundIcon = self.soundButton.childNode(withName: "soundIcon") as! SKSpriteNode
+//        self.noSoundIcon = self.soundButton.childNode(withName: "noSoundIcon") as! SKSpriteNode
+        soundIconAppears()
+        
         // loading singlePlayer "button"
         let buttonsArray = [self.childNode(withName: "SinglePlayer") as! SKSpriteNode,
                             self.childNode(withName: "MultiPlayer") as! SKSpriteNode,
-                            self.childNode(withName: "About") as! SKSpriteNode
+                            self.childNode(withName: "About") as! SKSpriteNode,
+                            self.soundButton,
                             ]
         buttonsManager.insertButton(nodeArray: buttonsArray)
     }
     
     /// Setups menu music when the app is loaded
     func setupMusics() {
-        MusicManager.instance.setupMenu()
         MusicManager.instance.playMenuAudio()
     }
     
@@ -99,9 +114,30 @@ class MenuScene : SKScene {
         case 2:
             self.delegateGameVC?.goToAbout()
         
+        // sound button tapped
+        case 3:
+            self.gameAudioPressed()
         default:
             break
         }
+    }
+    
+    /// function to represents the gameAudio button pressed
+    func gameAudioPressed() {
+        // mute and dismute the volume of musics
+        MusicManager.instance.pressGameAudio()
+        soundIconAppears()
+    }
+    
+    /// Function that decides what button music volume will appear according to musicManeger.volumeSound boolean.
+    func soundIconAppears() {
+        let musicManager = MusicManager.instance
+        if (musicManager.volumeSound) {
+            self.soundButton.texture = SKTexture(imageNamed: "soundIcon")
+        } else {
+            self.soundButton.texture = SKTexture(imageNamed: "noSoundIcon")
+        }
+        self.soundButton.alpha = 1
     }
     
     /// Function called when the swipe up is done and the swipe up effect will be obtained in the buttons.

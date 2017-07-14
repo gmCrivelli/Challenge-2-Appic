@@ -17,6 +17,10 @@ class GameViewController: UIViewController, GameVCProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //loads all musics of game
+        MusicManager.instance.setupMusics()
+        
         // loads the menu scene, that is, the first scene when the app is opened
         loadMenuScene()
     }

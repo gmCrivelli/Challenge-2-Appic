@@ -21,4 +21,7 @@ class PlayersColors {
     static func playerColor(player : Int) -> UIColor {
         return colorPlayer[player]
     }
+    
+    
+    
 }

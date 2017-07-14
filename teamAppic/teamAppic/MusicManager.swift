@@ -27,13 +27,24 @@ class MusicManager {
     /// menu sound volume
     let menuVolume: Float = 0.3
     
+    /// menu sound volume
+    let gameVolume: Float = 1
+    
+    /// menu sound volume
+    let gameOverVolume: Float = 1
+
+    /// boolean that indicates if there is sound in the game
+    public private (set) var volumeSound : Bool = true
+    
     private init() { } // private singleton init
     
     /// loading music (circus music)
-    func setupGame() {
+    private func setupGame() {
         do {
             gameAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "circusSound", ofType: "mp3")!))
             gameAudioPlayer.prepareToPlay()
+            // initial volume
+            gameAudioPlayer.volume = gameVolume
             
         } catch {
             print (error)
@@ -41,10 +52,12 @@ class MusicManager {
     }
     
     /// loading Game Over music
-    func setupGameOver() {
+    private func setupGameOver() {
         do {
             gameOverAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "gameOver", ofType: "mp3")!))
             gameOverAudioPlayer.prepareToPlay()
+            // initial volume
+            gameOverAudioPlayer.volume = gameOverVolume
             
         } catch {
             print (error)
@@ -52,14 +65,23 @@ class MusicManager {
     }
     
     /// loading Menu music
-    func setupMenu() {
+    private func setupMenu() {
         do {
             menuAudioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "menuSound", ofType: "mp3")!))
             menuAudioPlayer.prepareToPlay()
+            // initial volume
+            menuAudioPlayer.volume = menuVolume
             
         } catch {
             print (error)
         }
+    }
+    
+    /// loading all game musics
+    func setupMusics() {
+        setupGame()
+        setupMenu()
+        setupGameOver()
     }
     
     /// plays the music
@@ -76,14 +98,27 @@ class MusicManager {
     
     /// Get the game audio volume down
     func lowGameAudio() {
-        gameAudioPlayer.volume = minimumVolume
+        if (self.volumeSound) {
+            gameAudioPlayer.volume = minimumVolume
+        } else {
+            gameAudioPlayer.volume = 0
+        }
+    }
+    
+    /// get the game volume to mute, and when it is called again, to dismute
+    func pressGameAudio() {
+        self.volumeSound = !self.volumeSound
+        mute()
     }
     
     /// Get the game audio volume up
     func highGameAudio() {
-        gameAudioPlayer.volume = maximumVolume
+        if (self.volumeSound) {
+            gameAudioPlayer.volume = maximumVolume
+        } else {
+            gameAudioPlayer.volume = 0
+        }
     }
-    
     
     /// plays the Game Over music
     func playGameOverAudio() {
@@ -99,7 +134,6 @@ class MusicManager {
     
     /// plays the menu music with low volume
     func playMenuAudio() {
-        menuAudioPlayer.volume = menuVolume
         menuAudioPlayer.numberOfLoops = -1
         menuAudioPlayer.play()
     }
@@ -109,5 +143,18 @@ class MusicManager {
         menuAudioPlayer.stop()
         menuAudioPlayer.currentTime = 0
         menuAudioPlayer.prepareToPlay()
+    }
+    
+    /// function that mutes all sounds
+    func mute() {
+        if (self.volumeSound) {
+            menuAudioPlayer.volume = menuVolume
+            gameAudioPlayer.volume = gameVolume
+            gameOverAudioPlayer.volume = gameOverVolume
+        } else {
+            menuAudioPlayer.volume = 0
+            gameAudioPlayer.volume = 0
+            gameOverAudioPlayer.volume = 0
+        }
     }
 }

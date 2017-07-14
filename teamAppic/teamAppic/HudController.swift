@@ -82,7 +82,7 @@ class HudController : NSObject, HudProtocol {
             
 			let playerNameNode = gameNode.childNode(withName: "nameLabel\(i)") as! SKLabelNode
 			playerNameNode.isHidden = false
-			playerNameNode.text = player.playerName + ":"
+			playerNameNode.text = player.playerName
 			self.nameLabelNodeArray.append(playerNameNode)
 
 			let playerScoreNode = gameNode.childNode(withName: "scoreLabel\(i)") as! SKLabelNode

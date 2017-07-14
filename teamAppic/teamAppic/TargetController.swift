@@ -127,8 +127,8 @@ class TargetController: NSObject {
 		let splashNode = SKSpriteNode(texture: texture)
 		
 		splashNode.position = convertedLocation
-		splashNode.size.height = self.radius*2
-		splashNode.size.width = self.radius*2
+		splashNode.size.height = self.radius*4
+		splashNode.size.width = self.radius*4
 		splashNode.colorBlendFactor = 1
 		let color = randomColor()
 		splashNode.color = color

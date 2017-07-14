@@ -11,7 +11,7 @@ import GameplayKit
 import GameController
 import QuartzCore
 
-class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
+class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecognizerDelegate {
     
     //Nodes and TargetController
     var gameNode = SKNode()
@@ -38,6 +38,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     
     var lastUpdateTimeInterval : TimeInterval = 0
     var entityManager: EntityManager!
+    
+    private var panVel : CGPoint = CGPoint(x: 0.0, y: 0.0)
+    private let dampening:CGFloat = 0.87
     
     /// delegate to game view controller to have access to loading and presention of all scenes
     public weak var delegateGameVC : GameVCProtocol?
@@ -148,6 +151,11 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
         let menuType = UIPressType.menu
         menuGestureRecognizer.allowedPressTypes = [NSNumber(value: menuType.rawValue)];
         self.view?.addGestureRecognizer(menuGestureRecognizer)
+        
+        // setups the swipe motion
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panAim(_:)))
+        panGestureRecognizer.delegate = self
+        self.view?.addGestureRecognizer(panGestureRecognizer)
     }
     
     /// Function that catches the gesture for menu in siri remote and loads the menu scene after setups all game over setups.
@@ -236,6 +244,10 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             let movementPerSec:CGFloat = 750.0
             let timeInterval: CGFloat = 1.0/60.0
             
+            let maxX:CGFloat = self.size.width/2
+            let maxY:CGFloat = self.size.height/2
+            
+            /*
             let p_x:CGFloat = self.size.width/2
             let p_y:CGFloat = self.size.height/2
             
@@ -246,8 +258,18 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             posY = (posY.magnitude > p_y.magnitude) ? playerAimArray[0].position.y : posY
             
             playerAimArray[0].position.x = posX
-            playerAimArray[0].position.y = posY
+            playerAimArray[0].position.y = posY*/
             
+            
+            playerAimArray[0].position.x = max(min(playerAimArray[0].position.x + panVel.x, maxX), -maxX)
+            playerAimArray[0].position.y = max(min(playerAimArray[0].position.y - panVel.y, maxY), -maxY)
+            
+            if panVel.x * panVel.x + panVel.y * panVel.y < 1 {
+                panVel = CGPoint.zero
+            }
+            
+            panVel.x = panVel.x * dampening
+            panVel.y = panVel.y * dampening
         }
         
     }
@@ -285,6 +307,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
             let x = CGFloat((motion.controller?.microGamepad?.dpad.xAxis.value)!)
             let y = CGFloat((motion.controller?.microGamepad?.dpad.yAxis.value)!)
             currentTouchPosition = CGPoint(x: x, y: y)
+
         }
     }
     
@@ -308,14 +331,23 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol {
     func getGameNode() -> SKNode {
         return self.gameNode 
     }
+    
+    func panAim(_ sender: UIPanGestureRecognizer) {
+        //print(sender.velocity(in: self.view))
+        panVel = sender.velocity(in: self.view)
+        
+        panVel.x = panVel.x * (1 + abs(panVel.x * 0.0003)) * 0.001
+        panVel.y = panVel.y * (1 + abs(panVel.y * 0.0003)) * 0.003
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UITapGestureRecognizer) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
-
-
-
-
-
-
-
 
 
 

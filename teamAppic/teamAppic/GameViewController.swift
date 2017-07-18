@@ -27,6 +27,8 @@ class GameViewController: UIViewController, GameVCProtocol{
     
     /// loads and presents the menu scene
     public func loadMenuScene() {
+        // sures that all gestures will be removed
+        removeAllGestures()
         if let view = self.view as! SKView? {
             if let scene = SKScene(fileNamed: "MenuScene") {
                 // Set the scale mode to scale to fit the window
@@ -42,6 +44,7 @@ class GameViewController: UIViewController, GameVCProtocol{
             
             view.showsFPS = false
             view.showsNodeCount = false
+            
         }
     }
     
@@ -125,5 +128,10 @@ class GameViewController: UIViewController, GameVCProtocol{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+    }
+    
+    /// removes all gestures from this view
+    private func removeAllGestures() {
+        self.view.gestureRecognizers?.forEach(self.view.removeGestureRecognizer)
     }
 }

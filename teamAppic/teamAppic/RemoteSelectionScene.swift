@@ -61,6 +61,9 @@ class RemoteSelectionScene : SKScene {
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func menuTapped(_ sender: UITapGestureRecognizer) {
+        // removes all gestures before transition of this scene
+        removeAllGestures()
+        
         self.delegateGameVC?.loadMenuScene()
     }
     
@@ -78,6 +81,9 @@ class RemoteSelectionScene : SKScene {
     /// - Parameter sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
         var typeOfControl : String!
+        
+        // removes all gestures before transition of this scene
+        removeAllGestures()
         
         switch self.buttonsManager.pointerButton {
         // swipe button tapped
@@ -113,5 +119,12 @@ class RemoteSelectionScene : SKScene {
     /// - Parameter sender: UISwipeGestureRecognizer
     func swipeRight(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeDown()
+    }
+    
+    /// removes all gestures from this view
+    private func removeAllGestures() {
+        if let view = self.view as UIView! {
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+        }
     }
 }

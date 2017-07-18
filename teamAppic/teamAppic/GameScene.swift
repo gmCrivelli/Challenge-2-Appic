@@ -65,6 +65,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
     
     /// Setups the game over configurations
     func gameOverSetups() {
+        // removes all gestures
+        removeAllGestures()
+        
         // tops the game music
         MusicManager.instance.stopGameAudio()
         
@@ -338,6 +341,13 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
             return true
         } else {
             return false
+        }
+    }
+    
+    /// removes all gestures from this view
+    private func removeAllGestures() {
+        if let view = self.view as UIView! {
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
         }
     }
 }

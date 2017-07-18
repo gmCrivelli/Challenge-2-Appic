@@ -153,4 +153,5 @@ class MenuScene : SKScene {
     func swipeDown(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeDown()
     }
+
 }

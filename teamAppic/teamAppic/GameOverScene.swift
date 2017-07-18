@@ -82,7 +82,11 @@ class GameOverScene : SKScene {
         self.view?.addGestureRecognizer(menuGestureRecognizer)
     }
     
+    /// function called when menu is tapped.
+    ///
+    /// - Parameter sender: UITapGestureRecognizer
     func menuTapped(_ sender: UITapGestureRecognizer) {
+        removeAllGestures()
         self.delegateGameVC?.loadMenuScene()
     }
     
@@ -102,6 +106,10 @@ class GameOverScene : SKScene {
     ///
     /// - Parameter sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
+        
+        // removes all gestures before transition of this scene
+        removeAllGestures()
+        
         switch self.buttonsManager.pointerButton {
         // restart button tapped
         case 0:
@@ -126,5 +134,12 @@ class GameOverScene : SKScene {
     /// - Parameter sender: UISwipeGestureRecognizer
     func swipeDown(_ sender: UISwipeGestureRecognizer) {
         buttonsManager.swipeDown()
+    }
+    
+    /// removes all gestures from this view
+    private func removeAllGestures() {
+        if let view = self.view as UIView! {
+            view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
+        }
     }
 }

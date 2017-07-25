@@ -15,7 +15,7 @@ class GameTimer {
     let INTERVALTIME : TimeInterval = 1
     
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 60
+    private let GAMEPLAYTIME : Int = 10
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
@@ -54,6 +54,7 @@ class GameTimer {
         } else {
             // game over
             if let gameOverDelegate = gameDelegate {
+                gameOverDelegate.addScoreAndSubmitToGC()
                 gameOverDelegate.loadGameOverScene()
                 
                 MusicManager.instance.stopGameAudio()

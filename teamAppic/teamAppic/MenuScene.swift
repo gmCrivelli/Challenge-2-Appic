@@ -25,6 +25,10 @@ protocol GameVCProtocol : NSObjectProtocol {
     func loadRemoteScene()
     /// segue to performSegue to about view controller
     func goToAbout()
+    /// shows the leaderboards
+    func showLeader()
+    /// adds score to the leaderboards
+    func addScoreAndSubmitToGC()
 }
 
 class MenuScene : SKScene {
@@ -77,8 +81,6 @@ class MenuScene : SKScene {
         
         // loading the sound button
         self.soundButton = self.childNode(withName: "soundButton") as! SKSpriteNode
-//        self.soundIcon = self.soundButton.childNode(withName: "soundIcon") as! SKSpriteNode
-//        self.noSoundIcon = self.soundButton.childNode(withName: "noSoundIcon") as! SKSpriteNode
         soundIconAppears()
         
         // loading singlePlayer "button"
@@ -108,6 +110,7 @@ class MenuScene : SKScene {
         // multiplayer button tapped
         case 1:
             // multiplayer
+            self.delegateGameVC?.showLeader()
             break
         
         // about button tapped

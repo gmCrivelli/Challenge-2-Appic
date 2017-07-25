@@ -9,14 +9,21 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
-class GameViewController: UIViewController, GameVCProtocol{
+class GameViewController: UIViewController, GameVCProtocol, GKGameCenterControllerDelegate{
     
     /// scene where the game actions are implemented
     var gameScene : GameScene!
     
+    /// leaderboard id used in itunes connect
+    let LEADERBOARD_ID = "circuSplash.highScore"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // authenticating game center leaderboards
+        authenticateLocalPlayer()
         
         //loads all musics of game
         MusicManager.instance.setupMusics()
@@ -133,5 +140,52 @@ class GameViewController: UIViewController, GameVCProtocol{
     /// removes all gestures from this view
     private func removeAllGestures() {
         self.view.gestureRecognizers?.forEach(self.view.removeGestureRecognizer)
+    }
+    
+    
+    /// authenticates local player
+    func authenticateLocalPlayer() {
+        let localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            
+            if (viewController != nil) {
+                self.present(viewController!, animated: true, completion: nil)
+            }
+            else {
+                print((GKLocalPlayer.localPlayer().isAuthenticated))
+            }
+        }
+    }
+    
+    /// submits the final score to game center
+    func addScoreAndSubmitToGC() {
+        if GKLocalPlayer.localPlayer().isAuthenticated {
+            let score = Score.getHighScore()
+            // Submit score to GC leaderboard
+            let bestScoreInt = GKScore(leaderboardIdentifier: LEADERBOARD_ID)
+            bestScoreInt.value = Int64(score)
+            GKScore.report([bestScoreInt]) { (error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                } else {
+                    print("Best Score submitted to your Leaderboard!")
+                }
+            }
+        }
+    }
+    
+    // Delegate to dismiss the GC controller
+    
+    /// Function called after gameCenterViewController is finished.
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    /// Shows leaderboard screen.
+    func showLeader() {
+        let viewControllerVar = self.view?.window?.rootViewController
+        let gKGCViewController = GKGameCenterViewController()
+        gKGCViewController.gameCenterDelegate = self
+        viewControllerVar?.present(gKGCViewController, animated: true, completion: nil)
     }
 }

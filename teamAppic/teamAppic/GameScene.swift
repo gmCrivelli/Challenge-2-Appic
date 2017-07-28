@@ -11,6 +11,12 @@ import GameplayKit
 import GameController
 import QuartzCore
 
+// values used to possibilitate the movement along all the screen in motion
+/// value used to x axe to possibilitate the movement along all the screen in horizontal
+let PX = 0.7
+/// value used to y axe to possibilitate the movement along all the screen in vertical
+let PY = 0.35
+
 class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecognizerDelegate {
     
     //Nodes and TargetController
@@ -281,8 +287,10 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
         if !controllerSwipeMode {
             let x = motion.gravity.x
             let y = -motion.gravity.y
-            let p_x:Double = 0.7
-            let p_y:Double = 0.35
+            
+            // values used to possibilitate the movement along all the screen
+            let p_x:Double = PX
+            let p_y:Double = PY
             let maxX = Double(self.size.width/2)
             let maxY = Double(self.size.height/2)
             

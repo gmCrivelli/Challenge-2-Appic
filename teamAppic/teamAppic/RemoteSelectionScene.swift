@@ -18,6 +18,9 @@ protocol GameSceneProtocol : NSObjectProtocol {
     ///
     /// - Returns: gameNode from gameScene
     func getGameNode() -> SKNode
+    
+    /// Function that presents the curtain animation after time's up.
+    func curtainAnimation()
 }
 
 class RemoteSelectionScene : SKScene {

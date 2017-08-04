@@ -58,7 +58,7 @@ class GameOverScene : SKScene {
     
     /// Setups the Game Over music when the Game Over scene is called.
     func setupGameOverMusics() {
-        MusicManager.instance.playGameOverAudio()
+        
     }
     
     /// Setups all gestures.

@@ -15,7 +15,7 @@ class GameTimer {
     let INTERVALTIME : TimeInterval = 1
     
     /// constant that indicates the gameplay time
-    private let GAMEPLAYTIME : Int = 10
+    private let GAMEPLAYTIME : Int = 3
     
     /// singleton pattern
     static let gameTimerInstance = GameTimer()
@@ -31,6 +31,9 @@ class GameTimer {
     
     /// delegate to present game over
     public weak var gameDelegate: GameVCProtocol?
+    
+    /// delegate to game scene
+    public weak var gameSceneDelegate : GameSceneProtocol?
     
     public init () {
         self.timerCount = GAMEPLAYTIME
@@ -55,8 +58,9 @@ class GameTimer {
             // game over
             if let gameOverDelegate = gameDelegate {
                 gameOverDelegate.addScoreAndSubmitToGC()
-                gameOverDelegate.loadGameOverScene()
                 
+                // closes the curtain after time's up
+                gameSceneDelegate?.curtainAnimation()
                 MusicManager.instance.stopGameAudio()
             }
         }

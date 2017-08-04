@@ -17,11 +17,20 @@ let PX = 0.7
 /// value used to y axe to possibilitate the movement along all the screen in vertical
 let PY = 0.35
 
+/// Time to close the curtains.
+let CLOSE_CURTAIN_TIME : TimeInterval = 1.5
+
+/// Time to fade in the timesup label.
+let TIMESUP_APPEAR_TIME : TimeInterval = 1.5
+
 class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecognizerDelegate {
     
     //Nodes and TargetController
     var gameNode = SKNode()
     var pauseNode = SKSpriteNode()
+    var curtainLeft = SKSpriteNode()
+    var curtainRight = SKSpriteNode()
+    var timesUpLabel = SKSpriteNode()
     var targetController : TargetController!
     
     // hud controller
@@ -127,6 +136,11 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
         // initializing player array and aim array (single player for now)
         playerNameArray = ["Player 1"]
         playerAimArray = [gameNode.childNode(withName: "aim1") as! SKSpriteNode]
+        
+        curtainRight = self.childNode(withName: "curtainRightAnimation") as! SKSpriteNode
+        curtainLeft = self.childNode(withName: "curtainLeftAnimation") as! SKSpriteNode
+        
+        timesUpLabel = self.childNode(withName: "timesUpLabel") as! SKSpriteNode
         
         targetController = TargetController(screenSize: self.size, gameNode: gameNode, entityManager: entityManager)
         
@@ -329,13 +343,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
         }
     }
     
-    /// returns the gameNode reference
-    ///
-    /// - Returns: gameNode
-    func getGameNode() -> SKNode {
-        return self.gameNode 
-    }
-    
     func panAim(_ sender: UIPanGestureRecognizer) {
         //print(sender.velocity(in: self.view))
         panVel = sender.velocity(in: self.view)
@@ -358,7 +365,37 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
             view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
         }
     }
+    
+    // MARK: - GameSceneProtocol
+    
+    /// Returns the gameNode reference.
+    ///
+    /// - Returns: gameNode
+    func getGameNode() -> SKNode {
+        return self.gameNode
+    }
+    
+    /// Presents the curtain animation after time's up.
+    func curtainAnimation() {
+        // instantiates the action from sks
+        let rightSide = CGPoint(x: 440, y: 0)
+        let leftSide = CGPoint(x: -440, y: 0)
+        
+        let closeLeftCurtain = SKAction.move(to: leftSide, duration: CLOSE_CURTAIN_TIME)
+        let closeRightCurtain = SKAction.move(to: rightSide, duration: CLOSE_CURTAIN_TIME)
+        let timesUpAppear = SKAction.fadeIn(withDuration: TIMESUP_APPEAR_TIME)
+        
+        MusicManager.instance.playGameOverAudio()
+        
+        self.curtainRight.run(closeRightCurtain)
+        curtainLeft.run(closeLeftCurtain, completion: {
+            self.timesUpLabel.run(timesUpAppear, completion: {
+                self.delegateGameVC?.loadGameOverScene()
+            })
+        })
+    }
 }
+
 
 
 

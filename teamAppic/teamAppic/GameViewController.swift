@@ -85,7 +85,9 @@ class GameViewController: UIViewController, GameVCProtocol, GKGameCenterControll
                 
                 self.gameScene = scene as! GameScene
                 
+                // sets delegates from gameScene
                 self.gameScene.hudController.timer.gameDelegate = self
+                self.gameScene.hudController.timer.gameSceneDelegate = self.gameScene
                 self.gameScene.delegateGameVC = self
             }
             

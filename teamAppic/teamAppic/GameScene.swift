@@ -33,7 +33,7 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
     var timesUpLabel = SKSpriteNode()
     var targetController : TargetController!
     
-    // hud controller
+    /// hud controller to get access to its elements
     let hudController = HudController.hudInstance
     
     //Controller mode
@@ -85,9 +85,6 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
         
         // tops the game music
         MusicManager.instance.stopGameAudio()
-        
-        // initializes current score of all players
-        hudController.gameOverHighScore()
         
         // sures that every node will be removed when the game overs or menu is selected
         self.gameNode.removeAllChildren()

@@ -21,6 +21,9 @@ class GameOverScene : SKScene {
     /// highscore label to show the high score in game
     private var highScore = SKLabelNode()
     
+    /// current score label of the player
+    private var currentScore = SKLabelNode()
+    
     /// array that contains all buttons used with the ButtonsManager class
     private var buttonsArray = [SKSpriteNode]()
     
@@ -29,6 +32,9 @@ class GameOverScene : SKScene {
     
     /// instance of buttons manager to use some nodes as buttons
     private var buttonsManager = ButtonsManager()
+    
+    /// hud controller to get access to its elements
+    let hudController = HudController.hudInstance
     
     override func didMove(to view: SKView) {
         // setups gestures and nodes
@@ -95,11 +101,17 @@ class GameOverScene : SKScene {
         self.highScore = self.childNode(withName: "highScoreValue") as! SKLabelNode
         self.highScore.text = String(Score.getHighScore())
         
-        // loading singlePlayer "button"
+        // inserts the buttons in buttonsManager array
         self.buttonsArray = [self.childNode(withName: "restart") as! SKSpriteNode,
                             self.childNode(withName: "menu") as! SKSpriteNode]
-        
         buttonsManager.insertButton(nodeArray: buttonsArray)
+        
+        // inserts the current score in its label text
+        currentScore = self.childNode(withName: "currentScore") as! SKLabelNode
+        currentScore.text = String(hudController.playerArray[0].score.currentScore)
+        
+        // reinitializes current score of all players
+        hudController.gameOverHighScore()
     }
     
     /// Function called when the select is tapped in siri remote and swipe or motion control is selected, depending on what button was selected.

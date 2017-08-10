@@ -24,6 +24,9 @@ class GameOverScene : SKScene {
     /// current score label of the player
     private var currentScore = SKLabelNode()
     
+    /// Plank of first player.
+    private var plank1 = SKSpriteNode()
+    
     /// array that contains all buttons used with the ButtonsManager class
     private var buttonsArray = [SKSpriteNode]()
     
@@ -107,7 +110,8 @@ class GameOverScene : SKScene {
         buttonsManager.insertButton(nodeArray: buttonsArray)
         
         // inserts the current score in its label text
-        currentScore = self.childNode(withName: "currentScore") as! SKLabelNode
+        plank1 = self.childNode(withName: "plank1") as! SKSpriteNode
+        currentScore = plank1.childNode(withName: "currentScore") as! SKLabelNode
         currentScore.text = String(hudController.playerArray[0].score.currentScore)
         
         // reinitializes current score of all players

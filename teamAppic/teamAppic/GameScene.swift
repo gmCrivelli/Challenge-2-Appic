@@ -374,7 +374,10 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
     
     /// Presents the curtain animation after time's up.
     func curtainAnimation() {
-        // instantiates the action from sks
+        
+        removeAllGestures()
+        
+        // instantiates the action from sks. This numbers are used to close the entire curtain.
         let rightSide = CGPoint(x: 440, y: 0)
         let leftSide = CGPoint(x: -440, y: 0)
         

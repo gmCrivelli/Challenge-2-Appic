@@ -110,7 +110,6 @@ class MenuScene : SKScene {
         // multiplayer button tapped
         case 1:
             // multiplayer
-            self.delegateGameVC?.showLeader()
             break
         
         // about button tapped

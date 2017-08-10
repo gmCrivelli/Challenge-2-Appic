@@ -103,7 +103,7 @@ class GameOverScene : SKScene {
         
         // inserts the buttons in buttonsManager array
         self.buttonsArray = [self.childNode(withName: "restart") as! SKSpriteNode,
-                            self.childNode(withName: "menu") as! SKSpriteNode]
+                            self.childNode(withName: "leaderboards") as! SKSpriteNode]
         buttonsManager.insertButton(nodeArray: buttonsArray)
         
         // inserts the current score in its label text
@@ -119,16 +119,16 @@ class GameOverScene : SKScene {
     /// - Parameter sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
         
-        // removes all gestures before transition of this scene
-        removeAllGestures()
-        
         switch self.buttonsManager.pointerButton {
         // restart button tapped
         case 0:
+            // removes all gestures before transition of this scene
+            removeAllGestures()
+            
             self.delegateGameVC?.loadRemoteScene()
-        // menu button tapped
+        // leaderboards button tapped
         case 1:
-            self.delegateGameVC?.loadMenuScene()
+            self.delegateGameVC?.showLeader()
         default:
             break
         }

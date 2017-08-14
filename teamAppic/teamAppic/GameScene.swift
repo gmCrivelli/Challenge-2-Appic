@@ -194,7 +194,9 @@ class GameScene: SKScene, ReactToMotionEvents, GameSceneProtocol, UIGestureRecog
     ///   - sender: UITapGestureRecognizer
     func selectTapped(_ sender: UITapGestureRecognizer) {
         if (!self.gameNode.isPaused) {
-            targetController.detectHit(playerAimArray[0].position, player: 0)
+            DispatchQueue.main.async {
+                self.targetController.detectHit(self.playerAimArray[0].position, player: 0)
+            }
             print("Player 1 name: \(hudController.playerArray[0].playerName)")
             print("Current score Player 1: \(hudController.playerArray[0].score.currentScore)")
         }

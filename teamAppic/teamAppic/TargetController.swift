@@ -62,6 +62,8 @@ class TargetController: NSObject {
         }
     }
 	
+    var flag : Bool = true
+    
     func detectHit (_ location: CGPoint, player : Int) {
         // We do what we must.
         for t in Array(entityManager.entities).sorted(by: { t1, t2 in
@@ -87,7 +89,13 @@ class TargetController: NSObject {
                
                 print(spriteComponent.node.frame)
                 
-                let splash = Splash(imageNamed: splashImagesArray[randomSplash], targetRect: spriteComponent.size, splashPosition: convertedLocation, targetType: typeComponent.targetType)
+                var imageName = splashImagesArray[randomSplash]
+                if spriteComponent.node.xScale > 3 && flag {
+                    imageName += "BIG"
+                    flag = false
+                }
+                
+                let splash = Splash(imageNamed: imageName, targetRect: spriteComponent.size, splashPosition: convertedLocation, targetType: typeComponent.targetType)
 				let splashNode = SKSpriteNode(texture: splash.splashTexture)
 
 //                // these values must be the same of t.targetNode 

@@ -99,6 +99,7 @@ class EntityManager {
         toRemove.removeAll()
     }
     
+    // This is never called, use method below
     func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, initialAccel: float2, maxSpeed: Float, maxAccel: Float?, moveType: MoveType, path: GKPath?) {
         
         let target = Target(targetType: targetType, moveType: moveType, maxSpeed: initialVelocity.x, maxAccel: maxAccel, entityManager: self)
@@ -113,11 +114,15 @@ class EntityManager {
         if let spriteComponent = target.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = location
             spriteComponent.node.zPosition = EntityManager.zPosition
+            if scale > 3 {
+                spriteComponent.node.fillTexture = SKTexture(imageNamed: "bigTarget")
+            }
             spriteComponent.node.setScale(scale)
         }
         add(target)
     }
 	
+    // This spawns a target, and returns the entity. Welcome to STREET PROGRAMMING.
 	func spawnTarget(targetType: TargetType, location: CGPoint, scale: CGFloat, initialVelocity: float2, initialAccel: float2, maxSpeed: Float, maxAccel: Float?, moveType: MoveType, path: GKPath?, returnEntity: Bool) -> Target {
 		
 		let target = Target(targetType: targetType, moveType: moveType, maxSpeed: initialVelocity.x, maxAccel: maxAccel, entityManager: self)
@@ -144,6 +149,9 @@ class EntityManager {
             case .stickRight :
                 spriteComponent.node.zPosition += 2
             default : break
+            }
+            if scale > 3 {
+                spriteComponent.node.fillTexture = SKTexture(imageNamed: "bigTarget")
             }
 			spriteComponent.node.setScale(scale)
 		}

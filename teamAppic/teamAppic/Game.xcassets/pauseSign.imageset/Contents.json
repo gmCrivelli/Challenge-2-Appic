@@ -4,6 +4,10 @@
       "idiom" : "tv",
       "filename" : "pauseSign.pdf",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {

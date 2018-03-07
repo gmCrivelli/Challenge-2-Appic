@@ -4,6 +4,10 @@
       "idiom" : "tv",
       "filename" : "scarpzSign.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "scale" : "2x"
     }
   ],
   "info" : {

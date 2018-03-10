@@ -143,198 +143,198 @@ class PatternInstantiator {
     
     func setupArray() {
         
-//        // Duck patterns
-//        patternArray.append((0.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 960, y: -350),
-//                                          cannonStep: CGPoint(x: 0, y: 0),
-//                                          numberOfTargets: 10,
-//                                          targetScale: 0.9,
-//                                          targetTypeArray: [TargetType.stickLeft],
-//                                          baseTargetSpeed: float2(x: -400, y: 0),
-//                                          baseTargetAccel: float2(x: 0, y: 0),
-//                                          timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-//                                          entityManager: entityManager)))
-//        
-//        //Cross Targets
-//        //1o.
-//        patternArray.append((0.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 500, y: 700),
-//                                           baseTargetAccel: float2(x: 0, y: -350),
-//                                           timeDelayArray: [2],
-//                                           entityManager: entityManager)))
-//        
-//        //2o.
-//        patternArray.append((1.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: -500, y: 700),
-//                                           baseTargetAccel: float2(x: 0, y: -350),
-//                                           timeDelayArray: [2],
-//                                           entityManager: entityManager)))
-//        
-//        patternArray.append((10.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
-//                                           cannonStep: CGPoint(x: 150, y: 0),
-//                                           numberOfTargets: 15,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 0, y: 600),
-//                                           baseTargetAccel: float2(x: 0, y: -250),
-//                                           timeDelayArray: [0.3],
-//                                           entityManager: entityManager)))
-//        
-//        
-//        // Move to other side of screen
-//        patternArray.append((6.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -50),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 6,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 500, y: 0),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1.5],
-//                                           entityManager: entityManager)))
-//        
-//        //2o.
-//        patternArray.append((1.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 960, y: 300),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 6,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: -500, y: 0),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1.5],
-//                                           entityManager: entityManager)))
-//        
-//        //3o.
-//        patternArray.append((1.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -400, y: -540),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 6,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 0, y: 500),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1.5],
-//                                           entityManager: entityManager)))
-//        
-//        //4o.
-//        patternArray.append((1.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 400, y: 540),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 6,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 0, y: -500),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1.5],
-//                                           entityManager: entityManager)))
-//
-//        //Up Above
-//        //Left
-//        patternArray.append((9.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 350, y: 0),
-//                                           baseTargetAccel: float2(x: 0, y: 350),
-//                                           timeDelayArray: [2],
-//                                           entityManager: entityManager)))
-//        
-//        //Right
-//        patternArray.append((1.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: -350, y: 0),
-//                                           baseTargetAccel: float2(x: 0, y: 350),
-//                                           timeDelayArray: [2],
-//                                           entityManager: entityManager)))
-//        
-//        patternArray.append((0.0,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -400),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 10,
-//                                           targetScale: 0.9,
-//                                           targetTypeArray: [TargetType.stickRight],
-//                                           baseTargetSpeed: float2(x: 500, y: 0),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
-//                                           entityManager: entityManager)))
-//        
-//        // Flower left
-//        patternArray.append((12.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.5,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: -500, y: 700),
-//                                           baseTargetAccel: float2(x: 0, y: -250),
-//                                           timeDelayArray: [0.6],
-//                                           entityManager: entityManager)))
-//        
-//        // center
-//        patternArray.append((0.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 0, y: 500),
-//                                           baseTargetAccel: float2(x: 0, y: -250),
-//                                           timeDelayArray: [0.6],
-//                                           entityManager: entityManager)))
-//        // right
-//        patternArray.append((0.0,
-//                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.5,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 500, y: 700),
-//                                           baseTargetAccel: float2(x: 0, y: -250),
-//                                           timeDelayArray: [0.6],
-//                                           entityManager: entityManager)))
-//        
-//        //Up Above
-//        //Left
-//        patternArray.append((4.3,
-//                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: 350, y: 350),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1],
-//                                           entityManager: entityManager)))
-//        
-//        //Right
-//        patternArray.append((0.5,
-//                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
-//                                           cannonStep: CGPoint(x: 0, y: 0),
-//                                           numberOfTargets: 5,
-//                                           targetScale: 0.7,
-//                                           targetTypeArray: [TargetType.target],
-//                                           baseTargetSpeed: float2(x: -350, y: 350),
-//                                           baseTargetAccel: float2(x: 0, y: 0),
-//                                           timeDelayArray: [1],
-//                                           entityManager: entityManager)))
+        // Duck patterns
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -350),
+                                          cannonStep: CGPoint(x: 0, y: 0),
+                                          numberOfTargets: 10,
+                                          targetScale: 0.9,
+                                          targetTypeArray: [TargetType.stickLeft],
+                                          baseTargetSpeed: float2(x: -400, y: 0),
+                                          baseTargetAccel: float2(x: 0, y: 0),
+                                          timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+                                          entityManager: entityManager)))
+        
+        //Cross Targets
+        //1o.
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        //2o.
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        patternArray.append((10.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 150, y: 0),
+                                           numberOfTargets: 15,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 0, y: 600),
+                                           baseTargetAccel: float2(x: 0, y: -250),
+                                           timeDelayArray: [0.3],
+                                           entityManager: entityManager)))
+        
+        
+        // Move to other side of screen
+        patternArray.append((6.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -50),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 6,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 500, y: 0),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1.5],
+                                           entityManager: entityManager)))
+        
+        //2o.
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: 300),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 6,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -500, y: 0),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1.5],
+                                           entityManager: entityManager)))
+        
+        //3o.
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: -400, y: -540),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 6,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 0, y: 500),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1.5],
+                                           entityManager: entityManager)))
+        
+        //4o.
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: 400, y: 540),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 6,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 0, y: -500),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1.5],
+                                           entityManager: entityManager)))
+
+        //Up Above
+        //Left
+        patternArray.append((9.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 350, y: 0),
+                                           baseTargetAccel: float2(x: 0, y: 350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        //Right
+        patternArray.append((1.0,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -350, y: 0),
+                                           baseTargetAccel: float2(x: 0, y: 350),
+                                           timeDelayArray: [2],
+                                           entityManager: entityManager)))
+        
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -400),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 10,
+                                           targetScale: 0.9,
+                                           targetTypeArray: [TargetType.stickRight],
+                                           baseTargetSpeed: float2(x: 500, y: 0),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [DuckMovement.targetTravelTime * 1.2],
+                                           entityManager: entityManager)))
+        
+        // Flower left
+        patternArray.append((12.0,
+                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.5,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -250),
+                                           timeDelayArray: [0.6],
+                                           entityManager: entityManager)))
+        
+        // center
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 0, y: 500),
+                                           baseTargetAccel: float2(x: 0, y: -250),
+                                           timeDelayArray: [0.6],
+                                           entityManager: entityManager)))
+        // right
+        patternArray.append((0.0,
+                             PatternCannon(baseLocation: CGPoint(x: 0, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.5,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 500, y: 700),
+                                           baseTargetAccel: float2(x: 0, y: -250),
+                                           timeDelayArray: [0.6],
+                                           entityManager: entityManager)))
+        
+        //Up Above
+        //Left
+        patternArray.append((4.3,
+                             PatternCannon(baseLocation: CGPoint(x: -960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: 350, y: 350),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1],
+                                           entityManager: entityManager)))
+        
+        //Right
+        patternArray.append((0.5,
+                             PatternCannon(baseLocation: CGPoint(x: 960, y: -500),
+                                           cannonStep: CGPoint(x: 0, y: 0),
+                                           numberOfTargets: 5,
+                                           targetScale: 0.7,
+                                           targetTypeArray: [TargetType.target],
+                                           baseTargetSpeed: float2(x: -350, y: 350),
+                                           baseTargetAccel: float2(x: 0, y: 0),
+                                           timeDelayArray: [1],
+                                           entityManager: entityManager)))
 
         // MEGA TARGET
         patternArray.append((6.5,
